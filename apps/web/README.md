@@ -7,6 +7,7 @@
 - **React** 18.3+ with TypeScript
 - **Vite** - ビルドツール
 - **TanStack Router** - ルーティング
+- **CSS Modules** - スタイリング
 
 ## プロジェクト構造
 
@@ -44,6 +45,12 @@ src/
 複数のページで使用されるコンポーネントは `components/` 内に配置します：
 - `components/ui/` - Button、Input等の基本UIコンポーネント
 - `components/layout/` - Header、Footer等のレイアウトコンポーネント
+
+### スタイリング
+CSS Modulesを使用してコンポーネント単位でスタイルを管理：
+- ファイル名: `Component.module.css`
+- TypeScriptでの型安全なクラス名参照
+- スタイルのスコープ化により名前衝突を防止
 
 ### ルーティング
 TanStack Routerを使用し、ファイルベースルーティングを採用：

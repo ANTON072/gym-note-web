@@ -42,6 +42,8 @@ pnpm preview   # ビルド結果のプレビュー
 - **パッケージマネージャー**: pnpm 10.15.1（frozen-lockfile有効）
 - **フロントエンド**: React 18.3 + TypeScript 5.6
 - **ビルドツール**: Vite 5.4
+- **ルーティング**: TanStack Router
+- **スタイリング**: CSS Modules
 - **コード品質**: Biome（フォーマッター・リンター）
 
 ### 重要な設定
@@ -54,4 +56,6 @@ pnpm preview   # ビルド結果のプレビュー
 1. **日本語対応**: ドキュメントとコミュニケーションは日本語で行う
 2. **コード品質**: 保存時に自動フォーマットが実行される
 3. **型安全性**: TypeScriptのstrictモードを維持する
-4. **モノレポ拡張**: 将来的にmobileアプリやsharedパッケージが追加される前提で開発
+4. **スタイリング**: CSS Modulesを使用（Component.module.css）
+5. **ルーティング**: routes/[page]/route.tsx でページを定義
+6. **モノレポ拡張**: 将来的にmobileアプリやsharedパッケージが追加される前提で開発
