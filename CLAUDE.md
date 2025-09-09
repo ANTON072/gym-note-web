@@ -40,7 +40,7 @@ pnpm preview   # ビルド結果のプレビュー
 ### 技術スタック
 - **Node.js**: 22以上必須
 - **パッケージマネージャー**: pnpm 10.15.1（frozen-lockfile有効）
-- **フロントエンド**: React 18.3 + TypeScript 5.6
+- **フロントエンド**: React 19 + TypeScript 5.6
 - **ビルドツール**: Vite 5.4
 - **ルーティング**: TanStack Router
 - **スタイリング**: CSS Modules

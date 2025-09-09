@@ -4,7 +4,7 @@
 
 ## 技術スタック
 
-- **React** 18.3+ with TypeScript
+- **React** 19+ with TypeScript
 - **Vite** - ビルドツール
 - **TanStack Router** - ルーティング
 - **CSS Modules** - スタイリング
