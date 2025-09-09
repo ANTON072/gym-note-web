@@ -1,0 +1,19 @@
+{
+  "name": "gym-note-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev:web": "pnpm --filter @gym-note/web dev",
+    "build:web": "pnpm --filter @gym-note/web build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "type-check": "pnpm -r run type-check"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
+}
