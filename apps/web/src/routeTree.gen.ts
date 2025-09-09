@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteRouteImport } from './routes/about/route'
 import { Route as IndexRouteRouteImport } from './routes/index/route'
+import { Route as DevComponentsRouteRouteImport } from './routes/dev/components/route'
 
 const AboutRouteRoute = AboutRouteRouteImport.update({
   id: '/about',
@@ -22,31 +23,40 @@ const IndexRouteRoute = IndexRouteRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevComponentsRouteRoute = DevComponentsRouteRouteImport.update({
+  id: '/dev/components',
+  path: '/dev/components',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRouteRoute
   '/about': typeof AboutRouteRoute
+  '/dev/components': typeof DevComponentsRouteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRouteRoute
   '/about': typeof AboutRouteRoute
+  '/dev/components': typeof DevComponentsRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRouteRoute
   '/about': typeof AboutRouteRoute
+  '/dev/components': typeof DevComponentsRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/dev/components'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/dev/components'
+  id: '__root__' | '/' | '/about' | '/dev/components'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRouteRoute: typeof IndexRouteRoute
   AboutRouteRoute: typeof AboutRouteRoute
+  DevComponentsRouteRoute: typeof DevComponentsRouteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dev/components': {
+      id: '/dev/components'
+      path: '/dev/components'
+      fullPath: '/dev/components'
+      preLoaderRoute: typeof DevComponentsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRouteRoute: IndexRouteRoute,
   AboutRouteRoute: AboutRouteRoute,
+  DevComponentsRouteRoute: DevComponentsRouteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
