@@ -39,21 +39,28 @@ src/
 ## 設計原則
 
 ### ページ専用コンポーネント
+
 各ページのコンポーネントは `routes/[page]/components/` 内に配置し、そのページでのみ使用される機能を実装します。
 
-### 共通コンポーネント  
+### 共通コンポーネント
+
 複数のページで使用されるコンポーネントは `components/` 内に配置します：
-- `components/ui/` - Button、Input等の基本UIコンポーネント
-- `components/layout/` - Header、Footer等のレイアウトコンポーネント
+
+- `components/ui/` - Button、Input 等の基本 UI コンポーネント
+- `components/layout/` - Header、Footer 等のレイアウトコンポーネント
 
 ### スタイリング
-CSS Modulesを使用してコンポーネント単位でスタイルを管理：
+
+CSS Modules を使用してコンポーネント単位でスタイルを管理：
+
 - ファイル名: `Component.module.css`
-- TypeScriptでの型安全なクラス名参照
+- TypeScript での型安全なクラス名参照
 - スタイルのスコープ化により名前衝突を防止
 
 ### ルーティング
-TanStack Routerを使用し、ファイルベースルーティングを採用：
+
+TanStack Router を使用し、ファイルベースルーティングを採用：
+
 - `routes/[page]/route.tsx` - 各ページのルートファイル
 - ルートツリーは自動生成される
 
