@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { WelcomeSection } from "./components/WelcomeSection";
+import { WelcomeSection } from "./-components/WelcomeSection";
 
 export const Route = createFileRoute("/")({
   component: Index,
