@@ -1,5 +1,5 @@
-@import "open-props/style";
-@import "open-props/normalize";
+@import url("open-props/style");
+@import url("open-props/normalize");
 
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
@@ -9,9 +9,11 @@ body {
 a {
   color: var(--link);
   text-decoration: underline;
+
   &:hover {
     text-decoration: none;
   }
+
   &:visited {
     color: var(--link-visited);
   }

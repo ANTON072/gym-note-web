@@ -1,25 +1,25 @@
 .container {
   min-height: 100vh;
-  background: #f8fafc;
   padding: 16px;
+  background: #f8fafc;
 }
 
 .header {
-  text-align: center;
   margin-bottom: 32px;
+  text-align: center;
 }
 
 .title {
+  margin: 0 0 8px;
   font-size: 24px;
   font-weight: 700;
   color: #1e293b;
-  margin: 0 0 8px 0;
 }
 
 .subtitle {
+  margin: 0;
   font-size: 14px;
   color: #64748b;
-  margin: 0;
 }
 
 .main {
@@ -27,20 +27,20 @@
 }
 
 .section {
+  padding: 20px;
+  margin-bottom: 24px;
   background: white;
   border-radius: 12px;
-  margin-bottom: 24px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 .sectionTitle {
+  padding-bottom: 8px;
+  margin: 0 0 16px;
   font-size: 18px;
   font-weight: 600;
   color: #334155;
-  margin: 0 0 16px 0;
   border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 8px;
 }
 
 .componentGroup {
@@ -48,10 +48,10 @@
 }
 
 .componentTitle {
+  margin: 0 0 12px;
   font-size: 16px;
   font-weight: 500;
   color: #475569;
-  margin: 0 0 12px 0;
 }
 
 .examples {
@@ -60,14 +60,14 @@
   gap: 12px;
   padding: 16px;
   background: #f1f5f9;
-  border-radius: 8px;
   border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .placeholder {
-  color: #94a3b8;
-  font-style: italic;
-  text-align: center;
   padding: 32px;
   margin: 0;
+  font-style: italic;
+  color: #94a3b8;
+  text-align: center;
 }

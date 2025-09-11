@@ -18,6 +18,10 @@ pnpm lint
 pnpm lint:fix  # 自動修正
 pnpm type-check
 
+# CSSリンター
+pnpm css:lint  # CSSプロパティ順序チェック
+pnpm css:fix   # CSS自動修正（プロパティ順序等）
+
 # 依存関係のインストール（新規セットアップ時）
 pnpm install
 ```
@@ -49,7 +53,7 @@ pnpm preview   # ビルド結果のプレビュー
 - **ビルドツール**: Vite 5.4
 - **ルーティング**: TanStack Router
 - **スタイリング**: CSS Modules
-- **コード品質**: Biome（フォーマッター・リンター）
+- **コード品質**: Biome（フォーマッター・リンター）+ stylelint（CSS）
 
 ### 重要な設定
 

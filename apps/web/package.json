@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "css:types": "tcm src --pattern '**/*.module.css' --watch",
-    "css:types:build": "tcm src --pattern '**/*.module.css'"
+    "css:types:build": "tcm src --pattern '**/*.module.css'",
+    "css:lint": "stylelint \"src/**/*.css\"",
+    "css:fix": "stylelint \"src/**/*.css\" --fix"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.131.36",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^4.3.3",
     "npm-run-all": "^4.1.5",
+    "stylelint-config-recess-order": "^7.3.0",
     "typed-css-modules": "^0.9.1",
     "typescript": "^5.6.3",
     "vite": "^5.4.11"

@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  height: var(--size-8);
   place-items: center;
+  height: var(--size-8);
   padding: var(--size-2);
 }
