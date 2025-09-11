@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-router": "^1.131.36",
     "@tanstack/react-router-devtools": "^1.131.36",
+    "open-props": "^1.7.16",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
