@@ -16,11 +16,18 @@
     "css:fix": "stylelint \"src/**/*.css\" --fix"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.87.4",
     "@tanstack/react-router": "^1.131.36",
     "@tanstack/react-router-devtools": "^1.131.36",
+    "axios": "^1.11.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "lucide-react": "^0.544.0",
     "open-props": "^1.7.16",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.62.0",
+    "zod": "^4.1.7"
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.131.36",
