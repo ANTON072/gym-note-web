@@ -1,20 +1,22 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { GlobalFooter, GlobalHeader } from "@/components/layout";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
+// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 const RootLayout = () => (
-  <>
-    <div className="p-2 flex gap-2">
-      <Link to="/" className="[&.active]:font-bold">
-        Home
-      </Link>{" "}
-      <Link to="/about" className="[&.active]:font-bold">
-        About
-      </Link>
-    </div>
-    <hr />
-    <Outlet />
-    <TanStackRouterDevtools />
-  </>
+  <div
+    style={{
+      display: "grid",
+      gridTemplateRows: "auto 1fr auto",
+      height: "100svh",
+    }}
+  >
+    <GlobalHeader />
+    <main>
+      <Outlet />
+    </main>
+    <GlobalFooter />
+    {/* {import.meta.env.DEV && <TanStackRouterDevtools />} */}
+  </div>
 );
 
 export const Route = createRootRoute({ component: RootLayout });

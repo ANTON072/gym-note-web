@@ -1,0 +1,6 @@
+.root {
+  display: grid;
+  height: var(--size-8);
+  place-items: center;
+  padding: var(--size-2);
+}

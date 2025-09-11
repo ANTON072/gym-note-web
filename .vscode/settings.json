@@ -18,5 +18,10 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit",
     "source.fixAll.biome": "explicit"
-  }
+  },
+  "cssvar.files": [
+    "./node_modules/.pnpm/open-props@1.7.16/node_modules/open-props/open-props.min.css"
+  ],
+  "cssvar.ignore": [],
+  "cssvar.extensions": ["css", "postcss", "jsx", "tsx"]
 }
