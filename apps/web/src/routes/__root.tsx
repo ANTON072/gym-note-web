@@ -11,7 +11,14 @@ const RootLayout = () => (
     }}
   >
     <GlobalHeader />
-    <main>
+    <main
+      style={{
+        maxWidth: "var(--max-content-width)",
+        margin: "0 auto",
+        width: "100%",
+        padding: "var(--size-2)",
+      }}
+    >
       <Outlet />
     </main>
     <GlobalFooter />
