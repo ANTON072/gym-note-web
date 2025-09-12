@@ -24,3 +24,6 @@ a {
   }
 }
 
+svg,button,img {
+  vertical-align: top;
+}

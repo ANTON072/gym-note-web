@@ -1,7 +1,7 @@
+import { URL, fileURLToPath } from "node:url";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { fileURLToPath, URL } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,5 +24,8 @@ export default defineConfig({
       "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
       "@apps": fileURLToPath(new URL("../..", import.meta.url)),
     },
+  },
+  server: {
+    host: true,
   },
 });
