@@ -5,10 +5,11 @@
   height: var(--size-8);
   padding: 0 var(--size-2);
   background: #fff;
+  border-bottom: 1px solid var(--stone-12);
 
   > h1 {
     margin: 0 auto;
-    text-align: center;
+    text-align: center
   }
 }
 

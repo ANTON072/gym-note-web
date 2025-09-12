@@ -1,5 +1,5 @@
 @import url("open-props/style");
-@import url("open-props/normalize");
+@import url("kiso.css");
 
 :root {
   --max-content-width: 768px;
@@ -8,6 +8,7 @@
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
+  color: var(--stone-12);
 }
 
 a {
@@ -22,3 +23,4 @@ a {
     color: var(--link-visited);
   }
 }
+

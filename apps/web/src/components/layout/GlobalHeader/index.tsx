@@ -1,3 +1,4 @@
+import { HamburgerMenu } from "@/components/ui";
 import styles from "./styles.module.css";
 
 export const GlobalHeader = () => {
@@ -5,7 +6,7 @@ export const GlobalHeader = () => {
     <header className={styles.root}>
       <div />
       <h1 className={styles.title}>GYM NOTE</h1>
-      <div>Menu</div>
+      <HamburgerMenu />
     </header>
   );
 };

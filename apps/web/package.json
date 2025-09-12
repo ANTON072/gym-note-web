@@ -22,6 +22,7 @@
     "axios": "^1.11.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
+    "kiso.css": "^1.2.2",
     "lucide-react": "^0.544.0",
     "open-props": "^1.7.16",
     "react": "^19.1.1",
