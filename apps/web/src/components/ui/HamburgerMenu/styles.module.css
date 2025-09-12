@@ -6,14 +6,21 @@
   vertical-align: top;
   background-color: transparent;
   border: none;
+  transition: opacity 0.15s;
+
+  &:active {
+    opacity: 0.5;
+  }
 }
 
 .icon {
+  --icon-size: var(--size-7);
+
   position: absolute;
   top: 50%;
   left: 50%;
-  width: var(--size-8);
-  height: var(--size-8);
+  width: var(--icon-size);
+  height: var(--icon-size);
   cursor: pointer;
   opacity: 0.95;
   fill: none;
