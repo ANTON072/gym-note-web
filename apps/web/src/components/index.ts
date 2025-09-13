@@ -1,3 +1,4 @@
 export * from "./GlobalFooter";
 export * from "./GlobalHeader";
-export * from "./HamburgerMenu";
+export * from "./GlobalHeader/HamburgerMenu";
+export * from "./LoginForm";
