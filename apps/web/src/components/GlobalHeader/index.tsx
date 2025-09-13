@@ -1,5 +1,5 @@
-import { HamburgerMenu } from "@/components/ui";
 import { APP_NAME } from "@packages/config";
+import { HamburgerMenu } from "../HamburgerMenu";
 import styles from "./styles.module.css";
 
 export const GlobalHeader = () => {

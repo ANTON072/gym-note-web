@@ -1,4 +1,4 @@
-import { GlobalFooter, GlobalHeader } from "@/components/layout";
+import { GlobalFooter, GlobalHeader } from "@/components";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
