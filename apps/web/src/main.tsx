@@ -1,3 +1,4 @@
+import { initializeAuthListener } from "@/lib/firebase/authInitializer";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
@@ -6,6 +7,9 @@ import ReactDOM from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 import "./global.css";
+
+// Firebase Authの状態監視を開始
+initializeAuthListener();
 
 // Create a new router instance
 const router = createRouter({ routeTree });
