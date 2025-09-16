@@ -1,8 +1,8 @@
-import { renderHook } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { User } from "firebase/auth";
-import { useAuth } from "./useAuth";
 import * as rootStoreModule from "@/store/rootStore";
+import { renderHook } from "@testing-library/react";
+import type { User } from "firebase/auth";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useAuth } from "./useAuth";
 
 // rootStoreをモック
 vi.mock("@/store/rootStore", () => ({
@@ -32,7 +32,7 @@ describe("useAuth", () => {
 
   it("ログイン状態を正しく返す", () => {
     const mockUser = { uid: "123", email: "test@example.com" } as User;
-    
+
     mockUseRootStore.mockReturnValue({
       status: "login" as const,
       user: mockUser,
@@ -62,7 +62,7 @@ describe("useAuth", () => {
 
   it("setAuthStateアクションも含まれている", () => {
     const mockSetAuthState = vi.fn();
-    
+
     mockUseRootStore.mockReturnValue({
       status: "logout" as const,
       user: null,
