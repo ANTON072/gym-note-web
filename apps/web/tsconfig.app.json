@@ -32,7 +32,8 @@
       "@types/*": ["src/types/*"],
       "@services/*": ["src/services/*"],
       "@assets/*": ["src/assets/*"],
-      "@packages/*": ["../../packages/*"]
+      "@packages/*": ["../../packages/*"],
+      "@store": ["src/store/rootStore.ts"]
     }
   },
   "include": ["src"]

@@ -23,6 +23,7 @@ export default defineConfig({
       "@services": fileURLToPath(new URL("./src/services", import.meta.url)),
       "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
       "@packages": fileURLToPath(new URL("../../packages", import.meta.url)),
+      "@store": fileURLToPath(new URL("./src/store/rootStore.ts", import.meta.url)),
     },
   },
   server: {

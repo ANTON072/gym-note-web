@@ -1,5 +1,6 @@
 import { GlobalFooter, GlobalHeader } from "@/components";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 const RootLayout = () => (
