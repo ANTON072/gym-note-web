@@ -13,7 +13,10 @@
     "css:types": "tcm src --pattern '**/*.module.css' --watch",
     "css:types:build": "tcm src --pattern '**/*.module.css'",
     "css:lint": "stylelint \"src/**/*.css\"",
-    "css:fix": "stylelint \"src/**/*.css\" --fix"
+    "css:fix": "stylelint \"src/**/*.css\" --fix",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.87.4",
@@ -36,14 +39,19 @@
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.131.36",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^4.3.3",
+    "happy-dom": "^18.0.1",
     "npm-run-all": "^4.1.5",
     "stylelint-config-recess-order": "^7.3.0",
     "typed-css-modules": "^0.9.1",
     "typescript": "^5.6.3",
-    "vite": "^5.4.11"
+    "vite": "^5.4.11",
+    "vitest": "^3.2.4"
   }
 }
