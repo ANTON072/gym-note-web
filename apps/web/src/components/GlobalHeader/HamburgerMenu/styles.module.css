@@ -6,11 +6,6 @@
   vertical-align: top;
   background-color: transparent;
   border: none;
-  transition: opacity 0.15s;
-
-  &:active {
-    opacity: 0.5;
-  }
 }
 
 .icon {
@@ -24,7 +19,7 @@
   cursor: pointer;
   opacity: 0.95;
   fill: none;
-  stroke: var(--stone-12);
+  stroke: var(--text-color);
   stroke-width: 3;
   transform: translate(-50%,-50%);
 }

@@ -1,8 +1,8 @@
 import { GlobalFooter, GlobalHeader, LoginForm } from "@/components";
 import { useAuth } from "@/hooks";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { Toaster } from "sonner";
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 import styles from "./root.module.css";
 
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";

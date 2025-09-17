@@ -1,16 +1,32 @@
-import { DrawerBackdrop } from "./DrawerBackdrop";
-import { DrawerMenu } from "./DrawerMenu";
+import styles from "./styles.module.css";
 
-interface Props {
-  children: React.ReactNode;
-}
+export const Drawer = () => {
+  const menuList = [
+    { name: "Daily Note", href: "#" },
+    { name: "Register Exercise", href: "#" },
+    { name: "Logout", href: "#" },
+    { name: "Contact", href: "#" },
+  ];
 
-export const Drawer = ({ children }: Props) => {
   return (
-    <>
-      <DrawerBackdrop />
-      <DrawerMenu />
-      {children}
-    </>
+    <nav className={styles.root}>
+      <ul>
+        {menuList.map((item) => (
+          <li key={item.name}>
+            <a href={item.href} className="tap">
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <hr className={styles.divider} />
+      <ul>
+        <li>
+          <a href="#" className="tap">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 };

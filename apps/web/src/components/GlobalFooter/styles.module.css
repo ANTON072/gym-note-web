@@ -2,5 +2,5 @@
   display: grid;
   place-items: center;
   height: var(--size-8);
-  padding: var(--size-2);
+  padding: var(--container-padding);
 }

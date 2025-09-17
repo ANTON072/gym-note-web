@@ -3,12 +3,16 @@
 
 :root {
   --max-content-width: 768px;
+  --text-color: var(--stone-12);
+  --border-color: var(--stone-12);
+  --container-padding: var(--size-2);
+  --header-height: var(--size-8);
 }
 
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
-  color: var(--stone-12);
+  color: var(--text-color);
 }
 
 a {
@@ -27,3 +31,12 @@ a {
 svg,button,img {
   vertical-align: top;
 }
+
+.tap {
+  transition: opacity 0.15s;
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
