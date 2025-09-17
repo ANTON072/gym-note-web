@@ -2,10 +2,10 @@ import styles from "./styles.module.css";
 
 export const Drawer = () => {
   const menuList = [
-    { name: "Daily Note", href: "#" },
-    { name: "Register Exercise", href: "#" },
+    { name: "Today's Note", href: "/today" },
+    { name: "Daily Note", href: "/daily" },
+    { name: "Register Exercise", href: "/exercises" },
     { name: "Logout", href: "#" },
-    { name: "Contact", href: "#" },
   ];
 
   return (
@@ -22,7 +22,7 @@ export const Drawer = () => {
       <hr className={styles.divider} />
       <ul>
         <li>
-          <a href="#" className="tap">
+          <a href="/contact" className="tap">
             Contact
           </a>
         </li>
