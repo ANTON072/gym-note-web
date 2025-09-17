@@ -1,7 +1,6 @@
 import type { AuthState } from "@/types/auth";
 import type { User } from "firebase/auth";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
 
 interface RootStore {
   auth: AuthState & {
@@ -14,53 +13,34 @@ interface RootStore {
   };
 }
 
-export const useRootStore = create<RootStore>()(
-  devtools(
-    (set) => ({
-      auth: {
-        status: "loading",
-        user: null,
-        setAuthState: (status, user) =>
-          set(
-            (state) => ({
-              auth: {
-                ...state.auth,
-                status,
-                user,
-              },
-            }),
-            false,
-            "auth/setAuthState",
-          ),
-      },
-      drawer: {
-        isOpen: false,
-        openDrawer: () =>
-          set(
-            (state) => ({
-              drawer: {
-                ...state.drawer,
-                isOpen: true,
-              },
-            }),
-            false,
-            "drawer/openDrawer",
-          ),
-        closeDrawer: () =>
-          set(
-            (state) => ({
-              drawer: {
-                ...state.drawer,
-                isOpen: false,
-              },
-            }),
-            false,
-            "drawer/closeDrawer",
-          ),
-      },
-    }),
-    {
-      name: "root-store",
-    },
-  ),
-);
+export const useRootStore = create<RootStore>()((set) => ({
+  auth: {
+    status: "loading",
+    user: null,
+    setAuthState: (status, user) =>
+      set((state) => ({
+        auth: {
+          ...state.auth,
+          status,
+          user,
+        },
+      })),
+  },
+  drawer: {
+    isOpen: false,
+    openDrawer: () =>
+      set((state) => ({
+        drawer: {
+          ...state.drawer,
+          isOpen: true,
+        },
+      })),
+    closeDrawer: () =>
+      set((state) => ({
+        drawer: {
+          ...state.drawer,
+          isOpen: false,
+        },
+      })),
+  },
+}));
