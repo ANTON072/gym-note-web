@@ -1,8 +1,8 @@
 import styles from "./styles.module.css";
 
-export const LoginButton = () => {
+export const GoogleLoginButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <button type="button" className={styles["gsi-material-button"]}>
+    <button type="button" className={styles["gsi-material-button"]} {...props}>
       <div className={styles["gsi-material-button-state"]} />
       <div className={styles["gsi-material-button-content-wrapper"]}>
         <div className={styles["gsi-material-button-icon"]}>

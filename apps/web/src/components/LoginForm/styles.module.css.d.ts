@@ -1,5 +1,6 @@
 declare const styles: {
   readonly "content": string;
+  readonly "error": string;
   readonly "gsi-material-button": string;
   readonly "gsi-material-button-content-wrapper": string;
   readonly "gsi-material-button-contents": string;

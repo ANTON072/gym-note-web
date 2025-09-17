@@ -1,6 +1,7 @@
 import { GlobalFooter, GlobalHeader, LoginForm } from "@/components";
 import { useAuth } from "@/hooks";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 import type { ReactNode } from "react";
 import styles from "./root.module.css";
 
@@ -13,6 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => (
     <GlobalHeader />
     <main className={styles.main}>{children}</main>
     <GlobalFooter />
+    <Toaster />
   </div>
 );
 

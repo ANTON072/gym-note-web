@@ -12,6 +12,12 @@
   }
 }
 
+.error {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
 .gsi-material-button {
   position: relative;
   box-sizing: border-box;
