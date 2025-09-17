@@ -7,6 +7,11 @@ interface RootStore {
   auth: AuthState & {
     setAuthState: (status: "loading" | "login" | "logout", user: User | null) => void;
   };
+  drawer: {
+    isOpen: boolean;
+    openDrawer: () => void;
+    closeDrawer: () => void;
+  };
 }
 
 export const useRootStore = create<RootStore>()(
@@ -26,6 +31,31 @@ export const useRootStore = create<RootStore>()(
             }),
             false,
             "auth/setAuthState",
+          ),
+      },
+      drawer: {
+        isOpen: false,
+        openDrawer: () =>
+          set(
+            (state) => ({
+              drawer: {
+                ...state.drawer,
+                isOpen: true,
+              },
+            }),
+            false,
+            "drawer/openDrawer",
+          ),
+        closeDrawer: () =>
+          set(
+            (state) => ({
+              drawer: {
+                ...state.drawer,
+                isOpen: false,
+              },
+            }),
+            false,
+            "drawer/closeDrawer",
           ),
       },
     }),
