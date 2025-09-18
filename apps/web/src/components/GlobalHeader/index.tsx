@@ -22,7 +22,9 @@ export const GlobalHeader = () => {
         )}
       </div>
       <h1 className={styles.title}>{APP_NAME}</h1>
-      <div className={styles.hamburger_menu}>{user && <HamburgerMenu />}</div>
+      <div className={styles.hamburger_menu}>
+        <HamburgerMenu />
+      </div>
       <Drawer />
     </header>
   );
