@@ -14,16 +14,27 @@ const menuList = [
 
 export const Drawer = () => {
   const drawerRef = useRef<HTMLElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+
   const drawerStore = useRootStore((state) => state.drawer);
 
   useGSAP(() => {
-    // 初期状態で閉じた状態に設定（アニメーションなし）
+    gsap.set(backdropRef.current, {
+      autoAlpha: 0,
+      pointerEvents: "none",
+    });
     gsap.set(drawerRef.current, {
       x: "100%",
     });
   }, []);
 
   useGSAP(() => {
+    gsap.to(backdropRef.current, {
+      autoAlpha: drawerStore.isOpen ? 1 : 0,
+      duration: 0.3,
+      ease: "linear",
+      pointerEvents: drawerStore.isOpen ? "auto" : "none",
+    });
     if (drawerStore.isOpen) {
       gsap.to(drawerRef.current, {
         x: 0,
@@ -46,24 +57,27 @@ export const Drawer = () => {
   }, [drawerStore.isOpen]);
 
   return (
-    <nav ref={drawerRef} className={styles.root}>
-      <ul>
-        {menuList.map((item) => (
-          <li key={item.name}>
-            <a href={item.href} className="tap">
-              {item.name}
+    <>
+      <div ref={backdropRef} className={styles.backdrop} />
+      <nav ref={drawerRef} className={styles.root}>
+        <ul>
+          {menuList.map((item) => (
+            <li key={item.name}>
+              <a href={item.href} className="tap">
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <hr className={styles.divider} />
+        <ul>
+          <li>
+            <a href="/contact" className="tap">
+              Contact
             </a>
           </li>
-        ))}
-      </ul>
-      <hr className={styles.divider} />
-      <ul>
-        <li>
-          <a href="/contact" className="tap">
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+    </>
   );
 };

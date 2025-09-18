@@ -31,3 +31,12 @@
   background-color: var(--border-color);
   border: none;
 }
+
+.backdrop {
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  left: 0;
+  width: 100svw;
+  background: rgb(0 0 0 / 50%);
+}
