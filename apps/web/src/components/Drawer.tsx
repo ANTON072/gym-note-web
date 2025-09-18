@@ -72,9 +72,15 @@ export const Drawer = () => {
     }
   };
 
+  const handleClose = () => {
+    drawerStore.closeDrawer();
+  };
+
   return (
     <>
-      <div ref={backdropRef} className={styles.backdrop} />
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents:
+      Backdrop is intended to be closed by mouse only; keyboard interaction is not required.*/}
+      <div ref={backdropRef} className={styles.backdrop} onClick={handleClose} />
       <nav ref={drawerRef} className={styles.root}>
         <ul>
           {menuList.map((item) => (
