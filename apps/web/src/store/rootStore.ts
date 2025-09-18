@@ -9,6 +9,7 @@ interface RootStore {
   drawer: {
     isOpen: boolean;
     toggleDrawer: () => void;
+    closeDrawer: () => void;
   };
 }
 
@@ -32,6 +33,13 @@ export const useRootStore = create<RootStore>()((set) => ({
         drawer: {
           ...state.drawer,
           isOpen: !state.drawer.isOpen,
+        },
+      })),
+    closeDrawer: () =>
+      set((state) => ({
+        drawer: {
+          ...state.drawer,
+          isOpen: false,
         },
       })),
   },

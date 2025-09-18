@@ -61,6 +61,7 @@ export const Drawer = () => {
     try {
       await logout();
       toast.success("ログアウトしました");
+      drawerStore.closeDrawer();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "ログアウトに失敗しました";
       toast.error(errorMessage);
