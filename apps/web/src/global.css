@@ -53,4 +53,8 @@ svg,button,img {
     color: var(--key-color);
     border-color: var(--key-color);
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
