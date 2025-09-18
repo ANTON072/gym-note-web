@@ -3,8 +3,10 @@
 
 :root {
   --max-content-width: 768px;
-  --text-color: var(--stone-12);
-  --border-color: var(--stone-12);
+  --base-color: var(--stone-12);
+  --key-color: var(--red-9);
+  --text-color: var(--base-color);
+  --border-color: var(--base-color);
   --container-padding: var(--size-2);
   --header-height: var(--size-8);
 }
@@ -40,3 +42,15 @@ svg,button,img {
   }
 }
 
+.button {
+  padding: 0 1em;
+  font-size: inherit;
+  font-weight: bold;
+  line-height: 2em;
+  border-width: var(--size-1);
+
+  &:active {
+    color: var(--key-color);
+    border-color: var(--key-color);
+  }
+}

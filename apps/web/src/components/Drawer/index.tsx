@@ -2,14 +2,15 @@ import { useRootStore } from "@/store/rootStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import { toast } from "sonner";
 
+import { logout } from "@/lib/firebase/auth";
 import styles from "./styles.module.css";
 
 const menuList = [
   { name: "Today's Note", href: "/today" },
   { name: "Daily Note", href: "/daily" },
   { name: "Register Exercise", href: "/exercises" },
-  { name: "Logout", href: "#" },
 ];
 
 export const Drawer = () => {
@@ -56,6 +57,16 @@ export const Drawer = () => {
     }
   }, [drawerStore.isOpen]);
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("ログアウトしました");
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "ログアウトに失敗しました";
+      toast.error(errorMessage);
+    }
+  };
+
   return (
     <>
       <div ref={backdropRef} className={styles.backdrop} />
@@ -70,13 +81,31 @@ export const Drawer = () => {
           ))}
         </ul>
         <hr className={styles.divider} />
-        <ul>
-          <li>
-            <a href="/contact" className="tap">
-              Contact
-            </a>
-          </li>
-        </ul>
+        <div
+          style={{
+            display: "grid",
+            gap: "var(--size-5)",
+          }}
+        >
+          <ul>
+            <li>
+              <a href="/contact" className="tap">
+                Contact
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li
+              style={{
+                fontSize: "var(--font-size-1)",
+              }}
+            >
+              <button type="button" className="button" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
       </nav>
     </>
   );
