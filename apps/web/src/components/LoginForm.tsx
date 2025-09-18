@@ -1,10 +1,10 @@
 import { APP_NAME } from "@packages/config";
 import { useState } from "react";
 import { toast } from "sonner";
-import { signInWithGoogle } from "../../lib/firebase/auth";
+import { signInWithGoogle } from "../lib/firebase/auth";
 import { GoogleLoginButton } from "./GoogleLoginButton";
 
-import styles from "./styles.module.css";
+import styles from "./LoginForm.module.css";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);

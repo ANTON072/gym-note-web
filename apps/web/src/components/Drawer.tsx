@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { logout } from "@/lib/firebase/auth";
-import styles from "./styles.module.css";
+import styles from "./Drawer.module.css";
 
 const menuList = [
   { name: "Today's Note", href: "/today" },

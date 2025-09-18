@@ -1,5 +1,5 @@
 import { APP_NAME } from "@packages/config";
-import styles from "./styles.module.css";
+import styles from "./GlobalFooter.module.css";
 
 export const GlobalFooter = () => {
   return (

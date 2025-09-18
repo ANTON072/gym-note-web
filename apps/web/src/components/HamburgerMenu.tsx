@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./HamburgerMenu.module.css";
 
 export const HamburgerMenu = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (

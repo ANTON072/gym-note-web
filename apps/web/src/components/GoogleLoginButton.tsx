@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./GoogleLoginButton.module.css";
 
 export const GoogleLoginButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (

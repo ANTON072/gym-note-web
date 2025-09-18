@@ -3,9 +3,9 @@ import Avatar from "react-avatar";
 import { useAuth } from "@/hooks";
 import { useRootStore } from "@/store/rootStore";
 import { APP_NAME } from "@packages/config";
-import { Drawer } from "../Drawer";
+import { Drawer } from "./Drawer";
+import styles from "./GlobalHeader.module.css";
 import { HamburgerMenu } from "./HamburgerMenu";
-import styles from "./styles.module.css";
 
 export const GlobalHeader = () => {
   const { user } = useAuth();
