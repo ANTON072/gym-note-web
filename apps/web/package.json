@@ -23,6 +23,7 @@
     "firebase": "^12.2.1",
     "gsap": "^3.13.0",
     "kiso.css": "^1.2.2",
+    "lucide-react": "^0.544.0",
     "open-props": "^1.7.16",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

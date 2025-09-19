@@ -1,14 +1,27 @@
+import { CircleX } from "lucide-react";
 import styles from "./Toaster.module.css";
+
+interface ToasterItemProps {
+  message: string;
+  type: "normal" | "error";
+}
+
+const ToasterItem = ({ message, type }: ToasterItemProps) => {
+  return (
+    <li className={styles.toaster_list} data-type={type}>
+      <button type="button" className={styles.close_button} aria-label="閉じる">
+        <CircleX />
+      </button>
+      {message}
+    </li>
+  );
+};
 
 export const Toaster = () => {
   return (
     <section>
       <ol className={styles.toaster}>
-        <li className={styles.toaster_list}>ログインしました</li>
-        <li data-type="error" className={styles.toaster_list}>
-          ログインしました
-        </li>
-        <li className={styles.toaster_list}>ログインしました</li>
+        <ToasterItem message="ログインしました" type="normal" />
       </ol>
     </section>
   );

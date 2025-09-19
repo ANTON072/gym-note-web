@@ -21,6 +21,9 @@
   right: 0;
   bottom: 0;
   left: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.5em;
   order: var(--order);
   width: 100%;
   padding: var(--size-2);
@@ -32,4 +35,9 @@
   &[data-type="error"] {
     color: var(--error);
   }
+}
+
+.close_button {
+  padding: 0;
+  border: none;
 }
