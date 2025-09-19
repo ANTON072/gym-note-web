@@ -1,8 +1,10 @@
 import { GlobalFooter, GlobalHeader, LoginForm } from "@/components";
+import { Toaster } from "@/components/Toaster";
 import { useAuth } from "@/hooks";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
+import { Toaster as LibToaster } from "sonner";
+
 import styles from "./root.module.css";
 
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
@@ -15,6 +17,7 @@ const Layout = ({ children }: { children: ReactNode }) => (
     <main className={styles.main}>{children}</main>
     <GlobalFooter />
     <Toaster />
+    <LibToaster />
   </div>
 );
 

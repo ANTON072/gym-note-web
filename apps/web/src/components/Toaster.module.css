@@ -1,0 +1,35 @@
+.toaster {
+  --normal: var(--base-color);
+  --error: var(--red-8);
+
+  position: fixed;
+  bottom: var(--size-5);
+  left: 50%;
+  z-index: 999999999;
+  display: grid;
+  row-gap: var(--size-2);
+  align-content: end;
+  width: var(--max-content-width);
+  max-width: calc(100% - var(--size-8));
+  font-size: var(--font-size-1);
+  transform: translateX(-50%);
+  transition: transform 400ms ease;
+}
+
+.toaster_list {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  order: var(--order);
+  width: 100%;
+  padding: var(--size-2);
+  background: #FFF;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 1px;
+
+  &[data-type="error"] {
+    color: var(--error);
+  }
+}
