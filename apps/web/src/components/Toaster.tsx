@@ -10,7 +10,7 @@ export type ToastType = {
 
 interface ToasterItemProps {
   message: string;
-  type: "normal" | "error";
+  type?: "normal" | "error";
 }
 
 const ToasterItem = ({ message, type }: ToasterItemProps) => {
