@@ -1,8 +1,7 @@
-import Avatar from "react-avatar";
-
 import { useAuth } from "@/hooks";
 import { useRootStore } from "@/store/rootStore";
 import { APP_NAME } from "@packages/config";
+import { Avatar } from "./Avatar";
 import { Drawer } from "./Drawer";
 import styles from "./GlobalHeader.module.css";
 import { HamburgerMenu } from "./HamburgerMenu";
@@ -17,16 +16,7 @@ export const GlobalHeader = () => {
 
   return (
     <header className={styles.root}>
-      <div>
-        {user && (
-          <Avatar
-            src={user.photoURL ?? undefined}
-            name={user.displayName ?? undefined}
-            size="40"
-            round={true}
-          />
-        )}
-      </div>
+      <div>{user && <Avatar src={user.photoURL} name={user.displayName} size={40} />}</div>
       <h1 className={styles.title}>{APP_NAME}</h1>
       <div className={styles.hamburger_menu}>
         <HamburgerMenu onClick={handleClickHamburgerMenu} />

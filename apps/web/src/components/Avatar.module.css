@@ -1,0 +1,13 @@
+.avatar_image {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar_text {
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--key-color);
+  border-radius: 50%;
+}
