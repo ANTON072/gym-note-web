@@ -1,5 +1,12 @@
 import { CircleX } from "lucide-react";
+
 import styles from "./Toaster.module.css";
+
+export type ToastType = {
+  id: string;
+  message: string;
+  type: "normal" | "error";
+};
 
 interface ToasterItemProps {
   message: string;
