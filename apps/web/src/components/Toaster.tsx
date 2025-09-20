@@ -1,3 +1,4 @@
+import { useRootStore } from "@/store/rootStore";
 import styles from "./Toaster.module.css";
 import { CloseIcon } from "./icons/CloseIcon";
 
@@ -24,10 +25,14 @@ const ToasterItem = ({ message, type }: ToasterItemProps) => {
 };
 
 export const Toaster = () => {
+  const { toast } = useRootStore();
+
   return (
     <section>
       <ol className={styles.toaster}>
-        <ToasterItem message="ログインしました" type="normal" />
+        {toast.toastList.map((t) => (
+          <ToasterItem key={t.id} message={t.message} type={t.type} />
+        ))}
       </ol>
     </section>
   );
