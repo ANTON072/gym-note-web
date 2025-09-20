@@ -23,13 +23,23 @@ const ToasterItem = ({ message, type, id }: ToastType) => {
     );
   }, []);
 
+  const handleRemove = () => {
+    gsap.to(listRef.current, {
+      autoAlpha: 0,
+      y: 20,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: () => toast.remove(id),
+    });
+  };
+
   return (
     <li ref={listRef} className={styles.toaster_list} data-type={type}>
       <button
         type="button"
         className={styles.close_button}
         aria-label="閉じる"
-        onClick={() => toast.remove(id)}
+        onClick={handleRemove}
       >
         <CloseIcon size={20} />
       </button>
