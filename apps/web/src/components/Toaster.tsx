@@ -1,6 +1,5 @@
-import { CircleX } from "lucide-react";
-
 import styles from "./Toaster.module.css";
+import { CloseIcon } from "./icons/CloseIcon";
 
 export type ToastType = {
   id: string;
@@ -17,7 +16,7 @@ const ToasterItem = ({ message, type }: ToasterItemProps) => {
   return (
     <li className={styles.toaster_list} data-type={type}>
       <button type="button" className={styles.close_button} aria-label="閉じる">
-        <CircleX />
+        <CloseIcon size={20} />
       </button>
       {message}
     </li>
