@@ -16,7 +16,6 @@ function Index() {
         onClick={() => {
           toast.add({
             message: `This is a toast message ${Date.now()}`,
-            type: "normal",
           });
         }}
       >

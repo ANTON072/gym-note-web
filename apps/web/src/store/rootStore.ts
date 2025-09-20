@@ -15,7 +15,7 @@ interface RootStore {
   };
   toast: {
     toastList: ToastType[];
-    add: (toast: Omit<ToastType, "id">) => void;
+    add: (toast: Omit<ToastType, "id" | "type"> & { type?: ToastType["type"] }) => void;
     remove: (id: ToastType["id"]) => void;
   };
 }
@@ -46,7 +46,11 @@ export const useRootStore = create<RootStore>()(
       toastList: [],
       add: (toast) =>
         set((state) => {
-          state.toast.toastList.push({ id: Date.now().toString(), ...toast });
+          state.toast.toastList.push({
+            id: Date.now().toString(),
+            type: toast.type ?? "normal",
+            ...toast,
+          });
         }),
       remove: (id) =>
         set((state) => {
