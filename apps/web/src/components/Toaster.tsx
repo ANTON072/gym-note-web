@@ -48,9 +48,11 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
       ref={listRef}
       className={styles.toaster_list}
       data-type={type}
-      style={{
-        transform: `translateY(${yPosition ?? -9999}px)`,
-      }}
+      style={
+        {
+          "--y-position": yPosition !== undefined ? `${yPosition}px` : "-9999px",
+        } as React.CSSProperties
+      }
     >
       <button
         type="button"

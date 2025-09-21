@@ -29,6 +29,7 @@
   border-color: inherit;
   border-style: solid;
   border-width: var(--border-size);
+  transform: translateY(var(--y-position));
 
   &[data-type="error"] {
     color: var(--error);
