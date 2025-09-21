@@ -47,9 +47,9 @@ export const useRootStore = create<RootStore>()(
       add: (toast) =>
         set((state) => {
           // 最大3件まで表示。古いものから削除する。
-          if (state.toast.toastList.length >= 3) {
-            state.toast.toastList.shift();
-          }
+          // if (state.toast.toastList.length >= 3) {
+          //   state.toast.toastList.shift();
+          // }
           state.toast.toastList.push({
             id: Date.now().toString(),
             type: toast.type ?? "normal",

@@ -1,7 +1,7 @@
 import { useRootStore } from "@/store/rootStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Toaster.module.css";
 import { CloseIcon } from "./icons/CloseIcon";
 
@@ -9,19 +9,29 @@ export type ToastType = {
   id: string;
   message: string;
   type: "normal" | "error";
+  onHeightUpdate: (id: string, height: number) => void;
+  yPosition?: number;
 };
 
-const ToasterItem = ({ message, type, id }: ToastType) => {
+const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType) => {
   const { toast } = useRootStore();
   const listRef = useRef<HTMLLIElement>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      listRef.current,
-      { autoAlpha: 0, y: 20 },
-      { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" },
-    );
-  }, []);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: re-renders
+  useEffect(() => {
+    if (listRef.current) {
+      const height = listRef.current.offsetHeight;
+      onHeightUpdate(id, height);
+    }
+  }, [id]);
+
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     listRef.current,
+  //     { autoAlpha: 0, y: 20 },
+  //     { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" },
+  //   );
+  // }, []);
 
   const handleRemove = () => {
     gsap.to(listRef.current, {
@@ -34,7 +44,14 @@ const ToasterItem = ({ message, type, id }: ToastType) => {
   };
 
   return (
-    <li ref={listRef} className={styles.toaster_list} data-type={type}>
+    <li
+      ref={listRef}
+      className={styles.toaster_list}
+      data-type={type}
+      style={{
+        transform: `translateY(${yPosition ?? -9999}px)`,
+      }}
+    >
       <button
         type="button"
         className={styles.close_button}
@@ -50,12 +67,46 @@ const ToasterItem = ({ message, type, id }: ToastType) => {
 
 export const Toaster = () => {
   const { toast } = useRootStore();
+  const [itemHeights, setItemHeights] = useState<Record<string, number>>({});
+
+  const handleHeightUpdate = (id: string, height: number) => {
+    setItemHeights((prev) => ({ ...prev, [id]: height }));
+  };
+
+  const { itemPositions, totalHeight } = useMemo(() => {
+    const positions: Record<string, number> = {};
+    let currentY = 0;
+
+    for (const t of toast.toastList) {
+      positions[t.id] = currentY;
+      const height = itemHeights[t.id];
+      if (height) {
+        currentY += height + 8;
+      }
+    }
+    return {
+      itemPositions: positions,
+      totalHeight: Math.max(0, currentY - 8),
+    };
+  }, [toast.toastList, itemHeights]);
 
   return (
     <section>
-      <ol className={styles.toaster}>
+      <ol
+        className={styles.toaster}
+        style={
+          {
+            "--total-height": `${totalHeight}px`,
+          } as React.CSSProperties
+        }
+      >
         {toast.toastList.map((t) => (
-          <ToasterItem key={t.id} {...t} />
+          <ToasterItem
+            key={t.id}
+            {...t}
+            onHeightUpdate={handleHeightUpdate}
+            yPosition={itemPositions[t.id]}
+          />
         ))}
       </ol>
     </section>
