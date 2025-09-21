@@ -38,13 +38,15 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
   }, [yPosition]);
 
   const handleRemove = () => {
-    gsap.to(listRef.current, {
-      autoAlpha: 0,
-      y: 20,
-      duration: 0.3,
-      ease: "power2.out",
-      onComplete: () => toast.remove(id),
-    });
+    toast.remove(id);
+    // TODO: 削除アニメーションを入れる
+    // gsap.to(listRef.current, {
+    //   autoAlpha: 0,
+    //   y: 20,
+    //   duration: 0.3,
+    //   ease: "power2.out",
+    //   onComplete: () => toast.remove(id),
+    // });
   };
 
   return (
