@@ -17,7 +17,8 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
   const { toast } = useRootStore();
   const listRef = useRef<HTMLLIElement>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: re-renders
+  // 高さ測定用
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (listRef.current) {
       const height = listRef.current.offsetHeight;
@@ -25,13 +26,16 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
     }
   }, [id]);
 
-  // useGSAP(() => {
-  //   gsap.fromTo(
-  //     listRef.current,
-  //     { autoAlpha: 0, y: 20 },
-  //     { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" },
-  //   );
-  // }, []);
+  // 出現アニメーション用
+  useGSAP(() => {
+    if (!listRef.current || yPosition === undefined) return;
+
+    gsap.fromTo(
+      listRef.current,
+      { autoAlpha: 0, "--y-position": `${yPosition + 20}px` },
+      { autoAlpha: 1, "--y-position": `${yPosition}px`, duration: 0.3, ease: "power2.out" },
+    );
+  }, [yPosition]);
 
   const handleRemove = () => {
     gsap.to(listRef.current, {
