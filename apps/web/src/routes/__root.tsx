@@ -3,7 +3,6 @@ import { Toaster } from "@/components/Toaster";
 import { useAuth } from "@/hooks";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Toaster as LibToaster } from "sonner";
 
 import styles from "./root.module.css";
 
@@ -17,7 +16,6 @@ const Layout = ({ children }: { children: ReactNode }) => (
     <main className={styles.main}>{children}</main>
     <GlobalFooter />
     <Toaster />
-    <LibToaster />
   </div>
 );
 
