@@ -1,5 +1,5 @@
 import { useRootStore } from "@/store/rootStore";
-import { useGSAP } from "@gsap/react";
+import clsx from "clsx";
 import gsap from "gsap";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Toaster.module.css";
@@ -26,17 +26,6 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
     }
   }, [id]);
 
-  // 出現アニメーション用
-  useGSAP(() => {
-    if (!listRef.current || yPosition === undefined) return;
-
-    gsap.fromTo(
-      listRef.current,
-      { autoAlpha: 0, "--y-position": `${yPosition + 20}px` },
-      { autoAlpha: 1, "--y-position": `${yPosition}px`, duration: 0.3, ease: "power2.out" },
-    );
-  }, [yPosition]);
-
   const handleRemove = () => {
     gsap.to(listRef.current, {
       autoAlpha: 0,
@@ -50,7 +39,7 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType
   return (
     <li
       ref={listRef}
-      className={styles.toaster_list}
+      className={clsx(styles.toaster_list, styles.toaster_transition)}
       data-type={type}
       style={
         {
@@ -99,7 +88,7 @@ export const Toaster = () => {
   return (
     <section>
       <ol
-        className={styles.toaster}
+        className={clsx(styles.toaster, styles.toaster_transition)}
         style={
           {
             "--total-height": `${totalHeight}px`,

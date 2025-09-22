@@ -11,7 +11,6 @@
   max-width: calc(100% - var(--size-8));
   font-size: var(--font-size-1);
   transform: translateX(-50%) translateY(calc(-1 * var(--total-height, 0px)));
-  transition: transform 400ms ease;
 }
 
 .toaster_list {
@@ -34,6 +33,10 @@
   &[data-type="error"] {
     color: var(--error);
   }
+}
+
+.toaster_transition {
+  transition: transform 400ms ease;
 }
 
 .close_button {
