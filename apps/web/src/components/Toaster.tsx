@@ -39,9 +39,8 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToasterIt
   const handleRemove = () => {
     gsap.to(listRef.current, {
       autoAlpha: 0,
-      x: "+=100",
-      duration: 0.4,
-      ease: "power2.out",
+      duration: 0.2,
+      ease: "linear",
       onComplete: () => toast.remove(id),
     });
   };
