@@ -5,15 +5,18 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Toaster.module.css";
 import { CloseIcon } from "./icons/CloseIcon";
 
-export type ToastType = {
+export interface ToastType {
   id: string;
   message: string;
   type: "normal" | "error";
+}
+
+type ToasterItemProps = ToastType & {
   onHeightUpdate: (id: string, height: number) => void;
   yPosition?: number;
 };
 
-const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToastType) => {
+const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToasterItemProps) => {
   const { toast } = useRootStore();
   const listRef = useRef<HTMLLIElement>(null);
 
