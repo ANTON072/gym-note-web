@@ -2,7 +2,6 @@ import { useRootStore } from "@/store/rootStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState } from "react";
-import { toast } from "sonner";
 
 import { logout } from "@/lib/firebase/auth";
 import styles from "./Drawer.module.css";
@@ -17,6 +16,7 @@ export const Drawer = () => {
   const drawerRef = useRef<HTMLElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const [isMutating, setIsMutating] = useState(false);
+  const toast = useRootStore((state) => state.toast);
 
   const drawerStore = useRootStore((state) => state.drawer);
 
@@ -62,11 +62,11 @@ export const Drawer = () => {
     try {
       setIsMutating(true);
       await logout();
-      toast.success("ログアウトしました");
+      toast.add({ message: "ログアウトしました" });
       drawerStore.closeDrawer();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "ログアウトに失敗しました";
-      toast.error(errorMessage);
+      toast.add({ message: errorMessage, type: "error" });
     } finally {
       setIsMutating(false);
     }
