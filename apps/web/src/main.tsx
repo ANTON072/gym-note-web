@@ -1,6 +1,5 @@
 import { initializeAuthListener } from "@/lib/firebase/authInitializer";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 
 // Import the generated route tree
@@ -25,9 +24,5 @@ declare module "@tanstack/react-router" {
 const rootElement = document.getElementById("root");
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
-  );
+  root.render(<RouterProvider router={router} />);
 }
