@@ -29,11 +29,18 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToasterIt
     }
   }, [id]);
 
+  useEffect(() => {
+    const removeTimerId = setTimeout(() => {
+      handleRemove();
+    }, 5000);
+    return () => clearTimeout(removeTimerId);
+  }, []);
+
   const handleRemove = () => {
     gsap.to(listRef.current, {
       autoAlpha: 0,
-      x: "+=20",
-      duration: 0.3,
+      x: "+=100",
+      duration: 0.4,
       ease: "power2.out",
       onComplete: () => toast.remove(id),
     });
