@@ -4,10 +4,10 @@ import gsap from "gsap";
 import { useRef, useState } from "react";
 
 import { logout } from "@/lib/firebase/auth";
+import { Link } from "@tanstack/react-router";
 import styles from "./Drawer.module.css";
 
 const menuList = [
-  { name: "Today's Note", href: "/today" },
   { name: "Daily Note", href: "/daily" },
   { name: "Register Exercise", href: "/exercises" },
 ];
@@ -85,9 +85,9 @@ export const Drawer = () => {
         <ul>
           {menuList.map((item) => (
             <li key={item.name}>
-              <a href={item.href} className="tap">
+              <Link to={item.href} className="tap" onClick={handleClose}>
                 {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -98,13 +98,6 @@ export const Drawer = () => {
             gap: "var(--size-5)",
           }}
         >
-          <ul>
-            <li>
-              <a href="/contact" className="tap">
-                Contact
-              </a>
-            </li>
-          </ul>
           <ul>
             <li
               style={{
