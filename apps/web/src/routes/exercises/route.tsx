@@ -1,4 +1,4 @@
-import { PageTitle, Table } from "@/components";
+import { Button, PageTitle, Table } from "@/components";
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/exercises")({
@@ -38,7 +38,7 @@ function RouteComponent() {
   return (
     <div>
       <PageTitle title="種目一覧" />
-      <Link to="/exercises/new">新規登録</Link>
+      <Button to="/exercises/new">新規登録</Button>
       <form>
         <label htmlFor="body_part">部位で絞り込み:</label>
         <select name="body_part" id="body_part">

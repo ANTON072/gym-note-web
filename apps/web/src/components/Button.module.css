@@ -2,7 +2,6 @@
   display: inline-block;
   padding: var(--size-2) var(--size-5);
   font-size: var(--font-size-1);
-  font-weight: bold;
   color: #fff;
   text-decoration: none;
   cursor: pointer;

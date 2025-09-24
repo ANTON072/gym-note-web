@@ -1,41 +1,45 @@
+import { Link, type LinkProps } from "@tanstack/react-router";
 import clsx from "clsx";
 import { forwardRef } from "react";
 import styles from "./Button.module.css";
 
-// aタグの場合の型定義
-type AnchorButtonProps = {
-  href: string;
+// Linkタグの場合の型定義
+type LinkButtonProps = {
+  to: LinkProps["to"];
   children: React.ReactNode;
   className?: string;
-} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children" | "className">;
+} & Omit<React.ComponentPropsWithoutRef<typeof Link>, "to" | "children" | "className">;
 
 // buttonタグの場合の型定義
 type ButtonProps = {
-  href?: never;
+  to?: never;
   children: React.ReactNode;
   className?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 // 統合された型定義
-type Props = AnchorButtonProps | ButtonProps;
+type Props = LinkButtonProps | ButtonProps;
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
-  ({ href, children, className = "", ...rest }, ref) => {
-    // hrefが指定されている場合はaタグを使用
-    if (href) {
+  ({ to, children, className = "", ...rest }, ref) => {
+    // toが指定されている場合はLinkタグを使用
+    if (to) {
       return (
-        <a
-          href={href}
+        <Link
+          to={to}
           className={clsx(styles.button, className)}
           ref={ref as React.Ref<HTMLAnchorElement>}
-          {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+          {...(rest as Omit<
+            React.ComponentPropsWithoutRef<typeof Link>,
+            "to" | "children" | "className"
+          >)}
         >
           {children}
-        </a>
+        </Link>
       );
     }
 
-    // hrefが指定されていない場合はbuttonタグを使用
+    // toが指定されていない場合はbuttonタグを使用
     return (
       <button
         className={clsx(styles.button, className)}
