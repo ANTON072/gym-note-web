@@ -9,6 +9,7 @@
   --border-color: var(--base-color);
   --container-padding: var(--size-2);
   --header-height: var(--size-8);
+  --button-height: var(--size-7);
 }
 
 body {

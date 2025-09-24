@@ -1,11 +1,11 @@
 import type { SVGProps } from "react";
 import { SvgIcon } from "./SvgIcon";
 
-interface CloseIconProps extends Omit<SVGProps<SVGSVGElement>, "children"> {
+interface Props extends Omit<SVGProps<SVGSVGElement>, "children"> {
   size?: number | string;
 }
 
-export const CloseIcon = ({ size = 24, ...props }: CloseIconProps) => {
+export const CloseIcon = ({ size = 24, ...props }: Props) => {
   return (
     <SvgIcon size={size} title="Close" {...props}>
       <path

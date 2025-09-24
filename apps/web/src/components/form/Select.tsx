@@ -1,3 +1,4 @@
+import { ChevronDownIcon, CloseIcon } from "../icons";
 import styles from "./form.module.css";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -7,8 +8,11 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select = ({ children, name, ...props }: Props) => {
   return (
-    <select className={styles.select} name={name} {...props}>
-      {children}
-    </select>
+    <div className={styles.select_wrapper}>
+      <select className={styles.select} name={name} {...props}>
+        {children}
+      </select>
+      <ChevronDownIcon size={16} className={styles.select_icon} />
+    </div>
   );
 };

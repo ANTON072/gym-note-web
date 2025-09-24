@@ -1,12 +1,14 @@
 .button {
-  display: inline-block;
-  padding: var(--size-2) var(--size-5);
+  display: inline-flex;
+  padding: 0 var(--size-5);
+  height: var(--button-height);
   font-size: var(--font-size-0);
   color: #fff;
   text-decoration: none;
   cursor: pointer;
   background-color: var(--base-color);
   border: none;
+  align-items: center;
 
   &:active {
     background-color: var(--key-color);

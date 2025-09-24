@@ -6,6 +6,11 @@
   &:has([aria-invalid="true"]) {
     --text-color: var(--key-color);
   }
+
+  &:has(label) {
+    position: relative;
+    top: calc(-1 * var(--font-size-0));
+  }
 }
 
 .label {
@@ -28,16 +33,28 @@
   width: 100%;
 }
 
+.select_wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
 .select {
   --padding-horizontal: var(--size-2);
   appearance: none;
-  height: var(--size-6);
+  height: var(--button-height);
   padding-left: var(--padding-horizontal);
-  padding-right: var(--padding-horizontal);
-  /* padding: .4em calc(.8em + 30px) .4em .8em; */
+  padding-right: calc(var(--padding-horizontal) * 2 + 25px);
   border: 1px solid var(--text-color);
   background-color: #fff;
   color: var(--text-color);
   font-size: var(--font-size-0);
   cursor: pointer;
+}
+
+.select_icon {
+  color: var(--text-color);
+  position: absolute;
+  right: 15px;
+  pointer-events: none;
 }
