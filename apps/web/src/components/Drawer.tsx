@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 
 import { logout } from "@/lib/firebase/auth";
 import { Link } from "@tanstack/react-router";
+import { Button } from "./Button";
 import styles from "./Drawer.module.css";
 
 const menuList = [
@@ -99,14 +100,10 @@ export const Drawer = () => {
           }}
         >
           <ul>
-            <li
-              style={{
-                fontSize: "var(--font-size-1)",
-              }}
-            >
-              <button type="button" className="button" onClick={handleLogout} disabled={isMutating}>
+            <li>
+              <Button onClick={handleLogout} disabled={isMutating}>
                 Logout
-              </button>
+              </Button>
             </li>
           </ul>
         </div>

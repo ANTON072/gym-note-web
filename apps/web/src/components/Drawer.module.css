@@ -8,7 +8,7 @@
   z-index: 1;
   width: 80svw;
   padding: var(--space);
-  background: #FFF;
+  background: #fff;
   border-left: 1px solid var(--border-color);
 
   a {
@@ -19,7 +19,7 @@
   ul {
     display: grid;
     gap: var(--size-3);
-    font-size: var(--font-size-3)
+    font-size: var(--font-size-3);
   }
 }
 

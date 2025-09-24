@@ -24,7 +24,7 @@
   order: var(--order);
   width: 100%;
   padding: var(--size-2);
-  background: #FFF;
+  background: #fff;
   border-color: inherit;
   border-style: solid;
   border-width: var(--border-size);

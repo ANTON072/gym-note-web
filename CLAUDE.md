@@ -53,7 +53,7 @@ pnpm preview   # ビルド結果のプレビュー
 - **ビルドツール**: Vite 5.4
 - **ルーティング**: TanStack Router
 - **スタイリング**: CSS Modules
-- **コード品質**: Biome（フォーマッター・リンター）+ stylelint（CSS）
+- **コード品質**: Biome（フォーマッター・リンター / CSS含む統一運用）
 
 ### 重要な設定
 

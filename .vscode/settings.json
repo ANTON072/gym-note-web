@@ -17,11 +17,10 @@
   },
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit",
-    "source.fixAll.biome": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.biome": "explicit"
   },
   "[css]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "cssvar.files": [
     "./node_modules/.pnpm/open-props@1.7.16/node_modules/open-props/open-props.min.css"
