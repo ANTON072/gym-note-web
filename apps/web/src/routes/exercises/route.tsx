@@ -1,5 +1,6 @@
 import { Button, PageTitle, Table } from "@/components";
 import { Link, createFileRoute } from "@tanstack/react-router";
+import styles from "./exercises.module.css";
 
 export const Route = createFileRoute("/exercises")({
   component: RouteComponent,
@@ -36,20 +37,23 @@ const exercises: Exercise[] = [
 
 function RouteComponent() {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <PageTitle title="種目一覧" />
-      <Button to="/exercises/new">新規登録</Button>
-      <form>
-        <label htmlFor="body_part">部位で絞り込み:</label>
-        <select name="body_part" id="body_part">
-          <option value="legs">脚</option>
-          <option value="back">背中</option>
-          <option value="shoulders">肩</option>
-          <option value="arms">腕</option>
-          <option value="chest">胸</option>
-          <option value="cardio">有酸素</option>
-        </select>
-      </form>
+      <div className={styles.index_form}>
+        <form>
+          <label htmlFor="body_part">部位で絞り込み:</label>
+          <select name="body_part" id="body_part">
+            <option value="legs">脚</option>
+            <option value="back">背中</option>
+            <option value="shoulders">肩</option>
+            <option value="arms">腕</option>
+            <option value="chest">胸</option>
+            <option value="cardio">有酸素</option>
+            <option value="">すべて</option>
+          </select>
+        </form>
+        <Button to="/exercises/new">新規登録</Button>
+      </div>
       <Table
         data={exercises}
         columns={[

@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  row-gap: var(--size-3);
+}
+
+.index_form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
