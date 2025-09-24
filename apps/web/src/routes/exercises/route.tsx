@@ -38,41 +38,43 @@ const exercises: Exercise[] = [
 
 function RouteComponent() {
   return (
-    <div className={styles.wrapper}>
+    <>
       <PageTitle title="種目一覧" />
-      <div className={styles.index_form}>
-        <form>
-          <InputField label="種目名で絞り込み">
-            <Select name="body_part">
-              <option value="legs">脚</option>
-              <option value="back">背中</option>
-              <option value="shoulders">肩</option>
-              <option value="arms">腕</option>
-              <option value="chest">胸</option>
-              <option value="cardio">有酸素</option>
-              <option value="">すべて</option>
-            </Select>
-          </InputField>
-        </form>
-        <Button to="/exercises/new">新規登録</Button>
+      <div className={styles.wrapper}>
+        <div className={styles.index_form}>
+          <form>
+            <InputField label="種目名で絞り込み">
+              <Select name="body_part">
+                <option value="legs">脚</option>
+                <option value="back">背中</option>
+                <option value="shoulders">肩</option>
+                <option value="arms">腕</option>
+                <option value="chest">胸</option>
+                <option value="cardio">有酸素</option>
+                <option value="">すべて</option>
+              </Select>
+            </InputField>
+          </form>
+          <Button to="/exercises/new">新規登録</Button>
+        </div>
+        <Table
+          data={exercises}
+          columns={[
+            {
+              key: "name",
+              header: "種目名",
+              render: (exercise) => <Link to={`/exercises/${exercise.id}`}>{exercise.name}</Link>,
+              width: "75%",
+            },
+            {
+              key: "bodyPart",
+              header: "部位",
+              render: (exercise) => exercise.bodyPart,
+            },
+          ]}
+          keyExtractor={(exercise) => exercise.id}
+        />
       </div>
-      <Table
-        data={exercises}
-        columns={[
-          {
-            key: "name",
-            header: "種目名",
-            render: (exercise) => <Link to={`/exercises/${exercise.id}`}>{exercise.name}</Link>,
-            width: "75%",
-          },
-          {
-            key: "bodyPart",
-            header: "部位",
-            render: (exercise) => exercise.bodyPart,
-          },
-        ]}
-        keyExtractor={(exercise) => exercise.id}
-      />
-    </div>
+    </>
   );
 }

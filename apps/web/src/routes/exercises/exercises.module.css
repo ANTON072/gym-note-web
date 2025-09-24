@@ -1,6 +1,7 @@
 .wrapper {
   display: grid;
   row-gap: var(--size-3);
+  margin-top: var(--size-6);
 }
 
 .index_form {
