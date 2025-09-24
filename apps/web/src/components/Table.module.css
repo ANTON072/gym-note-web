@@ -24,12 +24,12 @@
   border-bottom: 2px solid var(--stone-7);
 }
 
-.body tr:hover {
-  background-color: var(--stone-2);
-}
-
 .body tr:nth-child(even) {
   background-color: var(--stone-1);
+}
+
+.body tr:hover {
+  background-color: var(--yellow-2);
 }
 
 .emptyRow {

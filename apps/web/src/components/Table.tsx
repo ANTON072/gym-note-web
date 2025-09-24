@@ -77,12 +77,16 @@ export function Table<T>({
                 <tr
                   key={key}
                   className={rowClass}
-                  onClick={() => handleRowClick(item, index)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      handleRowClick(item, index);
-                    }
-                  }}
+                  onClick={onRowClick ? () => handleRowClick(item, index) : undefined}
+                  onKeyDown={
+                    onRowClick
+                      ? (e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            handleRowClick(item, index);
+                          }
+                        }
+                      : undefined
+                  }
                   style={{ cursor: onRowClick ? "pointer" : undefined }}
                   tabIndex={onRowClick ? 0 : undefined}
                   role={onRowClick ? "button" : undefined}
