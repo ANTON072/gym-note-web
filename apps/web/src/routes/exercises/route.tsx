@@ -1,9 +1,38 @@
-import { PageTitle } from "@/components";
+import { PageTitle, Table } from "@/components";
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/exercises")({
   component: RouteComponent,
 });
+
+interface Exercise {
+  id: number;
+  name: string;
+  bodyPart: string;
+}
+
+const exercises: Exercise[] = [
+  { id: 1, name: "ベンチプレス", bodyPart: "胸" },
+  { id: 2, name: "スクワット", bodyPart: "脚" },
+  { id: 3, name: "デッドリフト", bodyPart: "背中" },
+  { id: 4, name: "懸垂", bodyPart: "背中" },
+  { id: 5, name: "腕立て伏せ", bodyPart: "胸" },
+  { id: 6, name: "ショルダープレス", bodyPart: "肩" },
+  { id: 7, name: "レッグプレス", bodyPart: "脚" },
+  { id: 8, name: "レッグエクステンション", bodyPart: "脚" },
+  { id: 9, name: "レッグカール", bodyPart: "脚" },
+  { id: 10, name: "ラットプルダウン", bodyPart: "背中" },
+  { id: 11, name: "ローイング", bodyPart: "背中" },
+  { id: 12, name: "バイセップカール", bodyPart: "上腕" },
+  { id: 13, name: "トライセップエクステンション", bodyPart: "上腕" },
+  { id: 14, name: "サイドレイズ", bodyPart: "肩" },
+  { id: 15, name: "クランチ", bodyPart: "腹" },
+  { id: 16, name: "プランク", bodyPart: "腹" },
+  { id: 17, name: "ケーブルフライ", bodyPart: "胸" },
+  { id: 18, name: "インクラインベンチプレス", bodyPart: "胸" },
+  { id: 19, name: "ディップス", bodyPart: "胸" },
+  { id: 20, name: "ハックスクワット", bodyPart: "脚" },
+];
 
 function RouteComponent() {
   return (
@@ -21,142 +50,23 @@ function RouteComponent() {
           <option value="cardio">有酸素</option>
         </select>
       </form>
-      <table className="table">
-        <thead>
-          <tr>
-            <th
-              style={{
-                width: "75%",
-              }}
-            >
-              種目名
-            </th>
-            <th>部位</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <Link to="/exercises/1">ベンチプレス</Link>
-            </td>
-            <td>胸</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/2">スクワット</Link>
-            </td>
-            <td>脚</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/3">デッドリフト</Link>
-            </td>
-            <td>背中</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/4">懸垂</Link>
-            </td>
-            <td>背中</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/5">腕立て伏せ</Link>
-            </td>
-            <td>胸</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/6">ショルダープレス</Link>
-            </td>
-            <td>肩</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/7">レッグプレス</Link>
-            </td>
-            <td>脚</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/8">レッグエクステンション</Link>
-            </td>
-            <td>脚</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/9">レッグカール</Link>
-            </td>
-            <td>脚</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/10">ラットプルダウン</Link>
-            </td>
-            <td>背中</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/11">ローイング</Link>
-            </td>
-            <td>背中</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/12">バイセップカール</Link>
-            </td>
-            <td>上腕</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/13">トライセップエクステンション</Link>
-            </td>
-            <td>上腕</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/14">サイドレイズ</Link>
-            </td>
-            <td>肩</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/15">クランチ</Link>
-            </td>
-            <td>腹</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/16">プランク</Link>
-            </td>
-            <td>腹</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/17">ケーブルフライ</Link>
-            </td>
-            <td>胸</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/18">インクラインベンチプレス</Link>
-            </td>
-            <td>胸</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/19">ディップス</Link>
-            </td>
-            <td>胸</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to="/exercises/20">ハックスクワット</Link>
-            </td>
-            <td>脚</td>
-          </tr>
-        </tbody>
-      </table>
+      <Table
+        data={exercises}
+        columns={[
+          {
+            key: "name",
+            header: "種目名",
+            render: (exercise) => <Link to={`/exercises/${exercise.id}`}>{exercise.name}</Link>,
+            width: "75%",
+          },
+          {
+            key: "bodyPart",
+            header: "部位",
+            render: (exercise) => exercise.bodyPart,
+          },
+        ]}
+        keyExtractor={(exercise) => exercise.id}
+      />
     </div>
   );
 }

@@ -1,0 +1,43 @@
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table table {
+  width: 100%;
+  font-size: var(--font-size-1);
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.header th,
+.cell {
+  padding: var(--size-2) var(--size-3);
+  text-align: left;
+  border-bottom: 1px solid var(--stone-6);
+}
+
+.header th {
+  font-weight: 600;
+  color: var(--stone-12);
+  background-color: var(--stone-3);
+  border-bottom: 2px solid var(--stone-7);
+}
+
+.body tr:hover {
+  background-color: var(--stone-2);
+}
+
+.body tr:nth-child(even) {
+  background-color: var(--stone-1);
+}
+
+.emptyRow {
+  height: 100px;
+}
+
+.emptyCell {
+  padding: var(--size-2) var(--size-3);
+  text-align: center;
+  color: var(--stone-9);
+}
