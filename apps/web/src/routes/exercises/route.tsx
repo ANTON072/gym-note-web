@@ -42,12 +42,7 @@ function RouteComponent() {
       <PageTitle title="種目一覧" />
       <div className={styles.index_form}>
         <form>
-          <InputField
-            label="種目名で絞り込み"
-            name="name"
-            error
-            helperText="部分一致で検索されます"
-          >
+          <InputField label="種目名で絞り込み">
             <select name="body_part" id="body_part">
               <option value="legs">脚</option>
               <option value="back">背中</option>

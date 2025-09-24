@@ -17,3 +17,13 @@
   font-size: var(--font-size-0);
   color: var(--text-color);
 }
+
+.full_width {
+  width: 100%;
+}
+
+.full_width input,
+.full_width textarea,
+.full_width select {
+  width: 100%;
+}
