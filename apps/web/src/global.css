@@ -32,36 +32,6 @@ img {
   vertical-align: top;
 }
 
-.tap {
-  transition: opacity 0.15s;
-
-  &:active {
-    opacity: 0.5;
-  }
-}
-
-.button {
-  padding: 0 1em;
-  font-size: inherit;
-  font-weight: bold;
-  line-height: 2em;
-  border-width: var(--size-1);
-
-  &:active {
-    color: var(--key-color);
-    border-color: var(--key-color);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-}
-
-.page_title {
-  margin: var(--size-3) 0;
-  font-size: var(--font-size-4);
-}
-
 .table {
   width: 100%;
   font-size: var(--font-size-1);

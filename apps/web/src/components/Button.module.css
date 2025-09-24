@@ -12,4 +12,8 @@
   &:active {
     background-color: var(--key-color);
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

@@ -86,7 +86,7 @@ export const Drawer = () => {
         <ul>
           {menuList.map((item) => (
             <li key={item.name}>
-              <Link to={item.href} className="tap" onClick={handleClose}>
+              <Link to={item.href} onClick={handleClose}>
                 {item.name}
               </Link>
             </li>
