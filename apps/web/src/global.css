@@ -18,15 +18,11 @@ body {
 }
 
 a {
-  color: var(--link);
-  text-decoration: underline;
+  color: var(--blue-8);
+  text-decoration: none;
 
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:visited {
-    color: var(--link-visited);
+  &:active {
+    color: var(--key-color);
   }
 }
 
@@ -56,5 +52,40 @@ svg,button,img {
 
   &:disabled {
     opacity: 0.5;
+  }
+}
+
+.page_title {
+  margin: var(--size-3) 0;
+  font-size: var(--font-size-4);
+}
+
+.table {
+  width: 100%;
+  font-size: var(--font-size-1);
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  th, td {
+    padding: var(--size-2) var(--size-3);
+    text-align: left;
+    border-bottom: 1px solid var(--stone-6);
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--stone-12);
+    background-color: var(--stone-3);
+    border-bottom: 2px solid var(--stone-7);
+  }
+
+  tbody tr {
+    &:hover {
+      background-color: var(--stone-2);
+    }
+
+    &:nth-child(even) {
+      background-color: var(--stone-1);
+    }
   }
 }
