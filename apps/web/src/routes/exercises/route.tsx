@@ -1,4 +1,5 @@
 import { Button, PageTitle, Table } from "@/components";
+import { InputField } from "@/components/form";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import styles from "./exercises.module.css";
 
@@ -41,16 +42,22 @@ function RouteComponent() {
       <PageTitle title="種目一覧" />
       <div className={styles.index_form}>
         <form>
-          <label htmlFor="body_part">部位で絞り込み:</label>
-          <select name="body_part" id="body_part">
-            <option value="legs">脚</option>
-            <option value="back">背中</option>
-            <option value="shoulders">肩</option>
-            <option value="arms">腕</option>
-            <option value="chest">胸</option>
-            <option value="cardio">有酸素</option>
-            <option value="">すべて</option>
-          </select>
+          <InputField
+            label="種目名で絞り込み"
+            name="name"
+            error
+            helperText="部分一致で検索されます"
+          >
+            <select name="body_part" id="body_part">
+              <option value="legs">脚</option>
+              <option value="back">背中</option>
+              <option value="shoulders">肩</option>
+              <option value="arms">腕</option>
+              <option value="chest">胸</option>
+              <option value="cardio">有酸素</option>
+              <option value="">すべて</option>
+            </select>
+          </InputField>
         </form>
         <Button to="/exercises/new">新規登録</Button>
       </div>

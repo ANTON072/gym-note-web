@@ -1,0 +1,19 @@
+.input_field {
+  display: grid;
+  row-gap: var(--size-1);
+  --text-color: inherit;
+
+  &:has([aria-invalid="true"]) {
+    --text-color: var(--key-color);
+  }
+}
+
+.label {
+  color: var(--text-color);
+  font-size: var(--font-size-0);
+}
+
+.helper_text {
+  font-size: var(--font-size-0);
+  color: var(--text-color);
+}
