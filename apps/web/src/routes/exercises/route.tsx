@@ -1,5 +1,5 @@
 import { Button, PageTitle, Table } from "@/components";
-import { InputField } from "@/components/form";
+import { InputField, Select } from "@/components/form";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import styles from "./exercises.module.css";
 
@@ -42,8 +42,8 @@ function RouteComponent() {
       <PageTitle title="種目一覧" />
       <div className={styles.index_form}>
         <form>
-          <InputField label="種目名で絞り込み">
-            <select name="body_part" id="body_part">
+          <InputField label="種目名で絞り込み" error>
+            <Select name="body_part">
               <option value="legs">脚</option>
               <option value="back">背中</option>
               <option value="shoulders">肩</option>
@@ -51,7 +51,7 @@ function RouteComponent() {
               <option value="chest">胸</option>
               <option value="cardio">有酸素</option>
               <option value="">すべて</option>
-            </select>
+            </Select>
           </InputField>
         </form>
         <Button to="/exercises/new">新規登録</Button>
