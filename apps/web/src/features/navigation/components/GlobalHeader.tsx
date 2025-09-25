@@ -1,7 +1,7 @@
 import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
 import { APP_NAME } from "@packages/config";
-import { Avatar } from "./Avatar";
+import { Avatar } from "@/components";
 import { Drawer } from "./Drawer";
 import styles from "./GlobalHeader.module.css";
 import { HamburgerMenu } from "./HamburgerMenu";

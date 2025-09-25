@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 
 import { logout } from "@/features/auth/lib/auth";
 import { Link } from "@tanstack/react-router";
-import { Button } from "./Button";
+import { Button } from "@/components";
 import styles from "./Drawer.module.css";
 
 const menuList = [

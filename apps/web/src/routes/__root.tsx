@@ -1,4 +1,4 @@
-import { GlobalFooter, GlobalHeader } from "@/components";
+import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { Toaster } from "@/components/Toaster";
 import { LoginForm, useAuth } from "@/features/auth";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
