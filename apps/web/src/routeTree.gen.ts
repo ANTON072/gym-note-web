@@ -9,11 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ExercisesRouteRouteImport } from './routes/exercises/route'
+import { Route as ExercisesRouteRouteImport } from './routes/exercises.route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ExercisesIndexRouteImport } from './routes/exercises/index'
-import { Route as ExercisesNewRouteImport } from './routes/exercises/new'
-import { Route as ExercisesExerciseIdRouteImport } from './routes/exercises/$exerciseId'
+import { Route as ExercisesIndexRouteImport } from './routes/exercises.index'
+import { Route as ExercisesNewRouteImport } from './routes/exercises.new'
+import { Route as ExercisesExerciseIdRouteImport } from './routes/exercises.$exerciseId'
 
 const ExercisesRouteRoute = ExercisesRouteRouteImport.update({
   id: '/exercises',
