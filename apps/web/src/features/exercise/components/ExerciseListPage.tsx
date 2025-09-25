@@ -1,6 +1,6 @@
 import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
-import styles from "@/feature/exercise/exercises.module.css";
+import styles from "@/features/exercise/exercises.module.css";
 import { Link } from "@tanstack/react-router";
 
 interface Exercise {
