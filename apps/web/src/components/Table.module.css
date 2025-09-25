@@ -28,10 +28,6 @@
   background-color: var(--stone-1);
 }
 
-.body tr:hover {
-  background-color: var(--yellow-2);
-}
-
 .emptyRow {
   height: 100px;
 }
