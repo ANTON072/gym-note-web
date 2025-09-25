@@ -24,6 +24,7 @@ export default defineConfig({
       "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
       "@packages": fileURLToPath(new URL("../../packages", import.meta.url)),
       "@store": fileURLToPath(new URL("./src/store/rootStore.ts", import.meta.url)),
+      "@feature": fileURLToPath(new URL("./src/feature", import.meta.url)),
     },
   },
   server: {
