@@ -1,9 +1,9 @@
-.avatar_image {
+.avatarImage {
   object-fit: cover;
   border-radius: 50%;
 }
 
-.avatar_text {
+.avatarText {
   display: grid;
   place-items: center;
   font-weight: bold;

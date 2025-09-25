@@ -1,5 +1,5 @@
 import type { ToastType } from "@/components";
-import type { AuthState } from "@/types/auth";
+import type { AuthState } from "@/features/auth/types";
 import type { User } from "firebase/auth";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";

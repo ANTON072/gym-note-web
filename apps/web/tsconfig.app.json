@@ -27,13 +27,10 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@routes/*": ["src/routes/*"],
-      "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"],
       "@packages/*": ["../../packages/*"],
-      "@store": ["src/store/rootStore.ts"]
+      "@store": ["src/store/rootStore.ts"],
+      "@feature/*": ["src/feature/*"]
     }
   },
   "include": ["src"]

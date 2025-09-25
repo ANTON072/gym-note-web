@@ -32,3 +32,25 @@ button,
 img {
   vertical-align: top;
 }
+
+/* Root Layout */
+.root-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100svh;
+}
+
+.root-main {
+  width: 100%;
+  max-width: var(--max-content-width);
+  padding: var(--container-padding);
+  margin: var(--size-4) auto 0 auto;
+}
+
+.root-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+}

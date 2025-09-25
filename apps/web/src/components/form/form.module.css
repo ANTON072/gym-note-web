@@ -1,4 +1,4 @@
-.input_field {
+.inputField {
   display: grid;
   row-gap: var(--size-1);
   --text-color: inherit;
@@ -18,22 +18,22 @@
   font-size: var(--font-size-0);
 }
 
-.helper_text {
+.helperText {
   font-size: var(--font-size-0);
   color: var(--text-color);
 }
 
-.full_width {
+.fullWidth {
   width: 100%;
 }
 
-.full_width input,
-.full_width textarea,
-.full_width select {
+.fullWidth input,
+.fullWidth textarea,
+.fullWidth select {
   width: 100%;
 }
 
-.select_wrapper {
+.selectWrapper {
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-.select_icon {
+.selectIcon {
   color: var(--text-color);
   position: absolute;
   right: 15px;

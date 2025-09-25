@@ -1,7 +1,7 @@
-import { useAuth } from "@/hooks";
+import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
 import { APP_NAME } from "@packages/config";
-import { Avatar } from "./Avatar";
+import { Avatar } from "@/components";
 import { Drawer } from "./Drawer";
 import styles from "./GlobalHeader.module.css";
 import { HamburgerMenu } from "./HamburgerMenu";
@@ -18,7 +18,7 @@ export const GlobalHeader = () => {
     <header className={styles.root}>
       <div>{user && <Avatar src={user.photoURL} name={user.displayName} size={40} />}</div>
       <h1 className={styles.title}>{APP_NAME}</h1>
-      <div className={styles.hamburger_menu}>
+      <div className={styles.hamburgerMenu}>
         <HamburgerMenu onClick={handleClickHamburgerMenu} />
       </div>
       <Drawer />

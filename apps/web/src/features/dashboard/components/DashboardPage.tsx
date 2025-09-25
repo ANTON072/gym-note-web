@@ -1,11 +1,6 @@
 import { useRootStore } from "@/store/rootStore";
-import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-function Index() {
+export function DashboardPage() {
   const { toast } = useRootStore();
 
   return (

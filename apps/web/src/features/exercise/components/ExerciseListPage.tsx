@@ -1,11 +1,8 @@
 import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
-import { Link, createFileRoute } from "@tanstack/react-router";
-import styles from "./exercises.module.css";
+import { Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/exercises")({
-  component: RouteComponent,
-});
+import styles from "./exercises.module.css";
 
 interface Exercise {
   id: number;
@@ -36,12 +33,12 @@ const exercises: Exercise[] = [
   { id: 20, name: "ハックスクワット", bodyPart: "脚" },
 ];
 
-function RouteComponent() {
+export function ExerciseListPage() {
   return (
     <>
       <PageTitle title="種目一覧" />
       <div className={styles.wrapper}>
-        <div className={styles.index_form}>
+        <div className={styles.indexForm}>
           <form>
             <InputField label="種目名で絞り込み">
               <Select name="body_part">
@@ -63,7 +60,11 @@ function RouteComponent() {
             {
               key: "name",
               header: "種目名",
-              render: (exercise) => <Link to={`/exercises/${exercise.id}`}>{exercise.name}</Link>,
+              render: (exercise) => (
+                <Link to="/exercises/$exerciseId" params={{ exerciseId: exercise.id.toString() }}>
+                  {exercise.name}
+                </Link>
+              ),
               width: "75%",
             },
             {

@@ -1,4 +1,4 @@
-import { initializeAuthListener } from "@/lib/firebase/authInitializer";
+import { initializeAuthListener } from "@/features/auth/lib/authInitializer";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 
