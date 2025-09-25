@@ -1,7 +1,7 @@
 import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import styles from "../exercises.module.css";
+import styles from "../../feature/exercise/exercises.module.css";
 
 export const Route = createFileRoute("/exercises/")({
   component: RouteComponent,
