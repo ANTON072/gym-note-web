@@ -29,7 +29,7 @@ export const InputField = ({ label, children, error, helperText, fullWidth }: Pr
     : children;
 
   return (
-    <div className={`${styles.input_field} ${fullWidth ? styles.full_width : ""}`}>
+    <div className={`${styles.inputField} ${fullWidth ? styles.fullWidth : ""}`}>
       {label && (
         <label htmlFor={fieldId} className={styles.label}>
           {label}
@@ -37,7 +37,7 @@ export const InputField = ({ label, children, error, helperText, fullWidth }: Pr
       )}
       {enhancedChildren}
       {helperText && (
-        <p id={helperTextId} className={styles.helper_text}>
+        <p id={helperTextId} className={styles.helperText}>
           {helperText}
         </p>
       )}

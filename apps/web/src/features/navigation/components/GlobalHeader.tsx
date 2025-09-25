@@ -18,7 +18,7 @@ export const GlobalHeader = () => {
     <header className={styles.root}>
       <div>{user && <Avatar src={user.photoURL} name={user.displayName} size={40} />}</div>
       <h1 className={styles.title}>{APP_NAME}</h1>
-      <div className={styles.hamburger_menu}>
+      <div className={styles.hamburgerMenu}>
         <HamburgerMenu onClick={handleClickHamburgerMenu} />
       </div>
       <Drawer />

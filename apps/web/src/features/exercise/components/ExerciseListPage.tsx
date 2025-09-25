@@ -38,7 +38,7 @@ export function ExerciseListPage() {
     <>
       <PageTitle title="種目一覧" />
       <div className={styles.wrapper}>
-        <div className={styles.index_form}>
+        <div className={styles.indexForm}>
           <form>
             <InputField label="種目名で絞り込み">
               <Select name="body_part">
