@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks";
+import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
 import { APP_NAME } from "@packages/config";
 import { Avatar } from "./Avatar";
