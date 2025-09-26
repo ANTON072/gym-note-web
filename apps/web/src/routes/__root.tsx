@@ -1,12 +1,15 @@
+import { Loading } from "@/components";
 import { Toaster } from "@/components/Toaster";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-
-const LoadingSpinner = () => <div className="root-loading">読み込み中...</div>;
+const LoadingSpinner = () => (
+  <div className="root-loading">
+    <Loading />
+  </div>
+);
 
 const Layout = ({ children }: { children: ReactNode }) => (
   <div className="root-container">
@@ -23,12 +26,7 @@ const RootLayout = () => {
   const content = {
     loading: <LoadingSpinner />,
     logout: <LoginForm />,
-    login: (
-      <>
-        <Outlet />
-        {/* {import.meta.env.DEV && <TanStackRouterDevtools />} */}
-      </>
-    ),
+    login: <Outlet />,
   }[status];
 
   return <Layout>{content}</Layout>;

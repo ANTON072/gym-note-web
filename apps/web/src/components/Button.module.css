@@ -2,13 +2,14 @@
   display: inline-flex;
   padding: 0 var(--size-5);
   height: var(--button-height);
-  font-size: var(--font-size-0);
+  font-size: var(--font-size-1);
   color: #fff;
   text-decoration: none;
   cursor: pointer;
   background-color: var(--base-color);
   border: none;
   align-items: center;
+  justify-content: center;
 
   &:active {
     background-color: var(--key-color);
@@ -16,5 +17,17 @@
 
   &:disabled {
     opacity: 0.5;
+  }
+}
+
+.outlined {
+  color: var(--base-color);
+  background-color: transparent;
+  border: 1px solid var(--base-color);
+
+  &:active {
+    color: var(--key-color);
+    background-color: transparent;
+    border-color: var(--key-color);
   }
 }

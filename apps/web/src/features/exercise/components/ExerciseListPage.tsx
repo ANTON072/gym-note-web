@@ -2,15 +2,12 @@ import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { Link } from "@tanstack/react-router";
 
+import type { Exercise } from "../types";
 import styles from "./exercises.module.css";
 
-interface Exercise {
-  id: number;
-  name: string;
-  bodyPart: string;
-}
+type ExerciseData = Pick<Exercise, "id" | "name" | "bodyPart">;
 
-const exercises: Exercise[] = [
+const exercises: ExerciseData[] = [
   { id: 1, name: "ベンチプレス", bodyPart: "胸" },
   { id: 2, name: "スクワット", bodyPart: "脚" },
   { id: 3, name: "デッドリフト", bodyPart: "背中" },
@@ -40,7 +37,13 @@ export function ExerciseListPage() {
       <div className={styles.wrapper}>
         <div className={styles.indexForm}>
           <form>
-            <InputField label="種目名で絞り込み">
+            <InputField
+              label="種目名で絞り込み"
+              style={{
+                position: "relative",
+                top: " calc(-1 * var(--form-font-size))",
+              }}
+            >
               <Select name="body_part">
                 <option value="legs">脚</option>
                 <option value="back">背中</option>

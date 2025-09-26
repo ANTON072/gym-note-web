@@ -1,3 +1,3 @@
-export { ExerciseListPage } from "./components/ExerciseListPage";
-export { ExerciseForm } from "./components/ExerciseForm";
-export * from "./types";
+export * from "./components/ExerciseListPage";
+export * from "./components/ExerciseNewPage";
+export * from "./components/ExerciseEditPage";

@@ -8,6 +8,7 @@ type LinkButtonProps = {
   to: LinkProps["to"];
   children: React.ReactNode;
   className?: string;
+  variant?: "outlined";
 } & Omit<React.ComponentPropsWithoutRef<typeof Link>, "to" | "children" | "className">;
 
 // buttonタグの場合の型定義
@@ -15,19 +16,20 @@ type ButtonProps = {
   to?: never;
   children: React.ReactNode;
   className?: string;
+  variant?: "outlined";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 // 統合された型定義
 type Props = LinkButtonProps | ButtonProps;
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
-  ({ to, children, className = "", ...rest }, ref) => {
+  ({ to, children, className = "", variant, ...rest }, ref) => {
     // toが指定されている場合はLinkタグを使用
     if (to) {
       return (
         <Link
           to={to}
-          className={clsx(styles.button, className)}
+          className={clsx(styles.button, variant && styles[variant], className)}
           ref={ref as React.Ref<HTMLAnchorElement>}
           {...(rest as Omit<
             React.ComponentPropsWithoutRef<typeof Link>,
@@ -42,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     // toが指定されていない場合はbuttonタグを使用
     return (
       <button
-        className={clsx(styles.button, className)}
+        className={clsx(styles.button, variant && styles[variant], className)}
         ref={ref as React.Ref<HTMLButtonElement>}
         {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
