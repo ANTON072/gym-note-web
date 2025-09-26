@@ -1,9 +1,6 @@
+import { ExerciseEditPage } from "@/features/exercise";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/exercises/$exerciseId")({
-  component: RouteComponent,
+  component: ExerciseEditPage,
 });
-
-function RouteComponent() {
-  return <div>Hello "/exercises/$exerciseId"!</div>;
-}
