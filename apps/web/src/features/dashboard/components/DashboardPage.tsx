@@ -1,4 +1,3 @@
-import { Loading } from "@/components";
 import { useRootStore } from "@/store/rootStore";
 
 export function DashboardPage() {
@@ -7,7 +6,6 @@ export function DashboardPage() {
   return (
     <div>
       <h1>Home</h1>
-      <Loading />
       <button
         type="button"
         onClick={() => {

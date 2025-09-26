@@ -1,16 +1,16 @@
 .loading {
   font-size: var(--font-size-5);
   font-weight: bold;
-
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease infinite;
+  animation: gradientFlow 3s ease-in-out infinite;
 }
 
-@keyframes gradientShift {
+@keyframes gradientFlow {
   0% {
     background-position: 0% 50%;
   }
