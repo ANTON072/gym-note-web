@@ -22,7 +22,7 @@ export const GlobalHeader = () => {
         <Link to="/">{APP_NAME}</Link>
       </h1>
       <div className={styles.hamburgerMenu}>
-        <HamburgerMenu onClick={handleClickHamburgerMenu} />
+        <HamburgerMenu isOpen={drawer.isOpen} onClick={handleClickHamburgerMenu} />
       </div>
       <Drawer />
     </header>
