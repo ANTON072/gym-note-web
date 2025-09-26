@@ -1,12 +1,16 @@
-import { InputField, Select, TextArea, TextField } from "@/components/form";
+import {
+  InputField,
+  RadioButton,
+  RadioGroup,
+  Select,
+  TextArea,
+  TextField,
+} from "@/components/form";
 import styles from "./exercises.module.css";
 
 export const ExerciseForm = () => {
   return (
     <div className={styles.formGrid}>
-      <InputField label="種目名" required>
-        <TextField name="name" placeholder="ベンチプレス" />
-      </InputField>
       <InputField label="部位" required>
         <Select name="bodyPart">
           <option value="legs">脚</option>
@@ -17,11 +21,14 @@ export const ExerciseForm = () => {
           <option value="cardio">有酸素</option>
         </Select>
       </InputField>
+      <InputField label="種目名" required>
+        <TextField name="name" placeholder="ベンチプレス" />
+      </InputField>
       <InputField label="動作パターン" required>
-        <Select name="laterality">
-          <option value="bilateral">バイラテラル(両側同時)</option>
-          <option value="unilateral">ユニラテラル(片側ずつ)</option>
-        </Select>
+        <RadioGroup name="laterality">
+          <RadioButton value="bilateral">バイラテラル(両側同時)</RadioButton>
+          <RadioButton value="unilateral">ユニラテラル(片側ずつ)</RadioButton>
+        </RadioGroup>
       </InputField>
       <InputField label="メモ">
         <TextArea name="memo" rows={4} />
