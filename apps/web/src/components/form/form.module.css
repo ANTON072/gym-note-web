@@ -6,16 +6,11 @@
   &:has([aria-invalid="true"]) {
     --text-color: var(--key-color);
   }
-
-  &:has(label) {
-    position: relative;
-    top: calc(-1 * var(--font-size-0));
-  }
 }
 
 .label {
   color: var(--text-color);
-  font-size: var(--font-size-0);
+  font-size: var(--form-font-size);
 }
 
 .helperText {
@@ -40,7 +35,7 @@
 }
 
 .select {
-  --padding-horizontal: var(--size-2);
+  --padding-horizontal: var(--form-padding-horizontal);
   appearance: none;
   height: var(--button-height);
   padding-left: var(--padding-horizontal);
@@ -48,8 +43,9 @@
   border: 1px solid var(--text-color);
   background-color: #fff;
   color: var(--text-color);
-  font-size: var(--font-size-0);
+  font-size: var(--form-font-size);
   cursor: pointer;
+  width: 100%;
 }
 
 .selectIcon {
@@ -57,4 +53,26 @@
   position: absolute;
   right: 15px;
   pointer-events: none;
+}
+
+.textField {
+  height: var(--button-height);
+  font-size: var(--form-font-size);
+  padding-left: var(--form-padding-horizontal);
+  padding-right: var(--form-padding-horizontal);
+
+  &::placeholder {
+    color: var(--place-holder);
+  }
+}
+
+.textArea {
+  min-height: calc(var(--button-height) * 2);
+  font-size: var(--form-font-size);
+  padding: var(--form-padding-horizontal);
+  resize: vertical;
+
+  &::placeholder {
+    color: var(--place-holder);
+  }
 }

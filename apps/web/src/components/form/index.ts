@@ -1,2 +1,4 @@
 export * from "./InputField";
 export * from "./Select";
+export * from "./TextArea";
+export * from "./TextField";
