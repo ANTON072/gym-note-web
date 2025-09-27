@@ -2,7 +2,7 @@ import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { Link } from "@tanstack/react-router";
 
-import type { Exercise } from "../types";
+import type { Exercise } from "../schema";
 import styles from "./exercises.module.css";
 
 type ExerciseData = Pick<Exercise, "id" | "name" | "bodyPart">;

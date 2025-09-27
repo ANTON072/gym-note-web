@@ -9,7 +9,7 @@ import {
 import styles from "./exercises.module.css";
 
 import type { FormState } from "@/types";
-import type { Exercise } from "../types";
+import type { Exercise } from "../schema";
 
 interface Props {
   defaultValues?: Partial<Exercise>;

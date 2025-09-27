@@ -1,42 +1,31 @@
+import { formatZodErrors } from "@/lib/validation";
 import type { FormState } from "@/types";
+import { exerciseFormSchema } from "../schema";
 
 export const createExerciseAction = async (
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> => {
-  const bodyPart = formData.get("bodyPart") as string;
-  const name = formData.get("name") as string;
-  const laterality = formData.get("laterality") as string;
-  const memo = formData.get("memo") as string;
+  const rawData = {
+    bodyPart: formData.get("bodyPart") as string,
+    name: formData.get("name") as string,
+    laterality: formData.get("laterality") as string,
+    memo: formData.get("memo") as string,
+  };
 
-  const errors: Record<string, string> = {};
+  const result = exerciseFormSchema.safeParse(rawData);
 
-  if (!bodyPart) {
-    errors.bodyPart = "部位を選択してください";
-  }
-  if (!name) {
-    errors.name = "種目名を入力してください";
-  }
-  if (!laterality) {
-    errors.laterality = "動作パターンを選択してください";
-  }
-
-  if (Object.keys(errors).length > 0) {
+  if (!result.success) {
     return {
       success: false,
       message: "入力内容を確認してください",
-      errors,
+      errors: formatZodErrors(result.error),
     };
   }
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  console.log("新規エクササイズデータ:", {
-    bodyPart,
-    name,
-    laterality,
-    memo,
-  });
+  console.log("新規エクササイズデータ:", result.data);
 
   return {
     success: true,
