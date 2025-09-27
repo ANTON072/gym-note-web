@@ -18,6 +18,10 @@
   color: var(--text-color);
 }
 
+.errorText {
+  color: var(--key-color);
+}
+
 .fullWidth {
   width: 100%;
 }

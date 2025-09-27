@@ -11,7 +11,7 @@ interface InputProps {
 interface Props {
   label?: string;
   children?: React.ReactNode;
-  error?: boolean;
+  error?: boolean | string;
   helperText?: string;
   fullWidth?: boolean;
   required?: boolean;
@@ -30,12 +30,16 @@ export const InputField = ({
   const fieldId = useId();
   const helperTextId = useId();
 
+  const hasError = Boolean(error);
+  const errorMessage = typeof error === "string" ? error : undefined;
+  const displayHelperText = errorMessage || helperText;
+
   // childrenが単一のReact要素の場合、idを付与
   const enhancedChildren = isValidElement(children)
     ? cloneElement(children as React.ReactElement<InputProps>, {
         id: fieldId,
-        "aria-invalid": error,
-        "aria-describedby": helperText ? helperTextId : undefined,
+        "aria-invalid": hasError,
+        "aria-describedby": displayHelperText ? helperTextId : undefined,
         required,
       })
     : children;
@@ -49,9 +53,9 @@ export const InputField = ({
         </label>
       )}
       {enhancedChildren}
-      {helperText && (
-        <p id={helperTextId} className={styles.helperText}>
-          {helperText}
+      {displayHelperText && (
+        <p id={helperTextId} className={`${styles.helperText} ${hasError ? styles.errorText : ""}`}>
+          {displayHelperText}
         </p>
       )}
     </div>
