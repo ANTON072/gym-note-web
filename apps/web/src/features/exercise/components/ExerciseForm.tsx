@@ -20,11 +20,11 @@ export const ExerciseForm = ({ defaultValues = {}, state }: Props) => {
   return (
     <>
       <div className={styles.formGrid}>
-        {state?.message && (
+        {/* {state?.message && (
           <div className={state.success ? styles.successMessage : styles.errorMessage}>
             {state.message}
           </div>
-        )}
+        )} */}
         <InputField label="部位" required error={state?.errors?.bodyPart}>
           <Select name="bodyPart" defaultValue={defaultValues.bodyPart || ""}>
             <option value="">選択してください</option>

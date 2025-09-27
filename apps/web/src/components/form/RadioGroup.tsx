@@ -5,9 +5,11 @@ interface Props {
   name: string;
   children: React.ReactNode;
   defaultValue?: string;
+  "aria-invalid"?: boolean;
+  "aria-describedby"?: string;
 }
 
-export const RadioGroup = ({ name, children, defaultValue }: Props) => {
+export const RadioGroup = ({ name, children, defaultValue, ...ariaProps }: Props) => {
   const enhancedChildren = Children.map(children, (child) => {
     if (isValidElement(child)) {
       const childProps = child.props as { value?: string };
@@ -19,5 +21,9 @@ export const RadioGroup = ({ name, children, defaultValue }: Props) => {
     return child;
   });
 
-  return <div className={styles.radioGroup}>{enhancedChildren}</div>;
+  return (
+    <div className={styles.radioGroup} {...ariaProps}>
+      {enhancedChildren}
+    </div>
+  );
 };

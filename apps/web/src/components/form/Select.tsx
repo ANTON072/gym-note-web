@@ -1,4 +1,4 @@
-import { ChevronDownIcon, CloseIcon } from "../icons";
+import { ChevronDownIcon } from "../icons";
 import styles from "./form.module.css";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {

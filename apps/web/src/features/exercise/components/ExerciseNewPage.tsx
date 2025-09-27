@@ -17,8 +17,8 @@ export const ExerciseNewPage = () => {
         <div />
         <Button to="/exercises">種目一覧</Button>
       </div>
-      <form action={formAction}>
-        <ExerciseForm state={state} />
+      <form action={formAction} noValidate>
+        <ExerciseForm state={state} defaultValues={{ laterality: "bilateral" }} />
         <div className={styles.formActions}>
           <Button type="button" variant="outlined" to="/exercises">
             キャンセル

@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import { cloneElement, isValidElement, useId } from "react";
 import styles from "./form.module.css";
 
@@ -45,7 +46,7 @@ export const InputField = ({
     : children;
 
   return (
-    <div className={`${styles.inputField} ${fullWidth ? styles.fullWidth : ""}`} style={style}>
+    <div className={clsx(styles.inputField, fullWidth && styles.fullWidth)} style={style}>
       {label && (
         <label htmlFor={fieldId} className={styles.label}>
           {label}
@@ -54,7 +55,7 @@ export const InputField = ({
       )}
       {enhancedChildren}
       {displayHelperText && (
-        <p id={helperTextId} className={`${styles.helperText} ${hasError ? styles.errorText : ""}`}>
+        <p id={helperTextId} className={clsx(styles.helperText, hasError && styles.errorText)}>
           {displayHelperText}
         </p>
       )}
