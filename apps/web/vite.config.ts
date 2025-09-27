@@ -17,7 +17,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       "@components": fileURLToPath(new URL("./src/components", import.meta.url)),
       "@routes": fileURLToPath(new URL("./src/routes", import.meta.url)),
-      "@utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
+      "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
       "@packages": fileURLToPath(new URL("../../packages", import.meta.url)),
       "@store": fileURLToPath(new URL("./src/store/rootStore.ts", import.meta.url)),
       "@feature": fileURLToPath(new URL("./src/feature", import.meta.url)),
