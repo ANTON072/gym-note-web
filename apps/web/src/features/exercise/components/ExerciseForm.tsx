@@ -6,6 +6,7 @@ import {
   TextArea,
   TextField,
 } from "@/components/form";
+import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import styles from "./exercises.module.css";
 
 import type { FormState } from "@/types";
@@ -28,12 +29,11 @@ export const ExerciseForm = ({ defaultValues = {}, state }: Props) => {
         <InputField label="部位" required error={state?.errors?.bodyPart}>
           <Select name="bodyPart" defaultValue={defaultValues.bodyPart || ""}>
             <option value="">選択してください</option>
-            <option value="legs">脚</option>
-            <option value="back">背中</option>
-            <option value="shoulders">肩</option>
-            <option value="arms">腕</option>
-            <option value="chest">胸</option>
-            <option value="cardio">有酸素</option>
+            {BODY_PART_OPTIONS.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </Select>
         </InputField>
         <InputField label="種目名" required error={state?.errors?.name}>
