@@ -8,52 +8,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Web開発サーバーの起動
-pnpm dev:web
+npm run dev
 
 # Webアプリのプロダクションビルド
-pnpm build:web
+npm run build
 
 # コード品質チェック
-pnpm lint
-pnpm lint:fix  # 自動修正
-pnpm type-check
+npm run lint
+npm run lint:fix  # 自動修正
+npm run type-check
 
-# CSSリンター
-pnpm css:lint  # CSSプロパティ順序チェック
-pnpm css:fix   # CSS自動修正（プロパティ順序等）
+# テスト実行
+npm test         # テスト実行
+npm run test:ui  # テストUIで実行
+npm run test:run # ワンショット実行
+
+# ビルド結果のプレビュー
+npm run preview
 
 # 依存関係のインストール（新規セットアップ時）
-pnpm install
-```
-
-### アプリケーション固有のコマンド
-
-apps/web 内で実行:
-
-```bash
-pnpm dev       # Vite開発サーバー
-pnpm build     # TypeScriptコンパイル + Viteビルド
-pnpm preview   # ビルド結果のプレビュー
+npm install
 ```
 
 ## アーキテクチャ
 
-### モノレポ構造
+### プロジェクト構造
 
-- **pnpm ワークスペース**を使用したモノレポ
-- `apps/` - エンドユーザー向けアプリケーション
-  - `web/` - Vite + React + TypeScript の Web アプリ
-- `packages/` - 共有パッケージ（将来の拡張用）
+- **単一のReactアプリケーション**
+- Vite + React + TypeScript の Web アプリ
 
 ### 技術スタック
 
 - **Node.js**: 22 以上必須
-- **パッケージマネージャー**: pnpm 10.15.1（frozen-lockfile 有効）
+- **パッケージマネージャー**: npm
 - **フロントエンド**: React 19 + TypeScript 5.6
 - **ビルドツール**: Vite 5.4
 - **ルーティング**: TanStack Router
 - **スタイリング**: CSS Modules
-- **コード品質**: Biome（フォーマッター・リンター / CSS 含む統一運用）
+- **テスト**: Vitest + Testing Library
+- **コード品質**: Biome（フォーマッター・リンター）
 
 ### 重要な設定
 
@@ -68,4 +61,4 @@ pnpm preview   # ビルド結果のプレビュー
 3. **型安全性**: TypeScript の strict モードを維持する
 4. **スタイリング**: CSS Modules を使用（Component.module.css）
 5. **ルーティング**: routes/[page]/route.tsx でページを定義
-6. **モノレポ拡張**: 将来的に mobile アプリや shared パッケージが追加される前提で開発
+6. **テスト**: Vitest を使用、Testing Library でコンポーネントテスト

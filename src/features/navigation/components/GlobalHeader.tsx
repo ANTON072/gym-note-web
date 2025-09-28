@@ -1,7 +1,7 @@
 import { Avatar } from "@/components";
 import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
-import { APP_NAME } from "@packages/config";
+import { APP_NAME } from "@/constants/app";
 import { Link } from "@tanstack/react-router";
 import { Drawer } from "./Drawer";
 import styles from "./GlobalHeader.module.css";

@@ -15,13 +15,9 @@ jobs:
         with:
           node-version: '22'
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
+      - run: npm install
 
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm web:build
+      - run: npm run build
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
