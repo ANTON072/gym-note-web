@@ -1,4 +1,4 @@
-import { APP_NAME } from "@packages/config";
+import { APP_NAME } from "@/constants/app";
 import { useState } from "react";
 import { signInWithGoogle } from "../lib/auth";
 import { GoogleLoginButton } from "./GoogleLoginButton";

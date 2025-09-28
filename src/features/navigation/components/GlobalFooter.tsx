@@ -1,4 +1,4 @@
-import { APP_NAME } from "@packages/config";
+import { APP_NAME } from "@/constants/app";
 import styles from "./GlobalFooter.module.css";
 
 export const GlobalFooter = () => {
