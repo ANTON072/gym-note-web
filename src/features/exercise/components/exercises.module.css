@@ -1,0 +1,41 @@
+.wrapper {
+  display: grid;
+  row-gap: var(--size-3);
+  margin-top: var(--size-6);
+}
+
+.indexForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formGrid {
+  display: grid;
+  gap: var(--form-gap);
+}
+
+.formActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--container-padding);
+  margin-top: calc(var(--form-gap) * 1.5);
+}
+
+.successMessage {
+  padding: var(--size-2);
+  background-color: var(--green-1);
+  color: var(--green-8);
+  border: 1px solid var(--green-3);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-0);
+}
+
+.errorMessage {
+  padding: var(--size-2);
+  background-color: var(--red-1);
+  color: var(--red-8);
+  border: 1px solid var(--red-3);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-0);
+}
