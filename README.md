@@ -1,4 +1,4 @@
-# Gym Note Web Frontend
+# Gym Note Web
 
 ## 開発コマンド
 
