@@ -8,7 +8,7 @@ import styles from "./exercises.module.css";
 
 export function ExerciseListPage() {
   const { data } = useGetExercises();
-  const exercises: Exercise[] = data?.exercises ?? [];
+  const exercises: Exercise[] = data ?? [];
 
   return (
     <>
