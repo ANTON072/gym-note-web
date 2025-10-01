@@ -2,35 +2,14 @@ import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { Link } from "@tanstack/react-router";
 
+import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import styles from "./exercises.module.css";
 
-type ExerciseData = Pick<Exercise, "id" | "name" | "bodyPart">;
-
-const exercises: ExerciseData[] = [
-  { id: 1, name: "ベンチプレス", bodyPart: "胸" },
-  { id: 2, name: "スクワット", bodyPart: "脚" },
-  { id: 3, name: "デッドリフト", bodyPart: "背中" },
-  { id: 4, name: "懸垂", bodyPart: "背中" },
-  { id: 5, name: "腕立て伏せ", bodyPart: "胸" },
-  { id: 6, name: "ショルダープレス", bodyPart: "肩" },
-  { id: 7, name: "レッグプレス", bodyPart: "脚" },
-  { id: 8, name: "レッグエクステンション", bodyPart: "脚" },
-  { id: 9, name: "レッグカール", bodyPart: "脚" },
-  { id: 10, name: "ラットプルダウン", bodyPart: "背中" },
-  { id: 11, name: "ローイング", bodyPart: "背中" },
-  { id: 12, name: "バイセップカール", bodyPart: "上腕" },
-  { id: 13, name: "トライセップエクステンション", bodyPart: "上腕" },
-  { id: 14, name: "サイドレイズ", bodyPart: "肩" },
-  { id: 15, name: "クランチ", bodyPart: "腹" },
-  { id: 16, name: "プランク", bodyPart: "腹" },
-  { id: 17, name: "ケーブルフライ", bodyPart: "胸" },
-  { id: 18, name: "インクラインベンチプレス", bodyPart: "胸" },
-  { id: 19, name: "ディップス", bodyPart: "胸" },
-  { id: 20, name: "ハックスクワット", bodyPart: "脚" },
-];
-
 export function ExerciseListPage() {
+  const { data } = useGetExercises();
+  const exercises: Exercise[] = data?.exercises ?? [];
+
   return (
     <>
       <PageTitle title="種目一覧" />
@@ -71,9 +50,9 @@ export function ExerciseListPage() {
               width: "75%",
             },
             {
-              key: "bodyPart",
+              key: "body_part",
               header: "部位",
-              render: (exercise) => exercise.bodyPart,
+              render: (exercise) => exercise.body_part,
             },
           ]}
           keyExtractor={(exercise) => exercise.id}
