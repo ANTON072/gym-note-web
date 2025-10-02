@@ -17,8 +17,13 @@ export function DashboardPage() {
         disableDismiss
         disableDrag
         closeOnBackdropTap={false}
+        disableScrollLocking
+        detent="content"
       >
         <p>Hello World</p>
+        <button type="button" onClick={onClose} className={styles["trigger-button"]}>
+          Close
+        </button>
       </BottomSheet>
     </div>
   );
