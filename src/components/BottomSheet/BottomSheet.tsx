@@ -1,10 +1,11 @@
 import React from "react";
 import { Sheet, type SheetProps, type SheetRef } from "react-modal-sheet";
 
-interface Props extends Omit<SheetProps, "children"> {
+interface Props extends Omit<SheetProps, "children" | "onClose"> {
   children: React.ReactNode;
   closeOnBackdropTap?: boolean;
   onBackdropTap?: () => void;
+  onClose?: () => void;
 }
 
 export const BottomSheet = React.forwardRef<SheetRef, Props>(
@@ -22,10 +23,18 @@ export const BottomSheet = React.forwardRef<SheetRef, Props>(
     };
 
     return (
-      <Sheet ref={ref} onClose={onClose} {...sheetProps}>
+      <Sheet ref={ref} onClose={onClose || (() => {})} {...sheetProps}>
         <Sheet.Container>
           <Sheet.Header />
-          <Sheet.Content>{children}</Sheet.Content>
+          <Sheet.Content>
+            <div
+              style={{
+                padding: "0 var(--form-padding-horizontal)",
+              }}
+            >
+              {children}
+            </div>
+          </Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop onTap={handleBackdropTap} />
       </Sheet>

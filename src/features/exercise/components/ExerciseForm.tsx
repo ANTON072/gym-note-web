@@ -11,23 +11,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import styles from "./exercises.module.css";
 
+import { Button } from "@/components";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
 
 interface Props {
-  defaultValues?: Partial<ExerciseFormData>;
-  onSubmit: (data: ExerciseFormData) => void;
+  isEdit?: boolean;
+  onClose: () => void;
 }
 
-export const ExerciseForm = ({ defaultValues = {}, onSubmit }: Props) => {
+export const ExerciseForm = ({ isEdit = false, onClose }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ExerciseFormData>({
     resolver: zodResolver(exerciseFormSchema),
-    defaultValues,
+    defaultValues: {},
   });
+
+  const onSubmit = () => {
+    //
+  };
 
   return (
     <form id="exercise-form" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -54,6 +59,14 @@ export const ExerciseForm = ({ defaultValues = {}, onSubmit }: Props) => {
         <InputField label="メモ" error={errors.memo?.message}>
           <TextArea {...register("memo")} rows={4} />
         </InputField>
+      </div>
+      <div className={styles.formActions}>
+        <Button type="button" variant="outlined" onClick={onClose}>
+          キャンセル
+        </Button>
+        <Button type="submit" form="exercise-form">
+          登録
+        </Button>
       </div>
     </form>
   );

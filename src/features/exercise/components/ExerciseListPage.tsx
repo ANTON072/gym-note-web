@@ -2,12 +2,16 @@ import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { Link } from "@tanstack/react-router";
 
+import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
+import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
+import { ExerciseForm } from "./ExerciseForm";
 import styles from "./exercises.module.css";
 
 export function ExerciseListPage() {
   const { data } = useGetExercises();
+  const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
   const exercises: Exercise[] = data ?? [];
 
   return (
@@ -24,17 +28,18 @@ export function ExerciseListPage() {
               }}
             >
               <Select name="body_part">
-                <option value="legs">脚</option>
-                <option value="back">背中</option>
-                <option value="shoulders">肩</option>
-                <option value="arms">腕</option>
-                <option value="chest">胸</option>
-                <option value="cardio">有酸素</option>
+                {BODY_PART_OPTIONS.map(({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
                 <option value="">すべて</option>
               </Select>
             </InputField>
           </form>
-          <Button to="/exercises/new">新規登録</Button>
+          <Button type="button" onClick={onOpen}>
+            新規登録
+          </Button>
         </div>
         <Table
           data={exercises}
@@ -58,6 +63,10 @@ export function ExerciseListPage() {
           keyExtractor={(exercise) => exercise.id}
         />
       </div>
+      {/* フォーム */}
+      <BottomSheet ref={ref} isOpen={isOpen} closeOnBackdropTap={false} disableDismiss disableDrag>
+        <ExerciseForm isEdit={false} onClose={onCloseBottomSheet} />
+      </BottomSheet>
     </>
   );
 }
