@@ -12,7 +12,7 @@ import styles from "./exercises.module.css";
 export function ExerciseListPage() {
   const { data } = useGetExercises();
   const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
-  const exercises: Exercise[] = data ?? [];
+  const exercises: Exercise[] = Array.isArray(data) ? data : [];
 
   return (
     <>
@@ -28,11 +28,11 @@ export function ExerciseListPage() {
               }}
             >
               <Select name="body_part">
-                {BODY_PART_OPTIONS.map(({ value, label }) => (
+                {Array.isArray(BODY_PART_OPTIONS) ? BODY_PART_OPTIONS.map(({ value, label }) => (
                   <option key={value} value={value}>
                     {label}
                   </option>
-                ))}
+                )) : null}
                 <option value="">すべて</option>
               </Select>
             </InputField>

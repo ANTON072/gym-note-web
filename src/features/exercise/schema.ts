@@ -1,16 +1,9 @@
-import { BODY_PARTS } from "@/constants/bodyParts";
+import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { z } from "zod";
 
 export const exerciseFormSchema = z.object({
   body_part: z.enum(
-    [
-      BODY_PARTS.LEGS,
-      BODY_PARTS.BACK,
-      BODY_PARTS.SHOULDERS,
-      BODY_PARTS.ARMS,
-      BODY_PARTS.CHEST,
-      BODY_PARTS.CARDIO,
-    ],
+    BODY_PART_OPTIONS.map(option => option.value) as [string, ...string[]],
     {
       message: "部位を選択してください",
     },
