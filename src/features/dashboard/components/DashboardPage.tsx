@@ -1,21 +1,30 @@
-import { useRootStore } from "@/store/rootStore";
+import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
+import styles from "./DashboardPage.module.css";
 
 export function DashboardPage() {
-  const { toast } = useRootStore();
+  const { onOpen, onClose, ref, isOpen } = useBottomSheet();
 
   return (
     <div>
       <h1>Home</h1>
-      <button
-        type="button"
-        onClick={() => {
-          toast.add({
-            message: `This is a toast message ${Date.now()}`,
-          });
-        }}
-      >
-        Click
+      <button type="button" onClick={onOpen} className={styles["trigger-button"]}>
+        Open Bottom Sheet
       </button>
+      <BottomSheet
+        ref={ref}
+        isOpen={isOpen}
+        onClose={onClose}
+        disableDismiss
+        disableDrag
+        closeOnBackdropTap={false}
+        disableScrollLocking
+        detent="content"
+      >
+        <p>Hello World</p>
+        <button type="button" onClick={onClose} className={styles["trigger-button"]}>
+          Close
+        </button>
+      </BottomSheet>
     </div>
   );
 }
