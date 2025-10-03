@@ -40,7 +40,7 @@ jobs:
         if: success()
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          payload: '{"text":"🎉 Firebase Production Deploy Success! Repository: ${{ github.repository }}\nProduction URL: ${{ steps.firebase-deploy.outputs.details_url }}"}'
+          payload: '{"text":"🎉 Firebase Production Deploy Success! Repository: ${{ github.repository }}\nProduction URL: https://gym-note.net"}'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
