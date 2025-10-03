@@ -1,13 +1,17 @@
 import { useRootStore } from "@/store/rootStore";
 
 export class HttpError extends Error {
+  public validationErrors?: Record<string, string[]>;
+
   constructor(
     public status: number,
     public statusText: string,
     message?: string,
+    validationErrors?: Record<string, string[]>,
   ) {
     super(message || `HTTP Error: ${status} ${statusText}`);
     this.name = "HttpError";
+    this.validationErrors = validationErrors;
   }
 }
 
@@ -59,7 +63,27 @@ class HttpAuth {
     });
 
     if (!response.ok) {
-      throw new HttpError(response.status, response.statusText);
+      const contentType = response.headers.get("content-type");
+      let errorData: any;
+      let validationErrors: Record<string, string[]> | undefined;
+      let errorMessage: string | undefined;
+
+      if (contentType?.includes("application/json")) {
+        try {
+          errorData = await response.json();
+          // Railsのバリデーションエラー形式をチェック
+          if (errorData.errors && typeof errorData.errors === "object") {
+            validationErrors = errorData.errors;
+          }
+          if (errorData.message) {
+            errorMessage = errorData.message;
+          }
+        } catch {
+          // JSON パースに失敗した場合は無視
+        }
+      }
+
+      throw new HttpError(response.status, response.statusText, errorMessage, validationErrors);
     }
 
     const contentType = response.headers.get("content-type");

@@ -1,6 +1,6 @@
 import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
-import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 
 import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
@@ -12,7 +12,18 @@ import styles from "./exercises.module.css";
 export function ExerciseListPage() {
   const { data, isLoading, isFetched } = useGetExercises();
   const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
+  const [selectedExerciseId, setSelectedExerciseId] = useState<number | null>(null);
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
+
+  const handleExerciseClick = (exerciseId: number) => {
+    setSelectedExerciseId(exerciseId);
+    onOpen();
+  };
+
+  const handleClose = () => {
+    setSelectedExerciseId(null);
+    onCloseBottomSheet();
+  };
 
   return (
     <>
@@ -51,9 +62,13 @@ export function ExerciseListPage() {
                 key: "name",
                 header: "種目名",
                 render: (exercise) => (
-                  <Link to="/exercises/$exerciseId" params={{ exerciseId: exercise.id.toString() }}>
+                  <button
+                    type="button"
+                    onClick={() => handleExerciseClick(exercise.id)}
+                    className={styles.exerciseLink}
+                  >
                     {exercise.name}
-                  </Link>
+                  </button>
                 ),
                 width: "75%",
               },
@@ -69,7 +84,7 @@ export function ExerciseListPage() {
       </div>
       {/* フォーム */}
       <BottomSheet ref={ref} isOpen={isOpen} closeOnBackdropTap={false} disableDismiss disableDrag>
-        <ExerciseForm isEdit={false} onClose={onCloseBottomSheet} />
+        <ExerciseForm exerciseId={selectedExerciseId} onClose={handleClose} />
       </BottomSheet>
     </>
   );

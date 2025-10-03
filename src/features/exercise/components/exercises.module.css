@@ -39,3 +39,13 @@
   border-radius: var(--radius-2);
   font-size: var(--font-size-0);
 }
+
+.exerciseLink {
+  all: unset;
+  color: var(--link-text-color);
+  cursor: pointer;
+}
+
+.exerciseLink:hover {
+  color: var(--blue-10);
+}

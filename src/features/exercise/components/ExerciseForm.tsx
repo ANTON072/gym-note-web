@@ -13,35 +13,27 @@ import styles from "./exercises.module.css";
 
 import { Button } from "@/components";
 import { useToast } from "@/hooks";
+import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
-import { useCreateExercise } from "../hooks/useExerciseApi";
+import { useCreateExercise, useGetExercise } from "../hooks/useExerciseApi";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
 
 interface Props {
-  isEdit?: boolean;
+  exerciseId?: number | null;
   onClose: () => void;
 }
 
-export const ExerciseForm = ({ isEdit = false, onClose }: Props) => {
+export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
 
-  const createMutation = useCreateExercise({
-    onSuccess: () => {
-      query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
-      toast.add({
-        message: "種目を登録しました",
-      });
-      onClose();
-    },
-    onError: (error) => {
-      toast.add({
-        message: `種目の登録に失敗しました: ${error.message}`,
-        type: "error",
-      });
-    },
+  const isEdit = typeof exerciseId === "number" && exerciseId !== null;
+
+  const { data } = useGetExercise(exerciseId, {
+    enabled: isEdit,
   });
 
   const defaultValues = {
@@ -51,6 +43,40 @@ export const ExerciseForm = ({ isEdit = false, onClose }: Props) => {
   const form = useForm<ExerciseFormData>({
     resolver: zodResolver(exerciseFormSchema),
     defaultValues,
+  });
+
+  useEffect(() => {
+    if (data) {
+      form.reset(data);
+    }
+  }, [data, form.reset]);
+
+  const createMutation = useCreateExercise({
+    onSuccess: () => {
+      query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
+      toast.add({
+        message: "種目を登録しました",
+      });
+      onClose();
+    },
+    onError: (error: Error) => {
+      handleFormError({
+        error,
+        setError: form.setError,
+        onValidationError: () => {
+          toast.add({
+            message: "入力内容を確認してください",
+            type: "error",
+          });
+        },
+        onOtherError: (error) => {
+          toast.add({
+            message: `種目の登録に失敗しました: ${error.message}`,
+            type: "error",
+          });
+        },
+      });
+    },
   });
 
   const onSubmit = (values: ExerciseFormData) => {
