@@ -42,7 +42,26 @@ jobs:
         if: success()
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          payload: '{"text": "🎉 Firebase Preview Deploy Success!", "blocks": [{"type": "header", "text": {"type": "plain_text", "text": "🎉 Firebase Preview Deploy Success!"}}, {"type": "section", "text": {"type": "mrkdwn", "text": "*Repository:* ${{ github.repository }}"}}]}'
+          payload: |
+            {
+              "text": "",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "🎉 Firebase Preview Deploy Success!"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Repository:* ${{ github.repository }}"
+                  }
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
