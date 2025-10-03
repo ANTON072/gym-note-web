@@ -17,7 +17,12 @@ import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
-import { useCreateExercise, useGetExercise } from "../hooks/useExerciseApi";
+import {
+  useCreateExercise,
+  useDeleteExercise,
+  useGetExercise,
+  useUpdateExercise,
+} from "../hooks/useExerciseApi";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
 
@@ -45,43 +50,67 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
     defaultValues,
   });
 
+  const handleMutationSuccess = (message: string) => {
+    query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
+    toast.add({ message });
+    onClose();
+  };
+
+  const handleMutationError = (error: Error, action: string) => {
+    toast.add({
+      message: `${action}に失敗しました: ${error.message}`,
+      type: "error",
+    });
+  };
+
+  const handleFormMutationError = (error: Error, action: string) => {
+    handleFormError({
+      error,
+      setError: form.setError,
+      onValidationError: () => {
+        toast.add({
+          message: "入力内容を確認してください",
+          type: "error",
+        });
+      },
+      onOtherError: (error) => handleMutationError(error, action),
+    });
+  };
+
+  const createMutation = useCreateExercise({
+    onSuccess: () => handleMutationSuccess("種目を登録しました"),
+    onError: (error: Error) => handleFormMutationError(error, "種目の登録"),
+  });
+
+  const updateMutation = useUpdateExercise({
+    onSuccess: () => handleMutationSuccess("種目を更新しました"),
+    onError: (error: Error) => handleFormMutationError(error, "種目の更新"),
+  });
+
+  const deleteMutation = useDeleteExercise({
+    onSuccess: () => handleMutationSuccess("種目を削除しました"),
+    onError: (error: Error) => handleMutationError(error, "種目の削除"),
+  });
+
+  const isPending = createMutation.isPending || deleteMutation.isPending;
+
+  const onSubmit = (values: ExerciseFormData) => {
+    if (isEdit && exerciseId) {
+      updateMutation.mutate({ id: exerciseId, data: values });
+      return;
+    }
+    createMutation.mutate(values);
+  };
+
+  const onDelete = (exerciseId: number) => {
+    window.confirm("本当に削除しますか？") && deleteMutation.mutate(exerciseId);
+  };
+
   useEffect(() => {
     if (data) {
       form.reset(data);
     }
   }, [data, form.reset]);
-
-  const createMutation = useCreateExercise({
-    onSuccess: () => {
-      query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
-      toast.add({
-        message: "種目を登録しました",
-      });
-      onClose();
-    },
-    onError: (error: Error) => {
-      handleFormError({
-        error,
-        setError: form.setError,
-        onValidationError: () => {
-          toast.add({
-            message: "入力内容を確認してください",
-            type: "error",
-          });
-        },
-        onOtherError: (error) => {
-          toast.add({
-            message: `種目の登録に失敗しました: ${error.message}`,
-            type: "error",
-          });
-        },
-      });
-    },
-  });
-
-  const onSubmit = (values: ExerciseFormData) => {
-    createMutation.mutate(values);
-  };
 
   return (
     <FormProvider {...form}>
@@ -110,14 +139,35 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
             <TextArea rows={4} />
           </InputField>
         </div>
-        <div className={styles.formActions}>
-          <Button type="button" variant="outlined" onClick={onClose}>
-            キャンセル
-          </Button>
-          <Button type="submit" form="exercise-form">
-            登録
-          </Button>
-        </div>
+        {isEdit ? (
+          <div>
+            <div>
+              <Button type="button" variant="outlined" onClick={onClose} disabled={isPending}>
+                キャンセル
+              </Button>
+              <Button type="submit" form="exercise-form" disabled={isPending}>
+                更新
+              </Button>
+            </div>
+            <Button
+              type="button"
+              variant="outlined"
+              onClick={() => onDelete(exerciseId)}
+              disabled={isPending}
+            >
+              削除
+            </Button>
+          </div>
+        ) : (
+          <div className={styles.formActions}>
+            <Button type="button" variant="outlined" onClick={onClose} disabled={isPending}>
+              キャンセル
+            </Button>
+            <Button type="submit" form="exercise-form" disabled={isPending}>
+              登録
+            </Button>
+          </div>
+        )}
       </form>
     </FormProvider>
   );
