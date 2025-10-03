@@ -28,8 +28,26 @@ jobs:
           VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
           VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
 
-      - name: Deploy to Firebase
-        run: |
-          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ${{ runner.temp }}/firebase-key.json
-          export GOOGLE_APPLICATION_CREDENTIALS="${{ runner.temp }}/firebase-key.json"
-          npx firebase-tools deploy --only hosting --project gym-note-app
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: firebase-deploy
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: gym-note-app
+          channelId: live
+
+      - name: Notify Slack on Success
+        if: success()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: '{"text":"🎉 Firebase Production Deploy Success! Repository: ${{ github.repository }}\nProduction URL: ${{ steps.firebase-deploy.outputs.details_url }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          payload: '{"text":"❌ Firebase Production Deploy Failed! Repository: ${{ github.repository }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
