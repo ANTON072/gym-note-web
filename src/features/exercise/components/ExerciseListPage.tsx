@@ -10,7 +10,7 @@ import { ExerciseForm } from "./ExerciseForm";
 import styles from "./exercises.module.css";
 
 export function ExerciseListPage() {
-  const { data } = useGetExercises();
+  const { data, isLoading, isFetched } = useGetExercises();
   const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
 
@@ -28,11 +28,13 @@ export function ExerciseListPage() {
               }}
             >
               <Select name="body_part">
-                {Array.isArray(BODY_PART_OPTIONS) ? BODY_PART_OPTIONS.map(({ value, label }) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                )) : null}
+                {Array.isArray(BODY_PART_OPTIONS)
+                  ? BODY_PART_OPTIONS.map(({ value, label }) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))
+                  : null}
                 <option value="">すべて</option>
               </Select>
             </InputField>
@@ -41,27 +43,29 @@ export function ExerciseListPage() {
             新規登録
           </Button>
         </div>
-        <Table
-          data={exercises}
-          columns={[
-            {
-              key: "name",
-              header: "種目名",
-              render: (exercise) => (
-                <Link to="/exercises/$exerciseId" params={{ exerciseId: exercise.id.toString() }}>
-                  {exercise.name}
-                </Link>
-              ),
-              width: "75%",
-            },
-            {
-              key: "body_part",
-              header: "部位",
-              render: (exercise) => exercise.body_part,
-            },
-          ]}
-          keyExtractor={(exercise) => exercise.id}
-        />
+        {isFetched && (
+          <Table
+            data={exercises}
+            columns={[
+              {
+                key: "name",
+                header: "種目名",
+                render: (exercise) => (
+                  <Link to="/exercises/$exerciseId" params={{ exerciseId: exercise.id.toString() }}>
+                    {exercise.name}
+                  </Link>
+                ),
+                width: "75%",
+              },
+              {
+                key: "body_part",
+                header: "部位",
+                render: (exercise) => exercise.body_part,
+              },
+            ]}
+            keyExtractor={(exercise) => exercise.id}
+          />
+        )}
       </div>
       {/* フォーム */}
       <BottomSheet ref={ref} isOpen={isOpen} closeOnBackdropTap={false} disableDismiss disableDrag>

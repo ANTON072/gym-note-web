@@ -3,7 +3,7 @@ import styles from "./form.module.css";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children: React.ReactNode;
-  name: string;
+  name?: string;
 }
 
 export const Select = ({ children, name, ...props }: Props) => {

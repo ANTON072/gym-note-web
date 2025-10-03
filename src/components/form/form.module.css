@@ -129,5 +129,5 @@
 .radioGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--size-1);
+  gap: var(--size-2);
 }
