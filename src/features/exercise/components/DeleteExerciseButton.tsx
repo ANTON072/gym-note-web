@@ -1,5 +1,7 @@
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { useStoreApi, useToast } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useDeleteExercise } from "../hooks/useExerciseApi";
@@ -15,6 +17,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
   const query = useQueryClient();
   const toast = useToast();
   const storeApi = useStoreApi();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const deleteMutation = useDeleteExercise({
     onMutate: () => {
@@ -36,18 +39,36 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
     },
   });
 
-  const handleClick = (id: number) => {
-    window.confirm("本当に削除しますか？") && deleteMutation.mutate(id);
+  const handleClick = () => {
+    setIsConfirmOpen(true);
+  };
+
+  const handleConfirm = () => {
+    deleteMutation.mutate(exerciseId);
+    setIsConfirmOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsConfirmOpen(false);
   };
 
   return (
-    <button
-      type="button"
-      onClick={() => handleClick(exerciseId)}
-      className={styles.listDeleteButton}
-      disabled={deleteMutation.isPending || disabled}
-    >
-      <GoTrash />
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={handleClick}
+        className={styles.listDeleteButton}
+        disabled={deleteMutation.isPending || disabled}
+      >
+        <GoTrash />
+      </button>
+      <ConfirmDialog
+        isOpen={isConfirmOpen}
+        message="本当に削除しますか？"
+        confirmLabel="削除"
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+    </>
   );
 };
