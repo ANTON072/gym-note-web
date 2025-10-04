@@ -50,12 +50,6 @@
   color: var(--blue-10);
 }
 
-.deleteButton {
-  all: unset;
-  text-align: right;
-  padding: var(--container-padding);
-}
-
 .listDeleteButton {
   display: grid;
   place-items: center;

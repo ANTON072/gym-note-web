@@ -12,19 +12,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import styles from "./exercises.module.css";
 
 import { Button } from "@/components";
-import { useToast } from "@/hooks";
+import { useStoreApi, useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
-import {
-  useCreateExercise,
-  useDeleteExercise,
-  useGetExercise,
-  useUpdateExercise,
-} from "../hooks/useExerciseApi";
+import { useCreateExercise, useGetExercise, useUpdateExercise } from "../hooks/useExerciseApi";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
+import { DeleteExerciseButton } from "./DeleteExerciseButton";
 
 interface Props {
   exerciseId?: number | null;
@@ -34,6 +30,7 @@ interface Props {
 export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
+  const storeApi = useStoreApi();
 
   const isEdit = typeof exerciseId === "number" && exerciseId !== null;
 
@@ -87,12 +84,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
     onError: (error: Error) => handleFormMutationError(error, "種目の更新"),
   });
 
-  const deleteMutation = useDeleteExercise({
-    onSuccess: () => handleMutationSuccess("種目を削除しました"),
-    onError: (error: Error) => handleMutationError(error, "種目の削除"),
-  });
-
-  const isPending = createMutation.isPending || deleteMutation.isPending;
+  const isPending = createMutation.isPending || updateMutation.isPending || storeApi.isAnyLoading;
 
   const onSubmit = (values: ExerciseFormData) => {
     if (isEdit && exerciseId) {
@@ -100,10 +92,6 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
       return;
     }
     createMutation.mutate(values);
-  };
-
-  const onDelete = (exerciseId: number) => {
-    window.confirm("本当に削除しますか？") && deleteMutation.mutate(exerciseId);
   };
 
   useEffect(() => {
@@ -148,14 +136,22 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
               更新
             </Button>
             <div />
-            <button
-              className={styles.deleteButton}
-              type="button"
-              onClick={() => onDelete(exerciseId)}
-              disabled={isPending}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                padding: "var(--container-padding)",
+              }}
             >
-              削除
-            </button>
+              <DeleteExerciseButton
+                exerciseId={exerciseId}
+                disabled={isPending}
+                onDeleted={() => {
+                  onClose();
+                }}
+              />
+            </div>
           </div>
         ) : (
           <div className={styles.formActions}>

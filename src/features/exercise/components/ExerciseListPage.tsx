@@ -5,9 +5,10 @@ import Skeleton from "react-loading-skeleton";
 
 import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
-import { GoTrash } from "react-icons/go";
+import { useStoreApi } from "@/hooks";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
+import { DeleteExerciseButton } from "./DeleteExerciseButton";
 import { ExerciseForm } from "./ExerciseForm";
 import styles from "./exercises.module.css";
 
@@ -16,6 +17,7 @@ export function ExerciseListPage() {
   const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
   const [selectedExerciseId, setSelectedExerciseId] = useState<number | null>(null);
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
+  const storeApi = useStoreApi();
 
   const handleExerciseClick = (exerciseId: number) => {
     setSelectedExerciseId(exerciseId);
@@ -40,7 +42,7 @@ export function ExerciseListPage() {
                 top: " calc(-1 * var(--form-font-size))",
               }}
             >
-              <Select name="body_part">
+              <Select name="body_part" disabled={storeApi.isAnyLoading}>
                 {Array.isArray(BODY_PART_OPTIONS)
                   ? BODY_PART_OPTIONS.map(({ value, label }) => (
                       <option key={value} value={value}>
@@ -69,6 +71,7 @@ export function ExerciseListPage() {
                     type="button"
                     onClick={() => handleExerciseClick(exercise.id)}
                     className={styles.exerciseLink}
+                    disabled={storeApi.isAnyLoading}
                   >
                     {exercise.name}
                   </button>
@@ -83,15 +86,7 @@ export function ExerciseListPage() {
               {
                 key: "edit",
                 header: "",
-                render: (exercise) => (
-                  <button
-                    type="button"
-                    onClick={() => handleExerciseClick(exercise.id)}
-                    className={styles.listDeleteButton}
-                  >
-                    <GoTrash />
-                  </button>
-                ),
+                render: (exercise) => <DeleteExerciseButton exerciseId={exercise.id} />,
               },
             ]}
             keyExtractor={(exercise) => exercise.id}
