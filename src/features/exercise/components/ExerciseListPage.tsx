@@ -58,7 +58,7 @@ export function ExerciseListPage() {
             新規登録
           </Button>
         </div>
-        {isLoading && <Skeleton count={5} height={40} style={{ marginBottom: 10 }} />}
+        {isLoading && !isFetched && <Skeleton count={5} height={40} style={{ marginBottom: 10 }} />}
         {isFetched && (
           <Table
             data={exercises}
