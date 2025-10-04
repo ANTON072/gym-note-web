@@ -140,23 +140,22 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
           </InputField>
         </div>
         {isEdit ? (
-          <div>
-            <div>
-              <Button type="button" variant="outlined" onClick={onClose} disabled={isPending}>
-                キャンセル
-              </Button>
-              <Button type="submit" form="exercise-form" disabled={isPending}>
-                更新
-              </Button>
-            </div>
-            <Button
+          <div className={styles.formActions}>
+            <Button type="button" variant="outlined" onClick={onClose} disabled={isPending}>
+              キャンセル
+            </Button>
+            <Button type="submit" form="exercise-form" disabled={isPending}>
+              更新
+            </Button>
+            <div />
+            <button
+              className={styles.deleteButton}
               type="button"
-              variant="outlined"
               onClick={() => onDelete(exerciseId)}
               disabled={isPending}
             >
               削除
-            </Button>
+            </button>
           </div>
         ) : (
           <div className={styles.formActions}>

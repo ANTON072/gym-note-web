@@ -1,6 +1,7 @@
 import { Button, PageTitle, Table } from "@/components";
 import { InputField, Select } from "@/components/form";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
@@ -54,6 +55,7 @@ export function ExerciseListPage() {
             新規登録
           </Button>
         </div>
+        {isLoading && <Skeleton count={5} height={40} style={{ marginBottom: 10 }} />}
         {isFetched && (
           <Table
             data={exercises}

@@ -49,3 +49,10 @@
 .exerciseLink:hover {
   color: var(--blue-10);
 }
+
+.deleteButton {
+  all: unset;
+  text-align: right;
+  font-size: var(--font-size-1);
+  padding: var(--container-padding);
+}
