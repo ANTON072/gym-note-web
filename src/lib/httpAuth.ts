@@ -19,6 +19,11 @@ interface RequestOptions extends Omit<RequestInit, "body"> {
   body?: unknown;
 }
 
+interface ErrorResponse {
+  errors?: Record<string, string[]>;
+  message?: string;
+}
+
 class HttpAuth {
   private baseURL: string;
 
@@ -64,7 +69,7 @@ class HttpAuth {
 
     if (!response.ok) {
       const contentType = response.headers.get("content-type");
-      let errorData: any;
+      let errorData: ErrorResponse | undefined;
       let validationErrors: Record<string, string[]> | undefined;
       let errorMessage: string | undefined;
 
@@ -72,10 +77,10 @@ class HttpAuth {
         try {
           errorData = await response.json();
           // Railsのバリデーションエラー形式をチェック
-          if (errorData.errors && typeof errorData.errors === "object") {
+          if (errorData?.errors && typeof errorData.errors === "object") {
             validationErrors = errorData.errors;
           }
-          if (errorData.message) {
+          if (errorData?.message) {
             errorMessage = errorData.message;
           }
         } catch {
