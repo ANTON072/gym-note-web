@@ -39,14 +39,9 @@ export const InputField = <T extends FieldValues = FieldValues>({
   let registerProps = {};
 
   try {
-    const { formState, register } = useFormContext<T>();
+    const { getFieldState, register } = useFormContext<T>();
     if (name) {
-      const errorValue = name.split(".").reduce<unknown>((obj, key) => {
-        return obj && typeof obj === "object" && key in obj
-          ? (obj as Record<string, unknown>)[key]
-          : undefined;
-      }, formState.errors);
-      fieldError = errorValue as FieldError | undefined;
+      fieldError = getFieldState(name).error;
       registerProps = register(name);
     }
   } catch {
