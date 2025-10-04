@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
+import { GoTrash } from "react-icons/go";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { ExerciseForm } from "./ExerciseForm";
@@ -72,12 +73,25 @@ export function ExerciseListPage() {
                     {exercise.name}
                   </button>
                 ),
-                width: "75%",
+                width: "55%",
               },
               {
                 key: "body_part",
                 header: "部位",
                 render: (exercise) => exercise.body_part,
+              },
+              {
+                key: "edit",
+                header: "",
+                render: (exercise) => (
+                  <button
+                    type="button"
+                    onClick={() => handleExerciseClick(exercise.id)}
+                    className={styles.listDeleteButton}
+                  >
+                    <GoTrash />
+                  </button>
+                ),
               },
             ]}
             keyExtractor={(exercise) => exercise.id}
