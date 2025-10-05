@@ -1,7 +1,7 @@
+import { app } from "@/configs/firebase";
 import { useRootStore } from "@/store/rootStore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import type { Unsubscribe } from "firebase/auth";
-import { app } from "@/configs/firebase";
 
 let unsubscribe: Unsubscribe | null = null;
 

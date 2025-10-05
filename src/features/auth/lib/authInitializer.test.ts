@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import type { User, Unsubscribe } from "firebase/auth";
-import { initializeAuthListener, cleanupAuthListener } from "./authInitializer";
+import type { Unsubscribe, User } from "firebase/auth";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { cleanupAuthListener, initializeAuthListener } from "./authInitializer";
 
 // Firebaseモジュールをモック
 vi.mock("firebase/auth", () => ({
@@ -24,7 +24,7 @@ vi.mock("@/store/rootStore", () => ({
 
 describe("authInitializer", () => {
   let mockUnsubscribe: ReturnType<typeof vi.fn>;
-  
+
   beforeEach(() => {
     vi.clearAllMocks();
     mockUnsubscribe = vi.fn();
@@ -47,10 +47,10 @@ describe("authInitializer", () => {
   it("ユーザーログイン時にsetAuthStateが呼ばれる", async () => {
     const { onAuthStateChanged } = await import("firebase/auth");
     const { useRootStore } = await import("@/store/rootStore");
-    
+
     const mockUser = { uid: "123", email: "test@example.com" } as User;
     const setAuthStateMock = vi.fn();
-    
+
     vi.mocked(useRootStore.getState).mockReturnValue({
       auth: {
         status: "loading",
@@ -72,9 +72,9 @@ describe("authInitializer", () => {
   it("ユーザーログアウト時にsetAuthStateが呼ばれる", async () => {
     const { onAuthStateChanged } = await import("firebase/auth");
     const { useRootStore } = await import("@/store/rootStore");
-    
+
     const setAuthStateMock = vi.fn();
-    
+
     vi.mocked(useRootStore.getState).mockReturnValue({
       auth: {
         status: "login",
