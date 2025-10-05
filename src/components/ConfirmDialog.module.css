@@ -1,4 +1,4 @@
-.dialog {
+.ConfirmDialog {
   border: none;
   border-radius: var(--size-2);
   padding: 0;
@@ -11,30 +11,30 @@
   }
 }
 
-.content {
+.ConfirmDialog__content {
   padding: var(--size-5);
 }
 
-.title {
+.ConfirmDialog__title {
   margin: 0 0 var(--size-3) 0;
   font-size: var(--font-size-3);
   font-weight: bold;
 }
 
-.message {
+.ConfirmDialog__message {
   margin: 0 0 var(--size-5) 0;
   font-size: var(--font-size-1);
   line-height: 1.5;
 }
 
-.buttons {
+.ConfirmDialog__buttons {
   display: flex;
   gap: var(--size-3);
   justify-content: flex-end;
 }
 
-.cancelButton,
-.confirmButton {
+.ConfirmDialog__cancelButton,
+.ConfirmDialog__confirmButton {
   padding: var(--size-2) var(--size-4);
   font-size: var(--font-size-1);
   border-radius: var(--size-1);
@@ -43,7 +43,7 @@
   transition: all 0.2s;
 }
 
-.cancelButton {
+.ConfirmDialog__cancelButton {
   color: var(--base-color);
   background-color: transparent;
   border-color: var(--base-color);
@@ -57,7 +57,7 @@
   }
 }
 
-.confirmButton {
+.ConfirmDialog__confirmButton {
   color: #fff;
   background-color: var(--base-color);
   border-color: var(--base-color);

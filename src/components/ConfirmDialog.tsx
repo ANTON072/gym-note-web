@@ -60,18 +60,26 @@ export const ConfirmDialog = ({
   return (
     <dialog
       ref={dialogRef}
-      className={styles.dialog}
+      className={styles.ConfirmDialog}
       onClick={handleBackdropClick}
       onKeyDown={handleKeyDown}
     >
-      <div className={styles.content}>
-        {title && <h2 className={styles.title}>{title}</h2>}
-        <p className={styles.message}>{message}</p>
-        <div className={styles.buttons}>
-          <button type="button" onClick={handleCancel} className={styles.cancelButton}>
+      <div className={styles.ConfirmDialog__content}>
+        {title && <h2 className={styles.ConfirmDialog__title}>{title}</h2>}
+        <p className={styles.ConfirmDialog__message}>{message}</p>
+        <div className={styles.ConfirmDialog__buttons}>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className={styles.ConfirmDialog__cancelButton}
+          >
             {cancelLabel}
           </button>
-          <button type="button" onClick={handleConfirm} className={styles.confirmButton}>
+          <button
+            type="button"
+            onClick={handleConfirm}
+            className={styles.ConfirmDialog__confirmButton}
+          >
             {confirmLabel}
           </button>
         </div>
