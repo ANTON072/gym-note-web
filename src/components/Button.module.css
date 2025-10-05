@@ -5,9 +5,7 @@
   font-size: var(--font-size-1);
   color: #fff;
   text-decoration: none;
-  cursor: pointer;
   background-color: var(--base-color);
-  border: none;
   align-items: center;
   justify-content: center;
 
