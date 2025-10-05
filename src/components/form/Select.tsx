@@ -8,11 +8,11 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select = ({ children, name, ...props }: Props) => {
   return (
-    <div className={styles.selectWrapper}>
-      <select className={styles.select} name={name} {...props}>
+    <div className={styles.Select}>
+      <select className={styles.Select__select} name={name} {...props}>
         {children}
       </select>
-      <GoChevronDown className={styles.selectIcon} size={"1.5em"} />
+      <GoChevronDown className={styles.Select__icon} size={"1.5em"} />
     </div>
   );
 };

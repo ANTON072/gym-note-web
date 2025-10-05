@@ -1,13 +1,11 @@
-.button {
+.Button {
   display: inline-flex;
   padding: 0 var(--size-5);
   height: var(--button-height);
   font-size: var(--font-size-1);
   color: #fff;
   text-decoration: none;
-  cursor: pointer;
   background-color: var(--base-color);
-  border: none;
   align-items: center;
   justify-content: center;
 

@@ -31,11 +31,9 @@ export const Loading = () => {
   }, []);
 
   return (
-    <div className={style.root}>
-      <div className={style.loading}>
-        Loading
-        <span ref={dotsRef} />
-      </div>
+    <div className={style.Loading}>
+      Loading
+      <span ref={dotsRef} />
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, Props>(
     });
 
     return (
-      <div className={styles.radioGroup} {...ariaProps}>
+      <div className={styles.RadioGroup} {...ariaProps}>
         {enhancedChildren}
       </div>
     );

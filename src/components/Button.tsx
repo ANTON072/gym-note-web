@@ -44,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     // toが指定されていない場合はbuttonタグを使用
     return (
       <button
-        className={clsx(styles.button, variant && styles[variant], className)}
+        className={clsx(styles.Button, variant && styles[variant], className)}
         ref={ref as React.Ref<HTMLButtonElement>}
         {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >

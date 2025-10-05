@@ -1,4 +1,4 @@
-.inputField {
+.InputField {
   display: grid;
   row-gap: var(--size-1);
   --text-color: inherit;
@@ -8,37 +8,37 @@
   }
 }
 
-.label {
+.InputField__label {
   color: var(--text-color);
   font-size: var(--form-font-size);
 }
 
-.helperText {
+.InputField__helperText {
   font-size: var(--font-size-0);
   color: var(--text-color);
 }
 
-.errorText {
+.InputField__errorText {
   color: var(--key-color);
 }
 
-.fullWidth {
+.InputField__fullWidth {
   width: 100%;
 }
 
-.fullWidth input,
-.fullWidth textarea,
-.fullWidth select {
+.InputField__fullWidth input,
+.InputField__fullWidth textarea,
+.InputField__fullWidth select {
   width: 100%;
 }
 
-.selectWrapper {
+.Select {
   display: inline-flex;
   align-items: center;
   position: relative;
 }
 
-.select {
+.Select__select {
   --padding-horizontal: var(--form-padding-horizontal);
   appearance: none;
   height: var(--button-height);
@@ -52,13 +52,13 @@
   width: 100%;
 }
 
-.selectIcon {
+.Select__icon {
   position: absolute;
   right: 15px;
   pointer-events: none;
 }
 
-.textField {
+.TextField {
   height: var(--button-height);
   font-size: var(--form-font-size);
   padding-left: var(--form-padding-horizontal);
@@ -70,7 +70,7 @@
   }
 }
 
-.textArea {
+.TextArea {
   min-height: calc(var(--button-height) * 2);
   font-size: var(--form-font-size);
   padding: var(--form-padding-horizontal);
@@ -82,7 +82,7 @@
   }
 }
 
-.radioButton {
+.RadioButton {
   display: inline-flex;
   align-items: center;
   gap: var(--size-1);
@@ -90,7 +90,7 @@
   font-size: var(--form-font-size);
 }
 
-.radioInput {
+.RadioButton__input {
   appearance: none;
   width: 16px;
   height: 16px;
@@ -121,11 +121,11 @@
   }
 }
 
-.radioLabel {
+.RadioButton__label {
   user-select: none;
 }
 
-.radioGroup {
+.RadioGroup {
   display: flex;
   flex-direction: column;
   gap: var(--size-2);

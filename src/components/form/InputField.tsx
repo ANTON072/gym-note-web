@@ -66,16 +66,22 @@ export const InputField = <T extends FieldValues = FieldValues>({
     : children;
 
   return (
-    <div className={clsx(styles.inputField, fullWidth && styles.fullWidth)} style={style}>
+    <div
+      className={clsx(styles.InputField, fullWidth && styles.InputField__fullWidth)}
+      style={style}
+    >
       {label && (
-        <label htmlFor={fieldId} className={styles.label}>
+        <label htmlFor={fieldId} className={styles.InputField__label}>
           {label}
-          {required && <span className={styles.required}>*</span>}
+          {required && <span className={styles.InputField__required}>*</span>}
         </label>
       )}
       {enhancedChildren}
       {displayHelperText && (
-        <p id={helperTextId} className={clsx(styles.helperText, hasError && styles.errorText)}>
+        <p
+          id={helperTextId}
+          className={clsx(styles.InputField__helperText, hasError && styles.InputField__errorText)}
+        >
           {displayHelperText}
         </p>
       )}
