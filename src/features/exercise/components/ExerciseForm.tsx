@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import styles from "./exercises.module.css";
 
-import { Button } from "@/components";
+import { MutateButton } from "@/components";
 import { useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
 import { useIsMutating, useQueryClient } from "@tanstack/react-query";
@@ -30,7 +30,6 @@ interface Props {
 export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
-  const isMutating = useIsMutating() > 0;
 
   const isEdit = typeof exerciseId === "number";
 
@@ -101,7 +100,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
 
   return (
     <FormProvider {...form}>
-      <form id="exercise-form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
         <div className={styles.formGrid}>
           <InputField label="部位" name="body_part" required>
             <Select>
@@ -128,12 +127,13 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
         </div>
         {isEdit ? (
           <div className={styles.formActions}>
-            <Button type="button" variant="outlined" onClick={onClose} disabled={isMutating}>
+            <MutateButton type="button" variant="outlined" onClick={onClose}>
               キャンセル
-            </Button>
-            <Button type="submit" form="exercise-form" disabled={isMutating}>
-              更新
-            </Button>
+            </MutateButton>
+            <MutateButton type="button" variant="outlined" onClick={onClose}>
+              キャンセル
+            </MutateButton>
+            <MutateButton type="submit">更新</MutateButton>
             <div />
             <div
               style={{
@@ -145,7 +145,6 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
             >
               <DeleteExerciseButton
                 exerciseId={exerciseId}
-                disabled={isMutating}
                 onDeleted={() => {
                   onClose();
                 }}
@@ -154,12 +153,10 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
           </div>
         ) : (
           <div className={styles.formActions}>
-            <Button type="button" variant="outlined" onClick={onClose} disabled={isMutating}>
+            <MutateButton type="button" variant="outlined" onClick={onClose}>
               キャンセル
-            </Button>
-            <Button type="submit" form="exercise-form" disabled={isMutating}>
-              登録
-            </Button>
+            </MutateButton>
+            <MutateButton type="submit">登録</MutateButton>
           </div>
         )}
       </form>
