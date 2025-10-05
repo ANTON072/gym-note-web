@@ -20,9 +20,9 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 // 統合された型定義
-type Props = LinkButtonProps | ButtonProps;
+export type ButtonComponentProps = LinkButtonProps | ButtonProps;
 
-export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
+export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonComponentProps>(
   ({ to, children, className = "", variant, ...rest }, ref) => {
     // toが指定されている場合はLinkタグを使用
     if (to) {

@@ -1,6 +1,6 @@
 import styles from "./PageTitle.module.css";
 
-export interface Props {
+interface Props {
   /** 表示するタイトル文字列 */
   title: string;
 }

@@ -1,6 +1,6 @@
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { useToast } from "@/hooks";
-import { useQueryClient } from "@tanstack/react-query";
+import { useIsMutating, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
@@ -17,6 +17,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
   const query = useQueryClient();
   const toast = useToast();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const isMutating = useIsMutating() > 0;
 
   const deleteMutation = useDeleteExercise({
     onSuccess: () => {
@@ -51,7 +52,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
         type="button"
         onClick={handleClick}
         className={styles.listDeleteButton}
-        disabled={deleteMutation.isPending || disabled}
+        disabled={isMutating}
       >
         <GoTrash />
       </button>
