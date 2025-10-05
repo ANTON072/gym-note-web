@@ -25,7 +25,7 @@ export const HamburgerMenu = ({ isOpen, ...props }: HamburgerMenuProps) => {
         duration: 0.3,
         ease: "back.in(1.7)",
         attr: {
-          d: topLine === topLineRef.current ? "M8,20 L32,20 Z" : "M8,20 L32,20 Z",
+          d: "M8,20 L32,20 Z",
         },
       })
         .set(middleLine, { opacity: 0 })
