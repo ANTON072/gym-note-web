@@ -11,14 +11,9 @@ export const RadioButton = ({
   ...props
 }: Props & Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof Props>) => {
   return (
-    <label className={styles.radioButton}>
-      <input
-        type="radio"
-        value={value}
-        className={styles.radioInput}
-        {...props}
-      />
-      <span className={styles.radioLabel}>{children}</span>
+    <label className={styles.RadioButton}>
+      <input type="radio" value={value} className={styles.RadioButton__input} {...props} />
+      <span className={styles.RadioButton__label}>{children}</span>
     </label>
   );
 };
