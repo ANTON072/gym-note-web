@@ -94,11 +94,12 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
     createMutation.mutate(values);
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Function
   useEffect(() => {
     if (data) {
       form.reset(data);
     }
-  }, [data, form.reset]);
+  }, [data]);
 
   return (
     <FormProvider {...form}>
