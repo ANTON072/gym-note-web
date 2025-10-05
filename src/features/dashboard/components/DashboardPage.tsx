@@ -1,5 +1,3 @@
-import { MutateButton } from "@/components";
-
 export function DashboardPage() {
   return (
     <div>
