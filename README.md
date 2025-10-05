@@ -4,14 +4,14 @@
 
 ```bash
 # 開発サーバー起動
-pnpm dev
+npm run dev
 
 # プロダクションビルド
-pnpm build
+npm run  build
 
 # プレビュー
-pnpm preview
+npm run preview
 
 # 型チェック
-pnpm type-check
+npm run type-check
 ```
