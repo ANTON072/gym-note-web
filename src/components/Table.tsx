@@ -26,11 +26,11 @@ export function Table<T>({
   data,
   columns,
   keyExtractor,
-  className = styles.table,
-  headerClassName = styles.header,
-  bodyClassName = styles.body,
-  rowClassName = styles.row,
-  cellClassName = styles.cell,
+  className = styles.Table,
+  headerClassName = styles.Table__header,
+  bodyClassName = styles.Table__body,
+  rowClassName = styles.Table__row,
+  cellClassName = styles.Table__cell,
   emptyMessage = "データがありません",
   onRowClick,
 }: TableProps<T>) {
@@ -60,8 +60,8 @@ export function Table<T>({
         </thead>
         <tbody className={bodyClassName}>
           {data.length === 0 ? (
-            <tr className={styles.emptyRow}>
-              <td colSpan={columns.length} className={styles.emptyCell}>
+            <tr className={styles.Table__emptyRow}>
+              <td colSpan={columns.length} className={styles.Table__emptyCell}>
                 {emptyMessage}
               </td>
             </tr>
@@ -71,7 +71,7 @@ export function Table<T>({
               const rowClass =
                 typeof rowClassName === "function"
                   ? rowClassName(item, index)
-                  : rowClassName || styles.row;
+                  : rowClassName || styles.Table__row;
 
               return (
                 <tr

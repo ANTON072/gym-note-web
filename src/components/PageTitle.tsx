@@ -6,5 +6,5 @@ export interface Props {
 }
 
 export const PageTitle = ({ title }: Props) => {
-  return <h2 className={styles.title}>{title}</h2>;
+  return <h2 className={styles.PageTitle}>{title}</h2>;
 };
