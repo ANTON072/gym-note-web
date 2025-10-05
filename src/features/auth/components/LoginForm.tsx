@@ -25,11 +25,10 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className={styles.root}>
-      <div className={styles.content}>
+    <div className={styles.LoginForm}>
+      <div className={styles.LoginForm__content}>
         <h2>Welcome to {APP_NAME}</h2>
-        <p>Record your daily training in {APP_NAME}.</p>
-        <p>Let's get started now‼️</p>
+        <p>毎日のトレーニングを記録しましょう💪</p>
         <div>
           <GoogleLoginButton onClick={handleGoogleLogin} disabled={isLoading} />
         </div>

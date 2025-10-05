@@ -2,6 +2,7 @@ import { useRootStore } from "@/store/rootStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState } from "react";
+import { GoSignOut } from "react-icons/go";
 
 import { Button } from "@/components";
 import { logout } from "@/features/auth/lib/auth";
@@ -9,8 +10,9 @@ import { Link } from "@tanstack/react-router";
 import styles from "./Drawer.module.css";
 
 const menuList = [
-  { name: "Note", href: "/daily" },
-  { name: "Exercise", href: "/exercises" },
+  { name: "本日のノート", href: "/" },
+  { name: "ノート", href: "/notes" },
+  { name: "種目", href: "/exercises" },
 ];
 
 export const Drawer = () => {
@@ -101,8 +103,9 @@ export const Drawer = () => {
         >
           <ul>
             <li>
-              <Button onClick={handleLogout} disabled={isMutating}>
-                Logout
+              <Button onClick={handleLogout} disabled={isMutating} variant="text">
+                <GoSignOut />
+                ログアウト
               </Button>
             </li>
           </ul>

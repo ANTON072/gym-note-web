@@ -1,7 +1,7 @@
 import styles from "./form.module.css";
 
 interface Props {
-  name: string;
+  name?: string;
   rows?: number;
 }
 
@@ -10,5 +10,5 @@ export const TextArea = ({
   rows = 3,
   ...props
 }: Props & Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, keyof Props>) => {
-  return <textarea name={name} rows={rows} className={styles.textArea} {...props} />;
+  return <textarea name={name} rows={rows} className={styles.TextArea} {...props} />;
 };

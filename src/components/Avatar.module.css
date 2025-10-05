@@ -1,9 +1,9 @@
-.avatarImage {
+.Avatar {
   object-fit: cover;
   border-radius: 50%;
 }
 
-.avatarText {
+.AvatarPlaceholder {
   display: grid;
   place-items: center;
   font-weight: bold;

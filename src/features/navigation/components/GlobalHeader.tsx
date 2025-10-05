@@ -1,7 +1,7 @@
 import { Avatar } from "@/components";
+import { APP_NAME } from "@/constants/app";
 import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
-import { APP_NAME } from "@/constants/app";
 import { Link } from "@tanstack/react-router";
 import { Drawer } from "./Drawer";
 import styles from "./GlobalHeader.module.css";
@@ -22,7 +22,7 @@ export const GlobalHeader = () => {
         <Link to="/">{APP_NAME}</Link>
       </h1>
       <div className={styles.hamburgerMenu}>
-        <HamburgerMenu isOpen={drawer.isOpen} onClick={handleClickHamburgerMenu} />
+        {user && <HamburgerMenu isOpen={drawer.isOpen} onClick={handleClickHamburgerMenu} />}
       </div>
       <Drawer />
     </header>
