@@ -1,19 +1,13 @@
-.root {
+.LoginForm {
   display: grid;
   place-items: center;
   height: 100%;
 }
 
-.content {
+.LoginForm__content {
   text-align: center;
 
   > p {
     margin: var(--size-2) 0;
   }
-}
-
-.error {
-  margin-top: 12px;
-  font-size: 14px;
-  color: #dc2626;
 }
