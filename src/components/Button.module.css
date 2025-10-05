@@ -1,4 +1,4 @@
-.button {
+.Button {
   display: inline-flex;
   padding: 0 var(--size-5);
   height: var(--button-height);
