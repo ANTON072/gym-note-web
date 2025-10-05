@@ -32,7 +32,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const query = useQueryClient();
   const storeApi = useStoreApi();
 
-  const isEdit = typeof exerciseId === "number" && exerciseId !== null;
+  const isEdit = typeof exerciseId === "number";
 
   const { data } = useGetExercise(exerciseId, {
     enabled: isEdit,
