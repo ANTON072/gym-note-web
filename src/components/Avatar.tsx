@@ -11,14 +11,14 @@ export const Avatar = ({ size, src, name }: Props) => {
     <>
       {src ? (
         <img
-          className={styles.avatarImage}
+          className={styles.Avatar}
           src={src}
           alt={name ?? "Avatar"}
           style={{ width: size, height: size }}
         />
       ) : (
         <div
-          className={styles.avatarText}
+          className={styles.AvatarPlaceholder}
           style={{ width: size, height: size, fontSize: size / 2 }}
         >
           {name?.charAt(0)}
