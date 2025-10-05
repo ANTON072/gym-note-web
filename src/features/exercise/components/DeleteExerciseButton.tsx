@@ -1,5 +1,5 @@
 import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { useStoreApi, useToast } from "@/hooks";
+import { useToast } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { GoTrash } from "react-icons/go";
@@ -16,13 +16,9 @@ interface Props {
 export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props) => {
   const query = useQueryClient();
   const toast = useToast();
-  const storeApi = useStoreApi();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const deleteMutation = useDeleteExercise({
-    onMutate: () => {
-      storeApi.setIsAnyLoading(true);
-    },
     onSuccess: () => {
       query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
       toast.add({ message: "種目を削除しました" });
@@ -33,9 +29,6 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
         message: `種目の削除に失敗しました: ${error.message}`,
         type: "error",
       });
-    },
-    onSettled: () => {
-      storeApi.setIsAnyLoading(false);
     },
   });
 

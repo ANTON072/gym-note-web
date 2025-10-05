@@ -5,10 +5,6 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 interface RootStore {
-  api: {
-    isAnyLoading: boolean;
-    setIsAnyLoading: (isLoading: boolean) => void;
-  };
   auth: AuthState & {
     setAuthState: (status: "loading" | "login" | "logout", user: User | null) => void;
   };
@@ -26,13 +22,6 @@ interface RootStore {
 
 export const useRootStore = create<RootStore>()(
   immer((set) => ({
-    api: {
-      isAnyLoading: false,
-      setIsAnyLoading: (isLoading: boolean) =>
-        set((state) => {
-          state.api.isAnyLoading = isLoading;
-        }),
-    },
     auth: {
       status: "loading",
       user: null,

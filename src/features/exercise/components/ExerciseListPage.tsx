@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
-import { useStoreApi } from "@/hooks";
+import { useIsMutating } from "@tanstack/react-query";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -17,7 +17,7 @@ export function ExerciseListPage() {
   const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
   const [selectedExerciseId, setSelectedExerciseId] = useState<number | null>(null);
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
-  const storeApi = useStoreApi();
+  const isMutating = useIsMutating() > 0;
 
   const handleExerciseClick = (exerciseId: number) => {
     setSelectedExerciseId(exerciseId);
@@ -42,7 +42,7 @@ export function ExerciseListPage() {
                 top: " calc(-1 * var(--form-font-size))",
               }}
             >
-              <Select name="body_part" disabled={storeApi.isAnyLoading}>
+              <Select name="body_part" disabled={isMutating}>
                 {Array.isArray(BODY_PART_OPTIONS)
                   ? BODY_PART_OPTIONS.map(({ value, label }) => (
                       <option key={value} value={value}>
@@ -71,7 +71,7 @@ export function ExerciseListPage() {
                     type="button"
                     onClick={() => handleExerciseClick(exercise.id)}
                     className={styles.exerciseLink}
-                    disabled={storeApi.isAnyLoading}
+                    disabled={isMutating}
                   >
                     {exercise.name}
                   </button>
