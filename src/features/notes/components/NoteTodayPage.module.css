@@ -1,5 +1,5 @@
 .ExerciseList {
   display: grid;
-  margin: calc(var(--container-padding) * 2) 0;
+  margin: var(--container-padding) 0;
   gap: var(--container-padding);
 }

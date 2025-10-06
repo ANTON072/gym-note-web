@@ -1,4 +1,6 @@
 import { GoPencil } from "react-icons/go";
+import { GoX } from "react-icons/go";
+import { GoPlusCircle } from "react-icons/go";
 import styles from "./ExerciseListItem.module.css";
 
 export const ExerciseListItem = () => {
@@ -25,11 +27,18 @@ export const ExerciseListItem = () => {
             <div key={set.id} className={styles.ExerciseListItem__set}>
               <div className={styles.ExerciseListItem__setNumber}>{index + 1}セット</div>
               <div className={styles.ExerciseListItem__setDetail}>
-                {set.weight}kg × {set.reps}回
+                <div>{set.weight}kg</div>
+                <GoX />
+                <div>{set.reps}回</div>
               </div>
             </div>
           ))}
-          <div>セットの追加</div>
+          <div className={styles.ExerciseListItem__addSet}>
+            <button className={styles.ExerciseListItem__addSetButton} type="button">
+              セットの追加
+              <GoPlusCircle />
+            </button>
+          </div>
         </div>
       </div>
     </div>

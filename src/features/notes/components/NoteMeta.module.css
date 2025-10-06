@@ -1,23 +1,29 @@
+.Note__meta {
+  margin-bottom: calc(var(--container-padding) * 3);
+}
+
 .Note_meta__body {
   background: var(--stone-2);
   padding: var(--container-padding);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, auto);
+  gap: 0.3em;
   font-size: 13px;
+  margin-bottom: var(--container-padding);
 }
 
 .Note__meta__place {
-  grid-column: span 2;
+  grid-column: span 3;
 }
 
 .Note__meta__editButton {
-  grid-column: span 2;
-  justify-self: self-end;
+  display: flex;
+  justify-content: flex-end;
 
   button {
     font-size: 13px;
     display: flex;
+    align-items: center;
     gap: 0.3em;
-    padding: 0.3em;
   }
 }

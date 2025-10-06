@@ -7,6 +7,7 @@ export const NoteMeta = () => {
       <div className={styles.Note_meta__body}>
         <div>2025年10月6日（月）</div>
         <div>開始時間: 12:00</div>
+        <div>終了時間: 13:00</div>
         <div className={styles.Note__meta__place}>場所: クラブオーサム西国分寺</div>
       </div>
       <div className={styles.Note__meta__editButton}>
