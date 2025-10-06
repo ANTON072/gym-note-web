@@ -1,4 +1,4 @@
-import { Button, PageTitle } from "@/components";
+import { Button } from "@/components";
 import { GoPlusCircle } from "react-icons/go";
 
 import { ExerciseListItem } from "./ExerciseListItem";
@@ -20,14 +20,18 @@ export const NoteTodayPage = () => {
       <NoteMeta />
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
+          display: "grid",
+          gridTemplateColumns: "1fr auto auto",
+          gap: "var(--size-1)",
           alignItems: "center",
           marginBottom: "var(--container-padding)",
         }}
       >
         <Button variant="text" startIcon={<GoPlusCircle />}>
           種目を追加
+        </Button>
+        <Button variant="outlined" size="small">
+          前回のノート
         </Button>
         <Button variant="outlined" size="small">
           並び変え
