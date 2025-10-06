@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  row-gap: var(--size-3);
+  row-gap: var(--size-1);
   margin-top: var(--size-6);
 }
 

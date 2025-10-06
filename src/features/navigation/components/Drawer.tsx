@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 import styles from "./Drawer.module.css";
 
 const menuList = [
-  { name: "本日のノート", href: "/" },
+  { name: "本日のノート", href: "/notes/today" },
   { name: "ノート", href: "/notes" },
   { name: "種目", href: "/exercises" },
 ];

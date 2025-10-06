@@ -1,0 +1,5 @@
+.ExerciseList {
+  display: grid;
+  margin: var(--container-padding) 0;
+  gap: var(--container-padding);
+}
