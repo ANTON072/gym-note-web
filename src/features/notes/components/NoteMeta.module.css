@@ -1,22 +1,20 @@
-.Note__meta {
+.NoteMeta {
   margin-bottom: calc(var(--container-padding) * 2);
-}
-
-.Note_meta__body {
   background: var(--stone-2);
   padding: var(--container-padding);
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: 0.3em;
   font-size: 13px;
-  margin-bottom: 3px;
+  position: relative;
+  padding-right: 20px;
 }
 
-.Note__meta__place {
+.NoteMeta__place {
   grid-column: span 3;
 }
 
-.Note__meta__editButton {
+.NoteMeta__editButton {
   display: flex;
   justify-content: flex-end;
 
@@ -26,4 +24,16 @@
     align-items: center;
     gap: 0.3em;
   }
+}
+
+.NoteMeta__editButtonArea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.NoteMeta__editIcon {
+  position: absolute;
+  right: 4px;
+  top: 4px;
 }

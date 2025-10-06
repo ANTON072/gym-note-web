@@ -1,5 +1,4 @@
 import { GoPencil } from "react-icons/go";
-import { GoX } from "react-icons/go";
 import { GoPlusCircle } from "react-icons/go";
 import styles from "./ExerciseListItem.module.css";
 
@@ -28,7 +27,7 @@ export const ExerciseListItem = () => {
               <div className={styles.ExerciseListItem__setNumber}>{index + 1}セット</div>
               <div className={styles.ExerciseListItem__setDetail}>
                 <div>{set.weight}kg</div>
-                <GoX />
+                <div>×</div>
                 <div>{set.reps}回</div>
               </div>
             </div>

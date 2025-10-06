@@ -68,7 +68,6 @@
 }
 
 .ExerciseListItem__addSetButton {
-  font-size: 13px;
   display: flex;
   justify-items: center;
   gap: 0.3em;

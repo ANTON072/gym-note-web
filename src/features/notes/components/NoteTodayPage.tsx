@@ -27,7 +27,7 @@ export const NoteTodayPage = () => {
           marginBottom: "var(--container-padding)",
         }}
       >
-        <Button variant="text" startIcon={<GoPlusCircle />}>
+        <Button variant="text" startIcon={<GoPlusCircle />} style={{ fontWeight: "bold" }}>
           種目を追加
         </Button>
         <Button variant="outlined" size="small">

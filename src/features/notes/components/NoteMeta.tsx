@@ -3,19 +3,14 @@ import styles from "./NoteMeta.module.css";
 
 export const NoteMeta = () => {
   return (
-    <div className={styles.Note__meta}>
-      <div className={styles.Note_meta__body}>
-        <div>2025年10月6日（月）</div>
-        <div>開始: 12:00</div>
-        <div />
-        <div className={styles.Note__meta__place}>場所: クラブオーサム西国分寺</div>
-      </div>
-      <div className={styles.Note__meta__editButton}>
-        <button type="button" className={styles.NoteEditButton}>
-          <GoPencil />
-          編集
-        </button>
-      </div>
+    <div className={styles.NoteMeta}>
+      <button type="button" className={styles.NoteMeta__editButtonArea}>
+        <GoPencil className={styles.NoteMeta__editIcon} />
+      </button>
+      <div>2025年10月6日（月）</div>
+      <div>開始: 12:00</div>
+      <div />
+      <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
     </div>
   );
 };
