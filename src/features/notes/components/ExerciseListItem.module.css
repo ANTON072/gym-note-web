@@ -23,7 +23,6 @@
     width: 100%;
     padding: var(--container-padding);
     display: grid;
-    display: grid;
     align-items: center;
     justify-items: end;
   }
