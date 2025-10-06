@@ -51,7 +51,12 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
       return (
         <Link
           to={to}
-          className={clsx(styles.Button, variant && styles[variant], size && styles[size], className)}
+          className={clsx(
+            styles.Button,
+            variant && styles[variant],
+            size && styles[size],
+            className,
+          )}
           ref={ref as React.Ref<HTMLAnchorElement>}
           data-loading={isLoading ? "true" : undefined}
           {...(rest as Omit<
