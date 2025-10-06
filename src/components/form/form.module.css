@@ -39,15 +39,15 @@
 }
 
 .Select__select {
-  --padding-horizontal: var(--form-padding-horizontal);
   appearance: none;
-  height: var(--button-height);
-  padding-left: var(--padding-horizontal);
-  padding-right: calc(var(--padding-horizontal) * 2 + 25px);
+  height: auto;
+  padding: var(--size-2) var(--size-3);
+  padding-right: calc(var(--size-3) + 25px);
   border: 1px solid var(--text-color);
+  border-radius: var(--radius-2);
   background-color: #fff;
   color: var(--text-color);
-  font-size: var(--form-font-size);
+  font-size: var(--font-size-1);
   cursor: pointer;
   width: 100%;
 }

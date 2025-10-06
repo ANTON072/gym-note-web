@@ -1,0 +1,5 @@
+.NoteStatusChip {
+  font-size: 13px;
+  border: 1px solid var(--base-color);
+  padding: .1em .3em;
+}

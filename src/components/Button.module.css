@@ -2,12 +2,12 @@
   --gap: var(--size-1);
 
   display: inline-flex;
-  padding: 0 var(--size-5);
-  height: var(--button-height);
+  padding: var(--size-2) var(--size-3);
   font-size: var(--font-size-1);
   color: #fff;
   text-decoration: none;
   background-color: var(--base-color);
+  border-radius: var(--radius-2);
   align-items: center;
   justify-content: center;
   gap: var(--gap);
@@ -116,4 +116,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--gap);
+}
+
+.small {
+  padding: var(--size-1) var(--size-2);
+  font-size: var(--font-size-0);
 }

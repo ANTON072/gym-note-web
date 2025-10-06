@@ -1,5 +1,5 @@
 .Note__meta {
-  margin-bottom: calc(var(--container-padding) * 3);
+  margin-bottom: calc(var(--container-padding) * 2);
 }
 
 .Note_meta__body {
@@ -9,7 +9,7 @@
   grid-template-columns: repeat(3, auto);
   gap: 0.3em;
   font-size: 13px;
-  margin-bottom: var(--container-padding);
+  margin-bottom: 3px;
 }
 
 .Note__meta__place {
