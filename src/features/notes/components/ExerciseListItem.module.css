@@ -1,0 +1,30 @@
+.ExerciseListItem {
+  border: 1px solid var(--stone-12);
+}
+
+.ExerciseListItem__head {
+  display: grid;
+  position: relative;
+  background: var(--stone-12);
+  color: #fff;
+  padding: var(--container-padding);
+}
+
+.ExerciseListItem__name {
+  font-weight: bold;
+}
+
+.ExerciseListItem__editButton {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  > div {
+    width: 100%;
+    padding: var(--container-padding);
+    display: grid;
+    display: grid;
+    align-items: center;
+    justify-items: end;
+  }
+}

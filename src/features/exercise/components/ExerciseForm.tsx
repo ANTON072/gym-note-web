@@ -14,7 +14,7 @@ import styles from "./exercises.module.css";
 import { MutateButton } from "@/components";
 import { useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
-import { useIsMutating, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useCreateExercise, useGetExercise, useUpdateExercise } from "../hooks/useExerciseApi";

@@ -1,0 +1,23 @@
+.Note_meta__body {
+  background: var(--stone-2);
+  padding: var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 13px;
+}
+
+.Note__meta__place {
+  grid-column: span 2;
+}
+
+.Note__meta__editButton {
+  grid-column: span 2;
+  justify-self: self-end;
+
+  button {
+    font-size: 13px;
+    display: flex;
+    gap: 0.3em;
+    padding: 0.3em;
+  }
+}
