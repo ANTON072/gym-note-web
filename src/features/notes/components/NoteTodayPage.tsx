@@ -10,11 +10,11 @@ export const NoteTodayPage = () => {
     <>
       <PageTitle title="本日のノート" />
       <NoteMeta />
+      <div>種目の追加</div>
       <div className={styles.ExerciseList}>
         <ExerciseListItem />
         <ExerciseListItem />
       </div>
-      <div>種目の追加</div>
     </>
   );
 };

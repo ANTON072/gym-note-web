@@ -2,6 +2,13 @@ import { GoPencil } from "react-icons/go";
 import styles from "./ExerciseListItem.module.css";
 
 export const ExerciseListItem = () => {
+  // 仮のデータ（後でpropsから受け取るように変更）
+  const sets = [
+    { id: 1, weight: 100, reps: 10 },
+    { id: 2, weight: 100, reps: 8 },
+    { id: 3, weight: 90, reps: 10 },
+  ];
+
   return (
     <div className={styles.ExerciseListItem}>
       <div className={styles.ExerciseListItem__head}>
@@ -12,9 +19,18 @@ export const ExerciseListItem = () => {
           </div>
         </button>
       </div>
-      <div>
-        <div>1Set</div>
-        <div>100kg x 10</div>
+      <div className={styles.ExerciseListItem__body}>
+        <div className={styles.ExerciseListItem__sets}>
+          {sets.map((set, index) => (
+            <div key={set.id} className={styles.ExerciseListItem__set}>
+              <div className={styles.ExerciseListItem__setNumber}>{index + 1}セット</div>
+              <div className={styles.ExerciseListItem__setDetail}>
+                {set.weight}kg × {set.reps}回
+              </div>
+            </div>
+          ))}
+          <div>セットの追加</div>
+        </div>
       </div>
     </div>
   );

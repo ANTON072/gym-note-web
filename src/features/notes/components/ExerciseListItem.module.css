@@ -28,3 +28,33 @@
     justify-items: end;
   }
 }
+
+.ExerciseListItem__body {
+  padding: var(--container-padding);
+}
+
+.ExerciseListItem__sets {
+  display: grid;
+  gap: 8px;
+}
+
+.ExerciseListItem__set {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--stone-4);
+}
+
+.ExerciseListItem__set:last-child {
+  border-bottom: none;
+}
+
+.ExerciseListItem__setNumber {
+  color: var(--stone-11);
+  font-weight: 500;
+}
+
+.ExerciseListItem__setDetail {
+  font-weight: 600;
+}
