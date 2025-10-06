@@ -9,10 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as NotesRouteRouteImport } from './routes/notes.route'
 import { Route as ExercisesRouteRouteImport } from './routes/exercises.route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExercisesIndexRouteImport } from './routes/exercises.index'
+import { Route as NotesTodayRouteImport } from './routes/notes.today'
 
+const NotesRouteRoute = NotesRouteRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExercisesRouteRoute = ExercisesRouteRouteImport.update({
   id: '/exercises',
   path: '/exercises',
@@ -28,37 +35,62 @@ const ExercisesIndexRoute = ExercisesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ExercisesRouteRoute,
 } as any)
+const NotesTodayRoute = NotesTodayRouteImport.update({
+  id: '/today',
+  path: '/today',
+  getParentRoute: () => NotesRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRouteRouteWithChildren
+  '/notes': typeof NotesRouteRouteWithChildren
+  '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/notes': typeof NotesRouteRouteWithChildren
+  '/notes/today': typeof NotesTodayRoute
   '/exercises': typeof ExercisesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRouteRouteWithChildren
+  '/notes': typeof NotesRouteRouteWithChildren
+  '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/exercises' | '/exercises/'
+  fullPaths: '/' | '/exercises' | '/notes' | '/notes/today' | '/exercises/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/exercises'
-  id: '__root__' | '/' | '/exercises' | '/exercises/'
+  to: '/' | '/notes' | '/notes/today' | '/exercises'
+  id:
+    | '__root__'
+    | '/'
+    | '/exercises'
+    | '/notes'
+    | '/notes/today'
+    | '/exercises/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExercisesRouteRoute: typeof ExercisesRouteRouteWithChildren
+  NotesRouteRoute: typeof NotesRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/exercises': {
       id: '/exercises'
       path: '/exercises'
@@ -80,6 +112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExercisesIndexRouteImport
       parentRoute: typeof ExercisesRouteRoute
     }
+    '/notes/today': {
+      id: '/notes/today'
+      path: '/today'
+      fullPath: '/notes/today'
+      preLoaderRoute: typeof NotesTodayRouteImport
+      parentRoute: typeof NotesRouteRoute
+    }
   }
 }
 
@@ -95,9 +134,22 @@ const ExercisesRouteRouteWithChildren = ExercisesRouteRoute._addFileChildren(
   ExercisesRouteRouteChildren,
 )
 
+interface NotesRouteRouteChildren {
+  NotesTodayRoute: typeof NotesTodayRoute
+}
+
+const NotesRouteRouteChildren: NotesRouteRouteChildren = {
+  NotesTodayRoute: NotesTodayRoute,
+}
+
+const NotesRouteRouteWithChildren = NotesRouteRoute._addFileChildren(
+  NotesRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExercisesRouteRoute: ExercisesRouteRouteWithChildren,
+  NotesRouteRoute: NotesRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
