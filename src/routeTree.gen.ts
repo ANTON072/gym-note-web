@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MypageRouteImport } from './routes/mypage'
 import { Route as NotesRouteRouteImport } from './routes/notes.route'
 import { Route as ExercisesRouteRouteImport } from './routes/exercises.route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExercisesIndexRouteImport } from './routes/exercises.index'
 import { Route as NotesTodayRouteImport } from './routes/notes.today'
 
+const MypageRoute = MypageRouteImport.update({
+  id: '/mypage',
+  path: '/mypage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotesRouteRoute = NotesRouteRouteImport.update({
   id: '/notes',
   path: '/notes',
@@ -45,12 +51,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRouteRouteWithChildren
   '/notes': typeof NotesRouteRouteWithChildren
+  '/mypage': typeof MypageRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/notes': typeof NotesRouteRouteWithChildren
+  '/mypage': typeof MypageRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises': typeof ExercisesIndexRoute
 }
@@ -59,19 +67,27 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/exercises': typeof ExercisesRouteRouteWithChildren
   '/notes': typeof NotesRouteRouteWithChildren
+  '/mypage': typeof MypageRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/exercises' | '/notes' | '/notes/today' | '/exercises/'
+  fullPaths:
+    | '/'
+    | '/exercises'
+    | '/notes'
+    | '/mypage'
+    | '/notes/today'
+    | '/exercises/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/notes' | '/notes/today' | '/exercises'
+  to: '/' | '/notes' | '/mypage' | '/notes/today' | '/exercises'
   id:
     | '__root__'
     | '/'
     | '/exercises'
     | '/notes'
+    | '/mypage'
     | '/notes/today'
     | '/exercises/'
   fileRoutesById: FileRoutesById
@@ -80,10 +96,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExercisesRouteRoute: typeof ExercisesRouteRouteWithChildren
   NotesRouteRoute: typeof NotesRouteRouteWithChildren
+  MypageRoute: typeof MypageRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mypage': {
+      id: '/mypage'
+      path: '/mypage'
+      fullPath: '/mypage'
+      preLoaderRoute: typeof MypageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notes': {
       id: '/notes'
       path: '/notes'
@@ -150,6 +174,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExercisesRouteRoute: ExercisesRouteRouteWithChildren,
   NotesRouteRoute: NotesRouteRouteWithChildren,
+  MypageRoute: MypageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

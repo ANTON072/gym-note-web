@@ -3,8 +3,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState } from "react";
 import { GoSignOut } from "react-icons/go";
+import { GoPerson } from "react-icons/go";
 
-import { Button } from "@/components";
 import { logout } from "@/features/auth/lib/auth";
 import { Link } from "@tanstack/react-router";
 import styles from "./Drawer.module.css";
@@ -85,28 +85,36 @@ export const Drawer = () => {
       Backdrop is intended to be closed by mouse only; keyboard interaction is not required.*/}
       <div ref={backdropRef} className={styles.backdrop} onClick={handleClose} />
       <nav ref={drawerRef} className={styles.root}>
-        <ul>
-          {menuList.map((item) => (
-            <li key={item.name}>
-              <Link to={item.href} onClick={handleClose}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <hr className={styles.divider} />
-        <div
-          style={{
-            display: "grid",
-            gap: "var(--size-5)",
-          }}
-        >
+        <div>
+          <ul>
+            {menuList.map((item) => (
+              <li key={item.name}>
+                <Link to={item.href} onClick={handleClose}>
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <hr className={styles.divider} />
           <ul>
             <li>
-              <Button onClick={handleLogout} disabled={isMutating} variant="text">
+              <Link to="/mypage" className={styles.iconButton} onClick={handleClose}>
+                <GoPerson />
+                マイページ
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={handleLogout}
+                disabled={isMutating}
+                className={styles.iconButton}
+              >
                 <GoSignOut />
                 ログアウト
-              </Button>
+              </button>
             </li>
           </ul>
         </div>
