@@ -47,23 +47,3 @@
   justify-content: flex-end;
 }
 
-.withdrawButton {
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #dc2626;
-  background: #ffffff;
-  border: 2px solid #dc2626;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.withdrawButton:hover {
-  color: #ffffff;
-  background: #dc2626;
-}
-
-.withdrawButton:active {
-  transform: scale(0.98);
-}
