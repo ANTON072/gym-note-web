@@ -94,11 +94,35 @@ jobs:
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Compute site ID
+        id: site
+        shell: bash
+        env:
+          SITE_ID_OVERRIDE: ${{ secrets.FIREBASE_SITE_ID }}
+        run: |
+          set -euo pipefail
+          if [ -n "${SITE_ID_OVERRIDE:-}" ]; then
+            SITE_ID="$SITE_ID_OVERRIDE"
+          else
+            if [ -f firebase.json ]; then
+              SITE_ID="$(jq -r '.hosting.site // .hosting[0].site // empty' firebase.json)"
+              if [ $? -ne 0 ]; then
+                echo "Error: Failed to parse firebase.json with jq." >&2
+                exit 1
+              fi
+            fi
+          fi
+          if [ -z "${SITE_ID:-}" ]; then
+            echo "Could not determine site_id." >&2
+            exit 1
+          fi
+          echo "site_id=$SITE_ID" >> "$GITHUB_OUTPUT"
+
       - name: Add authorized domains (Firebase Auth)
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           CHANNEL_ID: ${{ steps.channel.outputs.channel_id }}
-          SITE_ID: ${{ secrets.FIREBASE_SITE_ID }}
+          SITE_ID: ${{ steps.site.outputs.site_id }}
         run: |
           set -euo pipefail
 
