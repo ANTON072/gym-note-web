@@ -3,7 +3,7 @@ import { InputField, Select } from "@/components/form";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 
-import { BottomSheet, useBottomSheet } from "@/components/BottomSheet";
+import { useBottomSheet } from "@/components/BottomSheet";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { useIsMutating } from "@tanstack/react-query";
 import { useGetExercises } from "../hooks/useExerciseApi";
@@ -14,14 +14,14 @@ import styles from "./exercises.module.css";
 
 export function ExerciseListPage() {
   const { data, isLoading, isFetched } = useGetExercises();
-  const { ref, isOpen, onOpen, onClose: onCloseBottomSheet } = useBottomSheet();
+  const { BottomSheet, onOpen: onOpenBottomSheet, onClose: onCloseBottomSheet } = useBottomSheet();
   const [selectedExerciseId, setSelectedExerciseId] = useState<number | null>(null);
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
   const isMutating = useIsMutating() > 0;
 
   const handleExerciseClick = (exerciseId: number) => {
     setSelectedExerciseId(exerciseId);
-    onOpen();
+    onOpenBottomSheet();
   };
 
   const handleClose = () => {
@@ -54,7 +54,7 @@ export function ExerciseListPage() {
               </Select>
             </InputField>
           </form>
-          <Button type="button" onClick={onOpen}>
+          <Button type="button" onClick={onOpenBottomSheet}>
             新規登録
           </Button>
         </div>
@@ -94,7 +94,7 @@ export function ExerciseListPage() {
         )}
       </div>
       {/* フォーム */}
-      <BottomSheet ref={ref} isOpen={isOpen} closeOnBackdropTap={false} disableDismiss disableDrag>
+      <BottomSheet closeOnBackdropTap={false} disableDismiss disableDrag>
         <ExerciseForm exerciseId={selectedExerciseId} onClose={handleClose} />
       </BottomSheet>
     </>
