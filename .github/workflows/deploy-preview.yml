@@ -227,46 +227,37 @@ jobs:
       - name: Delete preview channel
         env:
           PROJECT_ID: ${{ env.PROJECT_ID }}
-          NPM_CONFIG_UPDATE_NOTIFIER: false
-          NO_UPDATE_NOTIFIER: true
+          FIREBASE_DEBUG: true
         shell: bash {0}
         run: |
           set +e  # Don't exit on error
 
-          # Capture stdout and stderr separately
-          TEMP_OUT=$(mktemp)
-          TEMP_ERR=$(mktemp)
-          npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force > "$TEMP_OUT" 2> "$TEMP_ERR"
-          EXIT_CODE=$?
+          echo "Attempting to delete channel: ${{ steps.vars.outputs.channel_id }}"
+          echo "Site: ${{ steps.vars.outputs.site_id }}"
+          echo "Project: $PROJECT_ID"
 
-          STDOUT_CONTENT=$(cat "$TEMP_OUT")
-          STDERR_CONTENT=$(cat "$TEMP_ERR")
-          rm -f "$TEMP_OUT" "$TEMP_ERR"
+          # Run firebase command with debug output
+          npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force 2>&1 | tee /tmp/firebase_output.txt
+          EXIT_CODE=${PIPESTATUS[0]}
 
-          # Filter npm deprecation warnings from stderr only
-          FILTERED_STDERR=$(echo "$STDERR_CONTENT" | grep -vE "^npm warn deprecated")
+          echo ""
+          echo "Exit code: $EXIT_CODE"
+          echo "Output length: $(wc -c < /tmp/firebase_output.txt)"
+
+          # Read the output
+          OUTPUT=$(cat /tmp/firebase_output.txt)
 
           if [ $EXIT_CODE -ne 0 ]; then
             # Check if the error is due to channel not found
-            COMBINED="$STDOUT_CONTENT$STDERR_CONTENT"
-            if echo "$COMBINED" | grep -qiE "(could not find|does not exist|not found)"; then
+            if echo "$OUTPUT" | grep -qiE "(could not find|does not exist|not found)"; then
               echo "Channel not found; nothing to delete."
               exit 0
             else
-              echo "Error deleting preview channel (exit code: $EXIT_CODE):"
-              if [ -n "$STDOUT_CONTENT" ]; then
-                echo "=== STDOUT ==="
-                echo "$STDOUT_CONTENT"
-              fi
-              if [ -n "$FILTERED_STDERR" ]; then
-                echo "=== STDERR (filtered) ==="
-                echo "$FILTERED_STDERR"
-              fi
+              echo "Error deleting preview channel."
+              echo "Full output:"
+              cat /tmp/firebase_output.txt
               exit 1
             fi
           else
             echo "Preview channel deleted successfully."
-            if [ -n "$STDOUT_CONTENT" ]; then
-              echo "$STDOUT_CONTENT"
-            fi
           fi
