@@ -10,16 +10,18 @@
   padding: var(--space);
   background: #fff;
   border-left: 1px solid var(--border-color);
+  display: grid;
+  grid-template-rows: 1fr auto;
 
-  a {
-    font-weight: bold;
+  a,
+  button {
     color: var(--base-color);
   }
 
   ul {
     display: grid;
     gap: var(--size-3);
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-2);
   }
 }
 
@@ -40,4 +42,9 @@
   width: 100svw;
   z-index: 1;
   background: rgb(0 0 0 / 50%);
+}
+
+.iconButton {
+  display: flex;
+  gap: 0.3em;
 }
