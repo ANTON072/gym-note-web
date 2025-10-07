@@ -13,13 +13,13 @@ export const useConfirm = () => {
   const [options, setOptions] = useState<ConfirmOptions>({
     message: "",
   });
-  const [onConfirmCallback, setOnConfirmCallback] = useState<() => void>(() => () => {});
-  const [onCancelCallback, setOnCancelCallback] = useState<(() => void) | undefined>(undefined);
+  const [onConfirmCallback, setOnConfirmCallback] = useState<(() => void) | null>(null);
+  const [onCancelCallback, setOnCancelCallback] = useState<(() => void) | null>(null);
 
   const open = (opts: ConfirmOptions, onConfirm: () => void, onCancel?: () => void) => {
     setOptions(opts);
     setOnConfirmCallback(() => onConfirm);
-    setOnCancelCallback(onCancel ? () => onCancel : undefined);
+    setOnCancelCallback(onCancel ? () => onCancel : null);
     setIsOpen(true);
   };
 
@@ -28,7 +28,7 @@ export const useConfirm = () => {
   };
 
   const handleConfirm = () => {
-    onConfirmCallback();
+    onConfirmCallback?.();
     close();
   };
 
