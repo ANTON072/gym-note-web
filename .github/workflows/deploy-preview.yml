@@ -124,7 +124,11 @@ jobs:
             SITE_ID="$SITE_ID_OVERRIDE"
           else
             if [ -f firebase.json ]; then
-              SITE_ID="$(jq -r '.hosting.site // .hosting[0].site // empty' firebase.json || true)"
+              SITE_ID="$(jq -r '.hosting.site // .hosting[0].site // empty' firebase.json)"
+              if [ $? -ne 0 ]; then
+                echo "Error: Failed to parse firebase.json with jq." >&2
+                exit 1
+              fi
             fi
           fi
           if [ -z "${SITE_ID:-}" ]; then
