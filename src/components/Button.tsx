@@ -8,7 +8,7 @@ type LinkButtonProps = {
   to: LinkProps["to"];
   children: React.ReactNode;
   className?: string;
-  variant?: "outlined";
+  variant?: "outlined" | "danger";
   size?: "small";
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
@@ -20,7 +20,7 @@ type ButtonProps = {
   to?: never;
   children: React.ReactNode;
   className?: string;
-  variant?: "outlined" | "text";
+  variant?: "outlined" | "text" | "danger";
   size?: "small";
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
