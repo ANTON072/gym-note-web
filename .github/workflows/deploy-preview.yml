@@ -2,13 +2,32 @@ name: Deploy to Preview Channel
 
 on:
   push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - '**'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     branches:
-      - develop
+      - '**'
+
+concurrency:
+  group: preview-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_and_preview:
+    # PR は Draft を除外。push は main 以外のみ。
+    if: >
+      (github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
+      (github.event_name == 'push' && github.ref != 'refs/heads/main')
     runs-on: ubuntu-latest
     environment: Preview
+
+    # プレビューのチャンネル名を PR/ブランチ単位で自動生成
+    env:
+      CHANNEL_ID: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('branch-{0}', replace(github.ref_name, '/', '-')) }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -32,11 +51,11 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         id: firebase-deploy
         with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           expires: 30d
           projectId: gym-note-app
-          channelId: develop
+          channelId: ${{ env.CHANNEL_ID }}
 
       - name: Notify Slack on Success
         if: success()
