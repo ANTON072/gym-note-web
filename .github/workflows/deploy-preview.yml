@@ -2,15 +2,56 @@ name: Deploy to Preview Channel
 
 on:
   push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - '**'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, closed]
     branches:
-      - develop
+      - '**'
+
+concurrency:
+  group: preview-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_and_preview:
+    # PR は Draft を除外。push は main 以外のみ。
+    if: >
+      (github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
+      (github.event_name == 'push' && github.ref != 'refs/heads/main')
     runs-on: ubuntu-latest
     environment: Preview
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Compute channel ID
+        id: channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            CHANNEL_ID="pr-${{ github.event.pull_request.number }}"
+          else
+            REF="${{ github.ref_name }}"
+            # Convert to lowercase
+            ch_lower="$(echo "$REF" | tr '[:upper:]' '[:lower:]')"
+            # Remove all characters except a-z, 0-9, /, and -
+            ch_clean="$(echo "$ch_lower" | sed 's#[^a-z0-9/-]##g')"
+            # Replace / with -
+            ch_slash="$(echo "$ch_clean" | sed 's#/#-#g')"
+            # Trim leading and trailing dashes
+            ch_trimmed="$(echo "$ch_slash" | sed 's/^-*//; s/-*$//')"
+            # Limit to 63 characters
+            CHANNEL_ID="$(echo "$ch_trimmed" | cut -c1-63)"
+          fi
+          echo "channel_id=$CHANNEL_ID" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-node@v4
         with:
@@ -32,11 +73,65 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         id: firebase-deploy
         with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           expires: 30d
           projectId: gym-note-app
-          channelId: develop
+          channelId: ${{ steps.channel.outputs.channel_id }}
+
+      - name: Extract preview domain from URL
+        id: preview-domain
+        run: |
+          set -euo pipefail
+          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
+          echo "Preview URL: $PREVIEW_URL"
+          # Extract domain from URL (remove https:// and any path)
+          DOMAIN=$(echo "$PREVIEW_URL" | sed 's|https\?://||' | sed 's|/.*||')
+          echo "Extracted domain: $DOMAIN"
+          echo "domain=$DOMAIN" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure jq
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Auth to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Add authorized domains (Firebase Auth)
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          PREVIEW_DOMAIN: ${{ steps.preview-domain.outputs.domain }}
+        run: |
+          set -euo pipefail
+
+          # Get project number and access token
+          PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --format='value(projectNumber)')"
+          ACCESS_TOKEN="$(gcloud auth print-access-token)"
+
+          # Fetch current authorized domains
+          CONFIG_URL="https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_NUMBER}/config"
+          AUTH_HEADER="Authorization: Bearer ${ACCESS_TOKEN}"
+          CURRENT_JSON="$(curl -sSf -H "$AUTH_HEADER" "$CONFIG_URL")"
+          CURRENT_LIST="$(echo "$CURRENT_JSON" | jq -r '.authorizedDomains // []')"
+
+          # Add preview domain if not already present
+          NEW_LIST="$(jq -n --argjson curr "$CURRENT_LIST" --arg domain "$PREVIEW_DOMAIN" \
+            '$curr + [$domain] | unique')"
+
+          # Update authorized domains
+          curl -sSf -X PATCH -H "$AUTH_HEADER" -H "Content-Type: application/json" \
+            "${CONFIG_URL}?updateMask=authorizedDomains" \
+            -d "$(jq -n --argjson list "$NEW_LIST" '{authorizedDomains: $list}')"
+
+          echo "Added authorized domain: $PREVIEW_DOMAIN"
 
       - name: Notify Slack on Success
         if: success()
@@ -53,3 +148,107 @@ jobs:
           payload: '{"text":"❌ Firebase Preview Deploy Failed! Repository: ${{ github.repository }}"}'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  cleanup:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      SITE_ID_OVERRIDE: ${{ secrets.FIREBASE_SITE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure jq
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Auth to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Compute channel and site
+        id: vars
+        shell: bash
+        run: |
+          set -euo pipefail
+          REF="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          # 1. Convert to lowercase
+          ch_lower="$(echo "$REF" | tr '[:upper:]' '[:lower:]')"
+          # 2. Remove all characters except a-z, A-Z, 0-9, /, and -
+          ch_clean="$(echo "$ch_lower" | sed 's#[^a-zA-Z0-9/-]##g')"
+          # 3. Replace / with -
+          ch_slash="$(echo "$ch_clean" | sed 's#/#-#g')"
+          # 4. Remove all characters except a-z, 0-9, and -
+          ch_final="$(echo "$ch_slash" | tr -cd 'a-z0-9-')"
+          # 5. Trim leading and trailing dashes
+          ch_trimmed="$(echo "$ch_final" | sed 's/^-*//; s/-*$//')"
+          # 6. Limit to 63 characters
+          CH="$(echo "$ch_trimmed" | cut -c1-63)"
+          echo "channel_id=$CH" >> "$GITHUB_OUTPUT"
+
+          if [ -n "${SITE_ID_OVERRIDE:-}" ]; then
+            SITE_ID="$SITE_ID_OVERRIDE"
+          else
+            if [ -f firebase.json ]; then
+              SITE_ID="$(jq -r '.hosting.site // .hosting[0].site // empty' firebase.json)"
+              if [ $? -ne 0 ]; then
+                echo "Error: Failed to parse firebase.json with jq." >&2
+                exit 1
+              fi
+            fi
+          fi
+          if [ -z "${SITE_ID:-}" ]; then
+            echo "Could not determine site_id." >&2
+            exit 1
+          fi
+          echo "site_id=$SITE_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Remove authorized domains (Firebase Auth)
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          CHANNEL_ID: ${{ steps.vars.outputs.channel_id }}
+          SITE_ID: ${{ steps.vars.outputs.site_id }}
+        run: |
+          set -euo pipefail
+          PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --format='value(projectNumber)')"
+          ACCESS_TOKEN="$(gcloud auth print-access-token)"
+          HOST1="${CHANNEL_ID}--${SITE_ID}.web.app"
+          HOST2="${CHANNEL_ID}--${SITE_ID}.firebaseapp.com"
+          CONFIG_URL="https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_NUMBER}/config"
+          AUTH_HEADER="Authorization: Bearer ${ACCESS_TOKEN}"
+          CURRENT_JSON="$(curl -sSf -H "$AUTH_HEADER" "$CONFIG_URL")"
+          CURRENT_LIST="$(echo "$CURRENT_JSON" | jq -r '.authorizedDomains // []')"
+          NEW_LIST="$(jq -n --argjson curr "$CURRENT_LIST" --arg h1 "$HOST1" --arg h2 "$HOST2" \
+            '$curr | map(select(. != $h1 and . != $h2))')"
+          curl -sSf -X PATCH -H "$AUTH_HEADER" -H "Content-Type: application/json" \
+            "${CONFIG_URL}?updateMask=authorizedDomains" \
+            -d "$(jq -n --argjson list "$NEW_LIST" '{authorizedDomains: $list}')"
+          echo "Removed authorized domains: $HOST1, $HOST2"
+
+      - name: Delete preview channel
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          OUTPUT=""
+          if ! OUTPUT=$(npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force 2>&1); then
+            if echo "$OUTPUT" | grep -qi "could not find channel"; then
+              echo "Channel not found; nothing to delete."
+            else
+              echo "Error deleting preview channel:"
+              echo "$OUTPUT"
+              exit 1
+            fi
+          else
+            echo "$OUTPUT"
+          fi
