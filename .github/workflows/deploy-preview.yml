@@ -239,16 +239,21 @@ jobs:
         env:
           PROJECT_ID: ${{ env.PROJECT_ID }}
         run: |
-          set -euo pipefail
-          OUTPUT=""
-          if ! OUTPUT=$(npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force 2>&1); then
-            if echo "$OUTPUT" | grep -qi "could not find channel"; then
+          set +e  # Don't exit on error
+          OUTPUT=$(npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force 2>&1)
+          EXIT_CODE=$?
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            # Check if the error is due to channel not found
+            if echo "$OUTPUT" | grep -qiE "(could not find|does not exist|not found)"; then
               echo "Channel not found; nothing to delete."
+              exit 0
             else
-              echo "Error deleting preview channel:"
+              echo "Error deleting preview channel (exit code: $EXIT_CODE):"
               echo "$OUTPUT"
               exit 1
             fi
           else
+            echo "Preview channel deleted successfully:"
             echo "$OUTPUT"
           fi
