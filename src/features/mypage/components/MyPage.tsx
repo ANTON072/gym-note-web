@@ -1,17 +1,22 @@
 import { Avatar, Button, PageTitle } from "@/components";
 import { useAuthenticatedUser } from "@/features/auth";
-
-import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { useState } from "react";
+import { useConfirm } from "@/hooks/useConfirm";
 import styles from "./MyPage.module.css";
 
 export const MyPage = () => {
   const authUser = useAuthenticatedUser();
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const { open, ConfirmDialog } = useConfirm();
 
-  const handleConfirm = () => {
-    setIsConfirmOpen(true);
-    console.log("退会処理");
+  const handleDeleteAccount = () => {
+    open(
+      {
+        message: "本当に退会しますか？",
+        confirmLabel: "退会する",
+      },
+      () => {
+        console.log("退会処理");
+      },
+    );
   };
 
   return (
@@ -32,18 +37,12 @@ export const MyPage = () => {
           </div>
         </div>
         <div className={styles.dangerZone}>
-          <Button type="button" onClick={handleConfirm} variant="danger">
+          <Button type="button" onClick={handleDeleteAccount} variant="danger">
             退会する
           </Button>
         </div>
       </div>
-      <ConfirmDialog
-        isOpen={isConfirmOpen}
-        message="本当に削除しますか？"
-        confirmLabel="削除"
-        onConfirm={handleConfirm}
-        onCancel={() => setIsConfirmOpen(false)}
-      />
+      <ConfirmDialog />
     </>
   );
 };
