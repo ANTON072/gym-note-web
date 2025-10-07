@@ -23,6 +23,10 @@ jobs:
       (github.event_name == 'push' && github.ref != 'refs/heads/main')
     runs-on: ubuntu-latest
     environment: Preview
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
