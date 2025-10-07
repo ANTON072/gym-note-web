@@ -1,5 +1,5 @@
-import { useConfirm } from "@/hooks/useConfirm";
 import { useToast } from "@/hooks";
+import { useConfirm } from "@/hooks/useConfirm";
 import { useIsMutating, useQueryClient } from "@tanstack/react-query";
 import { GoTrash } from "react-icons/go";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
@@ -40,7 +40,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
       },
       () => {
         deleteMutation.mutate(exerciseId);
-      }
+      },
     );
   };
 
