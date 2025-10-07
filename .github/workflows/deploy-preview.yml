@@ -106,8 +106,18 @@ jobs:
         run: |
           set -euo pipefail
           REF="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
-          CH="$(echo "$REF" | tr '[:upper:]' '[:lower:]' | sed 's#[^a-zA-Z0-9/-]##g' | sed 's#/#-#g' | tr -cd 'a-z0-9-')"
-          CH="$(echo "$CH" | sed 's/^-*//; s/-*$//' | cut -c1-63)"
+          # 1. Convert to lowercase
+          ch_lower="$(echo "$REF" | tr '[:upper:]' '[:lower:]')"
+          # 2. Remove all characters except a-z, A-Z, 0-9, /, and -
+          ch_clean="$(echo "$ch_lower" | sed 's#[^a-zA-Z0-9/-]##g')"
+          # 3. Replace / with -
+          ch_slash="$(echo "$ch_clean" | sed 's#/#-#g')"
+          # 4. Remove all characters except a-z, 0-9, and -
+          ch_final="$(echo "$ch_slash" | tr -cd 'a-z0-9-')"
+          # 5. Trim leading and trailing dashes
+          ch_trimmed="$(echo "$ch_final" | sed 's/^-*//; s/-*$//')"
+          # 6. Limit to 63 characters
+          CH="$(echo "$ch_trimmed" | cut -c1-63)"
           echo "channel_id=$CH" >> "$GITHUB_OUTPUT"
 
           if [ -n "${SITE_ID_OVERRIDE:-}" ]; then
