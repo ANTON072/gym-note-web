@@ -1,6 +1,4 @@
-import { GoIssueOpened } from "react-icons/go";
-import { GoIssueDraft } from "react-icons/go";
-import { GoIssueReopened } from "react-icons/go";
+import { GoIssueOpened, GoIssueDraft, GoIssueReopened } from "react-icons/go";
 
 import { NOTE_STATUS, type NoteStatus } from "../constants/noteStatus";
 import styles from "./NoteStatusChip.module.css";
