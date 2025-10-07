@@ -79,6 +79,17 @@ jobs:
           projectId: gym-note-app
           channelId: ${{ steps.channel.outputs.channel_id }}
 
+      - name: Extract preview domain from URL
+        id: preview-domain
+        run: |
+          set -euo pipefail
+          PREVIEW_URL="${{ steps.firebase-deploy.outputs.details_url }}"
+          echo "Preview URL: $PREVIEW_URL"
+          # Extract domain from URL (remove https:// and any path)
+          DOMAIN=$(echo "$PREVIEW_URL" | sed 's|https\?://||' | sed 's|/.*||')
+          echo "Extracted domain: $DOMAIN"
+          echo "domain=$DOMAIN" >> "$GITHUB_OUTPUT"
+
       - name: Ensure jq
         run: |
           if ! command -v jq >/dev/null 2>&1; then
@@ -94,35 +105,10 @@ jobs:
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Compute site ID
-        id: site
-        shell: bash
-        env:
-          SITE_ID_OVERRIDE: ${{ secrets.FIREBASE_SITE_ID }}
-        run: |
-          set -euo pipefail
-          if [ -n "${SITE_ID_OVERRIDE:-}" ]; then
-            SITE_ID="$SITE_ID_OVERRIDE"
-          else
-            if [ -f firebase.json ]; then
-              SITE_ID="$(jq -r '.hosting.site // .hosting[0].site // empty' firebase.json)"
-              if [ $? -ne 0 ]; then
-                echo "Error: Failed to parse firebase.json with jq." >&2
-                exit 1
-              fi
-            fi
-          fi
-          if [ -z "${SITE_ID:-}" ]; then
-            echo "Could not determine site_id." >&2
-            exit 1
-          fi
-          echo "site_id=$SITE_ID" >> "$GITHUB_OUTPUT"
-
       - name: Add authorized domains (Firebase Auth)
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          CHANNEL_ID: ${{ steps.channel.outputs.channel_id }}
-          SITE_ID: ${{ steps.site.outputs.site_id }}
+          PREVIEW_DOMAIN: ${{ steps.preview-domain.outputs.domain }}
         run: |
           set -euo pipefail
 
@@ -130,26 +116,22 @@ jobs:
           PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --format='value(projectNumber)')"
           ACCESS_TOKEN="$(gcloud auth print-access-token)"
 
-          # Compute preview domains
-          HOST1="${CHANNEL_ID}--${SITE_ID}.web.app"
-          HOST2="${CHANNEL_ID}--${SITE_ID}.firebaseapp.com"
-
           # Fetch current authorized domains
           CONFIG_URL="https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_NUMBER}/config"
           AUTH_HEADER="Authorization: Bearer ${ACCESS_TOKEN}"
           CURRENT_JSON="$(curl -sSf -H "$AUTH_HEADER" "$CONFIG_URL")"
           CURRENT_LIST="$(echo "$CURRENT_JSON" | jq -r '.authorizedDomains // []')"
 
-          # Add new domains if not already present
-          NEW_LIST="$(jq -n --argjson curr "$CURRENT_LIST" --arg h1 "$HOST1" --arg h2 "$HOST2" \
-            '$curr + [$h1, $h2] | unique')"
+          # Add preview domain if not already present
+          NEW_LIST="$(jq -n --argjson curr "$CURRENT_LIST" --arg domain "$PREVIEW_DOMAIN" \
+            '$curr + [$domain] | unique')"
 
           # Update authorized domains
           curl -sSf -X PATCH -H "$AUTH_HEADER" -H "Content-Type: application/json" \
             "${CONFIG_URL}?updateMask=authorizedDomains" \
             -d "$(jq -n --argjson list "$NEW_LIST" '{authorizedDomains: $list}')"
 
-          echo "Added authorized domains: $HOST1, $HOST2"
+          echo "Added authorized domain: $PREVIEW_DOMAIN"
 
       - name: Notify Slack on Success
         if: success()
