@@ -79,6 +79,54 @@ jobs:
           projectId: gym-note-app
           channelId: ${{ steps.channel.outputs.channel_id }}
 
+      - name: Ensure jq
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Auth to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Add authorized domains (Firebase Auth)
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          CHANNEL_ID: ${{ steps.channel.outputs.channel_id }}
+          SITE_ID: ${{ secrets.FIREBASE_SITE_ID }}
+        run: |
+          set -euo pipefail
+
+          # Get project number and access token
+          PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --format='value(projectNumber)')"
+          ACCESS_TOKEN="$(gcloud auth print-access-token)"
+
+          # Compute preview domains
+          HOST1="${CHANNEL_ID}--${SITE_ID}.web.app"
+          HOST2="${CHANNEL_ID}--${SITE_ID}.firebaseapp.com"
+
+          # Fetch current authorized domains
+          CONFIG_URL="https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_NUMBER}/config"
+          AUTH_HEADER="Authorization: Bearer ${ACCESS_TOKEN}"
+          CURRENT_JSON="$(curl -sSf -H "$AUTH_HEADER" "$CONFIG_URL")"
+          CURRENT_LIST="$(echo "$CURRENT_JSON" | jq -r '.authorizedDomains // []')"
+
+          # Add new domains if not already present
+          NEW_LIST="$(jq -n --argjson curr "$CURRENT_LIST" --arg h1 "$HOST1" --arg h2 "$HOST2" \
+            '$curr + [$h1, $h2] | unique')"
+
+          # Update authorized domains
+          curl -sSf -X PATCH -H "$AUTH_HEADER" -H "Content-Type: application/json" \
+            "${CONFIG_URL}?updateMask=authorizedDomains" \
+            -d "$(jq -n --argjson list "$NEW_LIST" '{authorizedDomains: $list}')"
+
+          echo "Added authorized domains: $HOST1, $HOST2"
+
       - name: Notify Slack on Success
         if: success()
         uses: slackapi/slack-github-action@v1.26.0
