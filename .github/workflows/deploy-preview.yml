@@ -227,29 +227,46 @@ jobs:
       - name: Delete preview channel
         env:
           PROJECT_ID: ${{ env.PROJECT_ID }}
+          NPM_CONFIG_UPDATE_NOTIFIER: false
+          NO_UPDATE_NOTIFIER: true
         shell: bash {0}
         run: |
           set +e  # Don't exit on error
-          OUTPUT=$(npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force 2>&1)
+
+          # Capture stdout and stderr separately
+          TEMP_OUT=$(mktemp)
+          TEMP_ERR=$(mktemp)
+          npx --yes firebase-tools@13 hosting:channel:delete "${{ steps.vars.outputs.channel_id }}" "${{ steps.vars.outputs.site_id }}" --project "$PROJECT_ID" --force > "$TEMP_OUT" 2> "$TEMP_ERR"
           EXIT_CODE=$?
 
-          # Filter out npm warnings from the output (but keep other content)
-          FILTERED_OUTPUT=$(echo "$OUTPUT" | grep -vE "^npm (WARN|warn|ERR!)")
+          STDOUT_CONTENT=$(cat "$TEMP_OUT")
+          STDERR_CONTENT=$(cat "$TEMP_ERR")
+          rm -f "$TEMP_OUT" "$TEMP_ERR"
+
+          # Filter npm deprecation warnings from stderr only
+          FILTERED_STDERR=$(echo "$STDERR_CONTENT" | grep -vE "^npm warn deprecated")
 
           if [ $EXIT_CODE -ne 0 ]; then
-            # Check if the error is due to channel not found (check both filtered and original output)
-            if echo "$OUTPUT" | grep -qiE "(could not find|does not exist|not found)"; then
+            # Check if the error is due to channel not found
+            COMBINED="$STDOUT_CONTENT$STDERR_CONTENT"
+            if echo "$COMBINED" | grep -qiE "(could not find|does not exist|not found)"; then
               echo "Channel not found; nothing to delete."
               exit 0
             else
               echo "Error deleting preview channel (exit code: $EXIT_CODE):"
-              echo "=== Full output ==="
-              echo "$OUTPUT"
-              echo "=== Filtered output ==="
-              echo "$FILTERED_OUTPUT"
+              if [ -n "$STDOUT_CONTENT" ]; then
+                echo "=== STDOUT ==="
+                echo "$STDOUT_CONTENT"
+              fi
+              if [ -n "$FILTERED_STDERR" ]; then
+                echo "=== STDERR (filtered) ==="
+                echo "$FILTERED_STDERR"
+              fi
               exit 1
             fi
           else
-            echo "Preview channel deleted successfully:"
-            echo "$FILTERED_OUTPUT"
+            echo "Preview channel deleted successfully."
+            if [ -n "$STDOUT_CONTENT" ]; then
+              echo "$STDOUT_CONTENT"
+            fi
           fi
