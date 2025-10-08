@@ -1,4 +1,4 @@
-import { type ReactNode, useRef, useState } from "react";
+import { type JSX, type ReactNode, useRef, useState } from "react";
 import { Sheet, type SheetProps, type SheetRef } from "react-modal-sheet";
 
 interface BottomSheetProps extends Omit<SheetProps, "children" | "isOpen" | "onClose"> {

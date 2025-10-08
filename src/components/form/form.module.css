@@ -64,6 +64,9 @@
   padding-left: var(--form-padding-horizontal);
   padding-right: var(--form-padding-horizontal);
   border: 1px solid var(--text-color);
+  border-radius: var(--radius-2);
+  background-color: #fff;
+  transition: border-color 0.2s ease;
 
   &::placeholder {
     color: var(--place-holder);
