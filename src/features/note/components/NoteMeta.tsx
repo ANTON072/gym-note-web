@@ -34,12 +34,9 @@ export const NoteMeta = () => {
         <div />
         <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
       </div>
-      <BottomSheet detent="content" onOpenEnd={handleOpenEnd}>
+      <BottomSheet detent="full" onOpenEnd={handleOpenEnd}>
         <form className={styles.NoteMeta__form}>
           <h2>場所・時間</h2>
-          <InputField label="場所" name="place">
-            <TextField onFocus={handleInputFocus} />
-          </InputField>
           <InputField label="日にち" name="date">
             <TextField ref={dateInputRef} type="date" onFocus={handleInputFocus} />
           </InputField>
@@ -51,6 +48,9 @@ export const NoteMeta = () => {
               <TextField type="time" onFocus={handleInputFocus} />
             </InputField>
           </div>
+          <InputField label="場所" name="place">
+            <TextField onFocus={handleInputFocus} />
+          </InputField>
           <Button
             type="submit"
             fullWidth
