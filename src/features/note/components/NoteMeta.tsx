@@ -13,6 +13,12 @@ export const NoteMeta = () => {
     dateInputRef.current?.focus();
   };
 
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      e.target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+  };
+
   return (
     <>
       <div className={styles.NoteMeta}>
@@ -30,21 +36,21 @@ export const NoteMeta = () => {
       </div>
       <BottomSheet detent="content" onOpenEnd={handleOpenEnd}>
         <form className={styles.NoteMeta__form}>
-          <h2>時間・場所</h2>
+          <h2>場所・時間</h2>
+          <InputField label="場所" name="place">
+            <TextField onFocus={handleInputFocus} />
+          </InputField>
           <InputField label="日にち" name="date">
-            <TextField ref={dateInputRef} type="date" />
+            <TextField ref={dateInputRef} type="date" onFocus={handleInputFocus} />
           </InputField>
           <div className={styles.NoteMeta__timeFields}>
             <InputField label="開始時刻" name="start_time">
-              <TextField type="time" />
+              <TextField type="time" onFocus={handleInputFocus} />
             </InputField>
             <InputField label="終了時刻" name="end_time">
-              <TextField type="time" />
+              <TextField type="time" onFocus={handleInputFocus} />
             </InputField>
           </div>
-          <InputField label="場所" name="place">
-            <TextField />
-          </InputField>
           <Button
             type="submit"
             fullWidth
