@@ -4,6 +4,7 @@ import { Sheet, type SheetProps, type SheetRef } from "react-modal-sheet";
 interface BottomSheetProps extends Omit<SheetProps, "children" | "isOpen" | "onClose"> {
   closeOnBackdropTap?: boolean;
   onBackdropTap?: () => void;
+  onOpenEnd?: () => void;
 }
 
 export const useBottomSheet = (defaultProps?: BottomSheetProps) => {
@@ -18,7 +19,7 @@ export const useBottomSheet = (defaultProps?: BottomSheetProps) => {
     ...props
   }: { children: ReactNode } & BottomSheetProps): JSX.Element => {
     const mergedProps = { ...defaultProps, ...props };
-    const { closeOnBackdropTap, onBackdropTap, ...sheetProps } = mergedProps;
+    const { closeOnBackdropTap, onBackdropTap, onOpenEnd, ...sheetProps } = mergedProps;
 
     // onBackdropTapが指定されている場合はcloseOnBackdropTapのデフォルトをfalseにする
     const shouldCloseOnTap = closeOnBackdropTap ?? !onBackdropTap;
@@ -33,7 +34,7 @@ export const useBottomSheet = (defaultProps?: BottomSheetProps) => {
     };
 
     return (
-      <Sheet ref={ref} isOpen={isOpen} onClose={onClose} {...sheetProps}>
+      <Sheet ref={ref} isOpen={isOpen} onClose={onClose} onOpenEnd={onOpenEnd} {...sheetProps}>
         <Sheet.Container>
           <Sheet.Header />
           <Sheet.Content>
@@ -55,6 +56,7 @@ export const useBottomSheet = (defaultProps?: BottomSheetProps) => {
     BottomSheet,
     onOpen,
     onClose,
+    isOpen,
     snapTo: (i: number) => ref.current?.snapTo(i),
   };
 };

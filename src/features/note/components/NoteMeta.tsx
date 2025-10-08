@@ -1,11 +1,17 @@
 import { Button } from "@/components";
 import { useBottomSheet } from "@/components/BottomSheet";
 import { InputField, TextField } from "@/components/form";
+import { useRef } from "react";
 import { GoPencil } from "react-icons/go";
 import styles from "./NoteMeta.module.css";
 
 export const NoteMeta = () => {
+  const dateInputRef = useRef<HTMLInputElement>(null);
   const { onOpen: onOpenBottomSheet, BottomSheet } = useBottomSheet();
+
+  const handleOpenEnd = () => {
+    dateInputRef.current?.focus();
+  };
 
   return (
     <>
@@ -22,17 +28,17 @@ export const NoteMeta = () => {
         <div />
         <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
       </div>
-      <BottomSheet detent="content">
+      <BottomSheet detent="content" onOpenEnd={handleOpenEnd}>
         <form className={styles.NoteMeta__form}>
           <h2>時間・場所</h2>
           <InputField label="日にち" name="date">
-            <TextField />
+            <TextField ref={dateInputRef} type="date" />
           </InputField>
           <InputField label="開始時刻" name="start_time">
-            <TextField />
+            <TextField type="time" />
           </InputField>
           <InputField label="終了時刻" name="end_time">
-            <TextField />
+            <TextField type="time" />
           </InputField>
           <InputField label="場所" name="place">
             <TextField />
