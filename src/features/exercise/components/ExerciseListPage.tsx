@@ -94,7 +94,7 @@ export function ExerciseListPage() {
         )}
       </div>
       {/* フォーム */}
-      <BottomSheet detent="full" closeOnBackdropTap={false} disableDismiss disableDrag>
+      <BottomSheet closeOnBackdropTap={false} disableDismiss disableDrag>
         <ExerciseForm exerciseId={selectedExerciseId} onClose={handleClose} />
       </BottomSheet>
     </>

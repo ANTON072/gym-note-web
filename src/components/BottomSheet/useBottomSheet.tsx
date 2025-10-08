@@ -37,7 +37,12 @@ export const useBottomSheet = (defaultProps?: BottomSheetProps) => {
       <Sheet ref={ref} isOpen={isOpen} onClose={onClose} onOpenEnd={onOpenEnd} {...sheetProps}>
         <Sheet.Container>
           <Sheet.Header />
-          <Sheet.Content>
+          <Sheet.Content
+            style={{
+              overflowY: "auto",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
             <div
               style={{
                 padding: "0 var(--form-padding-horizontal)",

@@ -34,7 +34,7 @@ export const NoteMeta = () => {
         <div />
         <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
       </div>
-      <BottomSheet detent="full" onOpenEnd={handleOpenEnd}>
+      <BottomSheet onOpenEnd={handleOpenEnd} avoidKeyboard>
         <form className={styles.NoteMeta__form}>
           <h2>場所・時間</h2>
           <InputField label="日にち" name="date">
