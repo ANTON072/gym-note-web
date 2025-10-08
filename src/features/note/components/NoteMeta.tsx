@@ -14,9 +14,10 @@ export const NoteMeta = () => {
   };
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // avoidKeyboardの調整が終わった後にスクロール
     setTimeout(() => {
-      e.target.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 300);
+      e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }, 400);
   };
 
   return (

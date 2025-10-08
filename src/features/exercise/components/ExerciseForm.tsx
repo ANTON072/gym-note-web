@@ -33,6 +33,15 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
 
   const isEdit = typeof exerciseId === "number";
 
+  const handleInputFocus = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    // avoidKeyboardの調整が終わった後にスクロール
+    setTimeout(() => {
+      e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }, 400);
+  };
+
   const { data } = useGetExercise(exerciseId, {
     enabled: isEdit,
   });
@@ -103,7 +112,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
         <div className={styles.formGrid}>
           <InputField label="部位" name="body_part" required>
-            <Select>
+            <Select onFocus={handleInputFocus}>
               <option value="">選択してください</option>
               {BODY_PART_OPTIONS.map(({ value, label }) => (
                 <option key={value} value={value}>
@@ -113,7 +122,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
             </Select>
           </InputField>
           <InputField label="種目名" name="name" required>
-            <TextField placeholder="ベンチプレス" />
+            <TextField placeholder="ベンチプレス" onFocus={handleInputFocus} />
           </InputField>
           <InputField label="動作パターン" name="laterality" required>
             <RadioGroup>
@@ -122,7 +131,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
             </RadioGroup>
           </InputField>
           <InputField label="メモ" name="memo">
-            <TextArea rows={4} />
+            <TextArea rows={4} onFocus={handleInputFocus} />
           </InputField>
         </div>
         {isEdit ? (
