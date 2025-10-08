@@ -46,5 +46,38 @@
   padding: 0 var(--container-padding);
   padding-bottom: calc(var(--container-padding) * 4);
   display: grid;
-  row-gap: 1em;
+  row-gap: 1.5em;
+}
+
+.NoteMeta__timeFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.NoteMeta__pickerWrapper {
+  position: relative;
+}
+
+.NoteMeta__pickerButton {
+  width: 100%;
+  padding: 0.75em;
+  text-align: left;
+  background: white;
+  border: 1px solid var(--stone-6);
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.NoteMeta__pickerButton:active {
+  background: var(--stone-2);
+}
+
+.NoteMeta__input {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid var(--stone-6);
+  border-radius: 6px;
+  font-size: 1em;
 }
