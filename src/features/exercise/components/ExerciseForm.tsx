@@ -38,7 +38,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   ) => {
     // avoidKeyboardの調整が終わった後にスクロール
     setTimeout(() => {
-      e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+      e.target.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }, 400);
   };
 
@@ -112,7 +112,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
         <div className={styles.formGrid}>
           <InputField label="部位" name="body_part" required>
-            <Select onFocus={handleInputFocus}>
+            <Select>
               <option value="">選択してください</option>
               {BODY_PART_OPTIONS.map(({ value, label }) => (
                 <option key={value} value={value}>
@@ -122,7 +122,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
             </Select>
           </InputField>
           <InputField label="種目名" name="name" required>
-            <TextField placeholder="ベンチプレス" onFocus={handleInputFocus} />
+            <TextField placeholder="ベンチプレス" />
           </InputField>
           <InputField label="動作パターン" name="laterality" required>
             <RadioGroup>
