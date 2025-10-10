@@ -16,7 +16,11 @@ export const ExerciseNewPage = () => {
             一覧に戻る
           </Button>
         </div>
-        <ExerciseForm />
+        <ExerciseForm
+          defaultValues={{
+            laterality: "bilateral" as const,
+          }}
+        />
       </div>
     </>
   );

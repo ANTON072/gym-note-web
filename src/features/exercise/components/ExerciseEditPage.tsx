@@ -1,9 +1,11 @@
 import { Button, PageTitle } from "@/components";
+import Skeleton from "react-loading-skeleton";
 
 import { useParams } from "@tanstack/react-router";
 import { GoChevronLeft } from "react-icons/go";
 
 import { NotFound } from "@/components/NotFound";
+import { useGetExercise } from "../hooks/useExerciseApi";
 import { ExerciseForm } from "./ExerciseForm";
 import styles from "./Exercises.module.css";
 
@@ -11,7 +13,10 @@ export const ExerciseEditPage = () => {
   const { exerciseId } = useParams({ from: "/exercises/$exerciseId" });
 
   const exerciseIdNumber = Number(exerciseId);
-  if (Number.isNaN(exerciseIdNumber)) {
+
+  const { data: exercise, isPending, isError } = useGetExercise(exerciseIdNumber);
+
+  if (Number.isNaN(exerciseIdNumber) || isError) {
     return <NotFound />;
   }
 
@@ -25,7 +30,11 @@ export const ExerciseEditPage = () => {
             一覧に戻る
           </Button>
         </div>
-        <ExerciseForm exerciseId={exerciseIdNumber} />
+        {isPending ? (
+          <Skeleton count={10} height={40} style={{ marginBottom: 10 }} />
+        ) : (
+          <ExerciseForm defaultValues={exercise} exerciseId={exerciseIdNumber} />
+        )}
       </div>
     </>
   );

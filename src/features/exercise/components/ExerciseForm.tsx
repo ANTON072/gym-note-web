@@ -16,23 +16,21 @@ import { useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
-import { useCreateExercise, useGetExercise, useUpdateExercise } from "../hooks/useExerciseApi";
+import { useCreateExercise, useUpdateExercise } from "../hooks/useExerciseApi";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
 
 interface Props {
   exerciseId?: number | null;
+  defaultValues?: Partial<ExerciseFormData>;
 }
 
-export const ExerciseForm = ({ exerciseId }: Props) => {
+export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
   const navigate = useNavigate();
-
-  console.log("exerciseId", exerciseId);
 
   const isEdit = typeof exerciseId === "number";
 
@@ -43,16 +41,6 @@ export const ExerciseForm = ({ exerciseId }: Props) => {
     setTimeout(() => {
       e.target.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }, 400);
-  };
-
-  const { data } = useGetExercise(exerciseId, {
-    enabled: isEdit,
-  });
-
-  console.log("data", data);
-
-  const defaultValues = {
-    laterality: "bilateral" as const,
   };
 
   const returnToList = () => {
@@ -108,13 +96,6 @@ export const ExerciseForm = ({ exerciseId }: Props) => {
     }
     createMutation.mutate(values);
   };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Function
-  useEffect(() => {
-    if (data) {
-      form.reset(data);
-    }
-  }, [data]);
 
   return (
     <FormProvider {...form}>
