@@ -34,15 +34,6 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
 
   const isEdit = typeof exerciseId === "number";
 
-  const handleInputFocus = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    // avoidKeyboardの調整が終わった後にスクロール
-    setTimeout(() => {
-      e.target.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    }, 400);
-  };
-
   const returnToList = () => {
     // 新規作成時はクエリパラメータなし、編集時は引き継ぐ
     navigate({ to: "/exercises", search: isEdit ? true : undefined });
@@ -122,7 +113,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
             </RadioGroup>
           </InputField>
           <InputField label="メモ" name="memo">
-            <TextArea rows={4} onFocus={handleInputFocus} />
+            <TextArea rows={4} />
           </InputField>
         </div>
         {isEdit ? (
