@@ -13,13 +13,6 @@ export const NoteMeta = () => {
     dateInputRef.current?.focus();
   };
 
-  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    // avoidKeyboardの調整が終わった後にスクロール
-    setTimeout(() => {
-      e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-    }, 400);
-  };
-
   return (
     <>
       <div className={styles.NoteMeta}>
@@ -39,18 +32,18 @@ export const NoteMeta = () => {
         <form className={styles.NoteMeta__form}>
           <h2>場所・時間</h2>
           <InputField label="日にち" name="date">
-            <TextField ref={dateInputRef} type="date" onFocus={handleInputFocus} />
+            <TextField ref={dateInputRef} type="date" />
           </InputField>
           <div className={styles.NoteMeta__timeFields}>
             <InputField label="開始時刻" name="start_time">
-              <TextField type="time" onFocus={handleInputFocus} />
+              <TextField type="time" />
             </InputField>
             <InputField label="終了時刻" name="end_time">
-              <TextField type="time" onFocus={handleInputFocus} />
+              <TextField type="time" />
             </InputField>
           </div>
           <InputField label="場所" name="place">
-            <TextField onFocus={handleInputFocus} />
+            <TextField />
           </InputField>
           <Button
             type="submit"

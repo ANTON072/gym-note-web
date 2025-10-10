@@ -1,3 +1,5 @@
+import { PlaceAndDateForm } from "./PlaceAndDateForm";
+
 export const NoteEditPage = () => {
-  return <div>Edit Note Page</div>;
+  return <PlaceAndDateForm />;
 };
