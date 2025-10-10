@@ -4,7 +4,7 @@ import { useIsMutating, useQueryClient } from "@tanstack/react-query";
 import { GoTrash } from "react-icons/go";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useDeleteExercise } from "../hooks/useExerciseApi";
-import styles from "./exercises.module.css";
+import styles from "./Exercises.module.css";
 
 interface Props {
   exerciseId: number;

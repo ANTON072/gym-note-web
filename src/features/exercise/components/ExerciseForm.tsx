@@ -9,36 +9,34 @@ import {
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import styles from "./exercises.module.css";
+import styles from "./Exercises.module.css";
 
-import { MutateButton } from "@/components";
+import { Button, MutateButton } from "@/components";
 import { useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
-import { useCreateExercise, useGetExercise, useUpdateExercise } from "../hooks/useExerciseApi";
+import { useCreateExercise, useUpdateExercise } from "../hooks/useExerciseApi";
 import type { ExerciseFormData } from "../schema";
 import { exerciseFormSchema } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
 
 interface Props {
   exerciseId?: number | null;
-  onClose: () => void;
+  defaultValues?: Partial<ExerciseFormData>;
 }
 
-export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
+export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
+  const navigate = useNavigate();
 
   const isEdit = typeof exerciseId === "number";
 
-  const { data } = useGetExercise(exerciseId, {
-    enabled: isEdit,
-  });
-
-  const defaultValues = {
-    laterality: "bilateral" as const,
+  const returnToList = () => {
+    // 新規作成時はクエリパラメータなし、編集時は引き継ぐ
+    navigate({ to: "/exercises", search: isEdit ? true : undefined });
   };
 
   const form = useForm<ExerciseFormData>({
@@ -49,7 +47,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const handleMutationSuccess = (message: string) => {
     query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
     toast.add({ message });
-    onClose();
+    returnToList();
   };
 
   const handleMutationError = (error: Error, action: string) => {
@@ -91,13 +89,6 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
     createMutation.mutate(values);
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Function
-  useEffect(() => {
-    if (data) {
-      form.reset(data);
-    }
-  }, [data]);
-
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
@@ -127,12 +118,9 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
         </div>
         {isEdit ? (
           <div className={styles.formActions}>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
+            <Button to="/exercises" search={true} variant="outlined">
               キャンセル
-            </MutateButton>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
-              キャンセル
-            </MutateButton>
+            </Button>
             <MutateButton type="submit">更新</MutateButton>
             <div />
             <div
@@ -146,16 +134,16 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
               <DeleteExerciseButton
                 exerciseId={exerciseId}
                 onDeleted={() => {
-                  onClose();
+                  returnToList();
                 }}
               />
             </div>
           </div>
         ) : (
           <div className={styles.formActions}>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
+            <Button to="/exercises" search={true} variant="outlined">
               キャンセル
-            </MutateButton>
+            </Button>
             <MutateButton type="submit">登録</MutateButton>
           </div>
         )}

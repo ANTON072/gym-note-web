@@ -10,6 +10,7 @@ type LinkButtonProps = {
   className?: string;
   variant?: "outlined" | "danger";
   size?: "small";
+  fullWidth?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   "data-loading"?: boolean | "true" | "false";
@@ -22,6 +23,7 @@ type ButtonProps = {
   className?: string;
   variant?: "outlined" | "text" | "danger";
   size?: "small";
+  fullWidth?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   "data-loading"?: boolean | "true" | "false";
@@ -38,6 +40,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
       className = "",
       variant,
       size,
+      fullWidth,
       startIcon,
       endIcon,
       "data-loading": dataLoading,
@@ -55,6 +58,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
             styles.Button,
             variant && styles[variant],
             size && styles[size],
+            fullWidth && styles.fullWidth,
             className,
           )}
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -76,7 +80,13 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
     // toが指定されていない場合はbuttonタグを使用
     return (
       <button
-        className={clsx(styles.Button, variant && styles[variant], size && styles[size], className)}
+        className={clsx(
+          styles.Button,
+          variant && styles[variant],
+          size && styles[size],
+          fullWidth && styles.fullWidth,
+          className,
+        )}
         ref={ref as React.Ref<HTMLButtonElement>}
         data-loading={isLoading ? "true" : undefined}
         {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
