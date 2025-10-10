@@ -9,7 +9,7 @@ import {
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import styles from "./exercises.module.css";
+import styles from "./Exercises.module.css";
 
 import { Button, MutateButton } from "@/components";
 import { useToast } from "@/hooks";
