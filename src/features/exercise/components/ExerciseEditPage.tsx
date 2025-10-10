@@ -26,7 +26,7 @@ export const ExerciseEditPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.indexForm}>
           <div />
-          <Button to="/exercises" startIcon={<GoChevronLeft />}>
+          <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
             一覧に戻る
           </Button>
         </div>

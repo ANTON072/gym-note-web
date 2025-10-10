@@ -44,7 +44,8 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   };
 
   const returnToList = () => {
-    navigate({ to: "/exercises" });
+    // 新規作成時はクエリパラメータなし、編集時は引き継ぐ
+    navigate({ to: "/exercises", search: isEdit ? true : undefined });
   };
 
   const form = useForm<ExerciseFormData>({
@@ -126,7 +127,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
         </div>
         {isEdit ? (
           <div className={styles.formActions}>
-            <Button to="/exercises" variant="outlined">
+            <Button to="/exercises" search={true} variant="outlined">
               キャンセル
             </Button>
             <MutateButton type="submit">更新</MutateButton>
@@ -149,7 +150,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
           </div>
         ) : (
           <div className={styles.formActions}>
-            <Button to="/exercises" variant="outlined">
+            <Button to="/exercises" search={true} variant="outlined">
               キャンセル
             </Button>
             <MutateButton type="submit">登録</MutateButton>

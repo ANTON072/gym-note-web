@@ -70,7 +70,11 @@ export function ExerciseListPage() {
                 key: "name",
                 header: "種目名",
                 render: (exercise) => (
-                  <Link to="/exercises/$exerciseId" params={{ exerciseId: exercise.id.toString() }}>
+                  <Link
+                    to="/exercises/$exerciseId"
+                    params={{ exerciseId: exercise.id.toString() }}
+                    search={true}
+                  >
                     {exercise.name}
                   </Link>
                 ),
