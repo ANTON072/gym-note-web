@@ -3,7 +3,7 @@ import { useBottomSheet } from "@/components/BottomSheet";
 import { InputField, TextField } from "@/components/form";
 import { useRef } from "react";
 import { GoPencil } from "react-icons/go";
-import styles from "./NoteMeta.module.css";
+import styles from "./Note.module.css";
 
 export const NoteMeta = () => {
   const dateInputRef = useRef<HTMLInputElement>(null);

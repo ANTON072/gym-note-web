@@ -1,7 +1,7 @@
 import { GoIssueDraft, GoIssueOpened, GoIssueReopened } from "react-icons/go";
 
 import { NOTE_STATUS, type NoteStatus } from "../constants/noteStatus";
-import styles from "./NoteStatusChip.module.css";
+import styles from "./Note.module.css";
 
 interface Props {
   status: NoteStatus;

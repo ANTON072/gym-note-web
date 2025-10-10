@@ -15,6 +15,7 @@ import { Route as ExercisesRouteRouteImport } from './routes/exercises.route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExercisesIndexRouteImport } from './routes/exercises.index'
 import { Route as NotesTodayRouteImport } from './routes/notes.today'
+import { Route as NotesNoteIdRouteImport } from './routes/notes.$noteId'
 import { Route as ExercisesNewRouteImport } from './routes/exercises.new'
 import { Route as ExercisesExerciseIdRouteImport } from './routes/exercises.$exerciseId'
 
@@ -48,6 +49,11 @@ const NotesTodayRoute = NotesTodayRouteImport.update({
   path: '/today',
   getParentRoute: () => NotesRouteRoute,
 } as any)
+const NotesNoteIdRoute = NotesNoteIdRouteImport.update({
+  id: '/$noteId',
+  path: '/$noteId',
+  getParentRoute: () => NotesRouteRoute,
+} as any)
 const ExercisesNewRoute = ExercisesNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/mypage': typeof MypageRoute
   '/exercises/$exerciseId': typeof ExercisesExerciseIdRoute
   '/exercises/new': typeof ExercisesNewRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/mypage': typeof MypageRoute
   '/exercises/$exerciseId': typeof ExercisesExerciseIdRoute
   '/exercises/new': typeof ExercisesNewRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises': typeof ExercisesIndexRoute
 }
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/mypage': typeof MypageRoute
   '/exercises/$exerciseId': typeof ExercisesExerciseIdRoute
   '/exercises/new': typeof ExercisesNewRoute
+  '/notes/$noteId': typeof NotesNoteIdRoute
   '/notes/today': typeof NotesTodayRoute
   '/exercises/': typeof ExercisesIndexRoute
 }
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/mypage'
     | '/exercises/$exerciseId'
     | '/exercises/new'
+    | '/notes/$noteId'
     | '/notes/today'
     | '/exercises/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/mypage'
     | '/exercises/$exerciseId'
     | '/exercises/new'
+    | '/notes/$noteId'
     | '/notes/today'
     | '/exercises'
   id:
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/mypage'
     | '/exercises/$exerciseId'
     | '/exercises/new'
+    | '/notes/$noteId'
     | '/notes/today'
     | '/exercises/'
   fileRoutesById: FileRoutesById
@@ -172,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesTodayRouteImport
       parentRoute: typeof NotesRouteRoute
     }
+    '/notes/$noteId': {
+      id: '/notes/$noteId'
+      path: '/$noteId'
+      fullPath: '/notes/$noteId'
+      preLoaderRoute: typeof NotesNoteIdRouteImport
+      parentRoute: typeof NotesRouteRoute
+    }
     '/exercises/new': {
       id: '/exercises/new'
       path: '/new'
@@ -206,10 +225,12 @@ const ExercisesRouteRouteWithChildren = ExercisesRouteRoute._addFileChildren(
 )
 
 interface NotesRouteRouteChildren {
+  NotesNoteIdRoute: typeof NotesNoteIdRoute
   NotesTodayRoute: typeof NotesTodayRoute
 }
 
 const NotesRouteRouteChildren: NotesRouteRouteChildren = {
+  NotesNoteIdRoute: NotesNoteIdRoute,
   NotesTodayRoute: NotesTodayRoute,
 }
 
