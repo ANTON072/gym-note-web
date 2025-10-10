@@ -48,6 +48,7 @@ export function ExerciseListPage() {
               }}
               value={filteredBodyPart ?? ""}
             >
+              <option value="">すべて</option>
               {Array.isArray(BODY_PART_OPTIONS)
                 ? BODY_PART_OPTIONS.map(({ value, label }) => (
                     <option key={value} value={value}>
@@ -55,7 +56,6 @@ export function ExerciseListPage() {
                     </option>
                   ))
                 : null}
-              <option value="">すべて</option>
             </Select>
           </InputField>
 
