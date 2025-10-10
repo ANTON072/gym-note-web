@@ -4,8 +4,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { useIsMutating } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -16,10 +15,11 @@ export function ExerciseListPage() {
   const exercises: Exercise[] = Array.isArray(data) ? data : [];
   const isMutating = useIsMutating() > 0;
 
-  const [filteredBodyPart, setFilteredBodyPart] = useState("");
+  const navigate = useNavigate({ from: "/exercises" });
+  const { bodyPart: filteredBodyPart } = useSearch({ from: "/exercises/" });
 
   const filteredExercises = exercises.filter((exercise) => {
-    if (filteredBodyPart === "") {
+    if (!filteredBodyPart) {
       return true;
     }
     return exercise.body_part === filteredBodyPart;
@@ -42,9 +42,11 @@ export function ExerciseListPage() {
               disabled={isMutating}
               onChange={(e) => {
                 const target = e.target.value;
-                setFilteredBodyPart(target);
+                navigate({
+                  search: { bodyPart: target || undefined },
+                });
               }}
-              value={filteredBodyPart}
+              value={filteredBodyPart ?? ""}
             >
               {Array.isArray(BODY_PART_OPTIONS)
                 ? BODY_PART_OPTIONS.map(({ value, label }) => (
