@@ -115,12 +115,30 @@
 }
 
 .NoteFormTitle {
-  font-size: 18px;
-  font-weight: bold;
   color: var(--stone-12);
   padding-bottom: var(--container-padding);
   border-bottom: 2px solid var(--stone-12);
   letter-spacing: 0.05em;
+  position: relative;
+
+  > span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  > button {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    > svg {
+      position: absolute;
+      right: var(--container-padding);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
 }
 
 .NoteFormRows {
