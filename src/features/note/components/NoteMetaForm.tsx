@@ -1,10 +1,19 @@
 import { Button } from "@/components";
 import { InputField, TextField } from "@/components/form";
+import { useNoteContext } from "../contexts/NoteContext";
 import styles from "./Note.module.css";
 
-export const PlaceAndDateForm = () => {
+export const NoteMetaForm = () => {
+  const { displayComponentId, setDisplayComponentId } = useNoteContext();
+
+  if (displayComponentId !== "edit_meta") return null;
+
   return (
-    <form>
+    <form
+      onSubmit={() => {
+        setDisplayComponentId(null);
+      }}
+    >
       <div className={styles.NoteFormRows}>
         <div className={styles.NoteFormTitle}>場所・日時</div>
         <InputField label="日にち" name="date">
