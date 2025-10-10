@@ -11,10 +11,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import styles from "./exercises.module.css";
 
-import { MutateButton } from "@/components";
+import { Button, MutateButton } from "@/components";
 import { useToast } from "@/hooks";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useCreateExercise, useGetExercise, useUpdateExercise } from "../hooks/useExerciseApi";
@@ -24,12 +25,14 @@ import { DeleteExerciseButton } from "./DeleteExerciseButton";
 
 interface Props {
   exerciseId?: number | null;
-  onClose: () => void;
 }
 
-export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
+export const ExerciseForm = ({ exerciseId }: Props) => {
   const toast = useToast();
   const query = useQueryClient();
+  const navigate = useNavigate();
+
+  console.log("exerciseId", exerciseId);
 
   const isEdit = typeof exerciseId === "number";
 
@@ -46,8 +49,14 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
     enabled: isEdit,
   });
 
+  console.log("data", data);
+
   const defaultValues = {
     laterality: "bilateral" as const,
+  };
+
+  const returnToList = () => {
+    navigate({ to: "/exercises" });
   };
 
   const form = useForm<ExerciseFormData>({
@@ -58,7 +67,7 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
   const handleMutationSuccess = (message: string) => {
     query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
     toast.add({ message });
-    onClose();
+    returnToList();
   };
 
   const handleMutationError = (error: Error, action: string) => {
@@ -136,12 +145,9 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
         </div>
         {isEdit ? (
           <div className={styles.formActions}>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
+            <Button to="/exercises" variant="outlined">
               キャンセル
-            </MutateButton>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
-              キャンセル
-            </MutateButton>
+            </Button>
             <MutateButton type="submit">更新</MutateButton>
             <div />
             <div
@@ -155,16 +161,16 @@ export const ExerciseForm = ({ exerciseId, onClose }: Props) => {
               <DeleteExerciseButton
                 exerciseId={exerciseId}
                 onDeleted={() => {
-                  onClose();
+                  returnToList();
                 }}
               />
             </div>
           </div>
         ) : (
           <div className={styles.formActions}>
-            <MutateButton type="button" variant="outlined" onClick={onClose}>
+            <Button to="/exercises" variant="outlined">
               キャンセル
-            </MutateButton>
+            </Button>
             <MutateButton type="submit">登録</MutateButton>
           </div>
         )}
