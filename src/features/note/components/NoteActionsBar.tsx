@@ -3,7 +3,7 @@ import { useBottomSheet } from "@/components/BottomSheet";
 import { InputField, TextField } from "@/components/form";
 import { useRef } from "react";
 import { GoPlusCircle } from "react-icons/go";
-import styles from "./NoteActionsBar.module.css";
+import styles from "./Note.module.css";
 
 export const NoteActionsBar = () => {
   const exerciseNameInputRef = useRef<HTMLInputElement>(null);

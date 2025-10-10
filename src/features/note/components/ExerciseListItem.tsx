@@ -1,6 +1,6 @@
 import { GoPencil } from "react-icons/go";
 import { GoPlusCircle } from "react-icons/go";
-import styles from "./ExerciseListItem.module.css";
+import styles from "./Note.module.css";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）

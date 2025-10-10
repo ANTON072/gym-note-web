@@ -1,24 +1,9 @@
-import { Button } from "@/components";
-import { useBottomSheet } from "@/components/BottomSheet";
-import { InputField, TextField } from "@/components/form";
-import { useRef } from "react";
 import { GoPencil } from "react-icons/go";
-import styles from "./NoteMeta.module.css";
+import { useNoteContext } from "../contexts/NoteContext";
+import styles from "./Note.module.css";
 
 export const NoteMeta = () => {
-  const dateInputRef = useRef<HTMLInputElement>(null);
-  const { onOpen: onOpenBottomSheet, BottomSheet } = useBottomSheet();
-
-  const handleOpenEnd = () => {
-    dateInputRef.current?.focus();
-  };
-
-  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    // avoidKeyboardの調整が終わった後にスクロール
-    setTimeout(() => {
-      e.target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-    }, 400);
-  };
+  const { setDisplayComponentId } = useNoteContext();
 
   return (
     <>
@@ -26,7 +11,9 @@ export const NoteMeta = () => {
         <button
           type="button"
           className={styles.NoteMeta__editButtonArea}
-          onClick={onOpenBottomSheet}
+          onClick={() => {
+            setDisplayComponentId("edit_meta");
+          }}
         >
           <GoPencil className={styles.NoteMeta__editIcon} />
         </button>
@@ -35,34 +22,6 @@ export const NoteMeta = () => {
         <div />
         <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
       </div>
-      <BottomSheet onOpenEnd={handleOpenEnd} avoidKeyboard>
-        <form className={styles.NoteMeta__form}>
-          <h2>場所・時間</h2>
-          <InputField label="日にち" name="date">
-            <TextField ref={dateInputRef} type="date" onFocus={handleInputFocus} />
-          </InputField>
-          <div className={styles.NoteMeta__timeFields}>
-            <InputField label="開始時刻" name="start_time">
-              <TextField type="time" onFocus={handleInputFocus} />
-            </InputField>
-            <InputField label="終了時刻" name="end_time">
-              <TextField type="time" onFocus={handleInputFocus} />
-            </InputField>
-          </div>
-          <InputField label="場所" name="place">
-            <TextField onFocus={handleInputFocus} />
-          </InputField>
-          <Button
-            type="submit"
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-          >
-            更新
-          </Button>
-        </form>
-      </BottomSheet>
     </>
   );
 };

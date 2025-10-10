@@ -1,7 +1,7 @@
 import { PageTitle } from "@/components";
 import type { ComponentProps } from "react";
+import styles from "./Note.module.css";
 import { NoteStatusChip } from "./NoteStatusChip";
-import styles from "./NoteTitle.module.css";
 
 type NoteTitleProps = ComponentProps<typeof PageTitle>;
 type NoteStatusChipProps = ComponentProps<typeof NoteStatusChip>;
