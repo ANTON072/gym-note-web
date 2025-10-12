@@ -32,6 +32,19 @@ type ButtonProps = {
 // 統合された型定義
 export type ButtonComponentProps = LinkButtonProps | ButtonProps;
 
+type ButtonVariant = NonNullable<ButtonComponentProps["variant"]>;
+type ButtonSize = NonNullable<ButtonComponentProps["size"]>;
+
+const VARIANT_CLASS_NAME: Record<ButtonVariant, string> = {
+  outlined: styles.Button__outlined,
+  text: styles.Button__text,
+  danger: styles.Button__danger,
+};
+
+const SIZE_CLASS_NAME: Record<ButtonSize, string> = {
+  small: styles.Button__small,
+};
+
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonComponentProps>(
   (
     {
@@ -49,18 +62,26 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
     ref,
   ) => {
     const isLoading = dataLoading === true || dataLoading === "true";
+    const buttonClassName = clsx(
+      styles.Button,
+      variant ? VARIANT_CLASS_NAME[variant] : undefined,
+      size ? SIZE_CLASS_NAME[size] : undefined,
+      fullWidth ? styles.Button__fullWidth : undefined,
+      className,
+    );
+    const innerContent = (
+      <span className={styles.Button__content} aria-hidden={isLoading}>
+        {startIcon ? <span className={styles.Button__startIcon}>{startIcon}</span> : null}
+        {children}
+        {endIcon ? <span className={styles.Button__endIcon}>{endIcon}</span> : null}
+      </span>
+    );
     // toが指定されている場合はLinkタグを使用
     if (to) {
       return (
         <Link
           to={to}
-          className={clsx(
-            styles.Button,
-            variant && styles[variant],
-            size && styles[size],
-            fullWidth && styles.fullWidth,
-            className,
-          )}
+          className={buttonClassName}
           ref={ref as React.Ref<HTMLAnchorElement>}
           data-loading={isLoading ? "true" : undefined}
           {...(rest as Omit<
@@ -68,11 +89,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
             "to" | "children" | "className"
           >)}
         >
-          <span className={styles.content} aria-hidden={isLoading}>
-            {startIcon ? <span className={styles.startIcon}>{startIcon}</span> : null}
-            {children}
-            {endIcon ? <span className={styles.endIcon}>{endIcon}</span> : null}
-          </span>
+          {innerContent}
         </Link>
       );
     }
@@ -80,22 +97,12 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
     // toが指定されていない場合はbuttonタグを使用
     return (
       <button
-        className={clsx(
-          styles.Button,
-          variant && styles[variant],
-          size && styles[size],
-          fullWidth && styles.fullWidth,
-          className,
-        )}
+        className={buttonClassName}
         ref={ref as React.Ref<HTMLButtonElement>}
         data-loading={isLoading ? "true" : undefined}
         {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
-        <span className={styles.content} aria-hidden={isLoading}>
-          {startIcon ? <span className={styles.startIcon}>{startIcon}</span> : null}
-          {children}
-          {endIcon ? <span className={styles.endIcon}>{endIcon}</span> : null}
-        </span>
+        {innerContent}
       </button>
     );
   },

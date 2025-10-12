@@ -22,21 +22,21 @@ export const MyPage = () => {
   return (
     <>
       <PageTitle title="マイページ" />
-      <div className={styles.profileCard}>
-        <div className={styles.avatarSection}>
+      <div className={styles.MyPage}>
+        <div className={styles.MyPage__avatarSection}>
           <Avatar src={authUser.photoURL} name={authUser.displayName} size={80} />
         </div>
-        <div className={styles.infoSection}>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>ユーザー名</span>
-            <span className={styles.value}>{authUser.displayName}</span>
+        <div className={styles.MyPage__infoSection}>
+          <div className={styles.MyPage__infoItem}>
+            <span className={styles.MyPage__label}>ユーザー名</span>
+            <span className={styles.MyPage__value}>{authUser.displayName}</span>
           </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>メールアドレス</span>
-            <span className={styles.value}>{authUser.email}</span>
+          <div className={styles.MyPage__infoItem}>
+            <span className={styles.MyPage__label}>メールアドレス</span>
+            <span className={styles.MyPage__value}>{authUser.email}</span>
           </div>
         </div>
-        <div className={styles.dangerZone}>
+        <div className={styles.MyPage__dangerZone}>
           <Button type="button" onClick={handleDeleteAccount} variant="danger">
             退会する
           </Button>

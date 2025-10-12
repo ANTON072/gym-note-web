@@ -28,15 +28,9 @@ export function ExerciseListPage() {
   return (
     <>
       <PageTitle title="種目一覧" />
-      <div className={styles.wrapper}>
-        <div className={styles.indexForm}>
-          <InputField
-            label="種目名で絞り込み"
-            style={{
-              position: "relative",
-              top: " calc(-1 * var(--form-font-size))",
-            }}
-          >
+      <div className={styles.Exercises}>
+        <div className={styles.Exercises__filter}>
+          <InputField label="種目名で絞り込み" className={styles.Exercises__filterInput}>
             <Select
               name="body_part"
               disabled={isMutating}

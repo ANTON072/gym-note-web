@@ -28,6 +28,14 @@
   background-color: var(--stone-1);
 }
 
+.Table__row {
+  transition: background-color 0.2s ease;
+}
+
+.Table__row:hover {
+  background-color: var(--stone-2);
+}
+
 .Table__emptyRow {
   height: 100px;
 }

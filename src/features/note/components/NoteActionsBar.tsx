@@ -3,7 +3,7 @@ import { useBottomSheet } from "@/components/BottomSheet";
 import { InputField, TextField } from "@/components/form";
 import { useRef } from "react";
 import { GoPlusCircle } from "react-icons/go";
-import styles from "./Note.module.css";
+import styles from "./NoteActionsBar.module.css";
 
 export const NoteActionsBar = () => {
   const exerciseNameInputRef = useRef<HTMLInputElement>(null);
@@ -19,7 +19,7 @@ export const NoteActionsBar = () => {
         <Button
           variant="text"
           startIcon={<GoPlusCircle />}
-          style={{ fontWeight: "bold" }}
+          className={styles.NoteActionsBar__addButton}
           onClick={onOpenBottomSheet}
         >
           種目を追加
@@ -37,13 +37,7 @@ export const NoteActionsBar = () => {
           <InputField label="種目名" name="exercise_name">
             <TextField ref={exerciseNameInputRef} />
           </InputField>
-          <Button
-            type="submit"
-            fullWidth
-            style={{
-              marginTop: "1em",
-            }}
-          >
+          <Button type="submit" fullWidth className={styles.NoteActionsBar__submitButton}>
             追加
           </Button>
         </form>

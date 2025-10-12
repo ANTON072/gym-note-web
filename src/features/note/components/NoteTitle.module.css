@@ -1,0 +1,6 @@
+.NoteTitle {
+  display: grid;
+  justify-items: start;
+  gap: var(--container-padding);
+  margin-bottom: calc(var(--container-padding) * 2);
+}

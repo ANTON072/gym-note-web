@@ -1,0 +1,22 @@
+.NoteActionsBar {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--size-2);
+  margin-bottom: var(--container-padding);
+}
+
+.NoteActionsBar__addButton {
+  font-weight: var(--font-weight-7);
+}
+
+.NoteActionsBar__form {
+  display: grid;
+  row-gap: var(--size-4);
+  padding-inline: var(--container-padding);
+  padding-bottom: calc(var(--container-padding) * 4);
+}
+
+.NoteActionsBar__submitButton {
+  margin-top: var(--size-4);
+}

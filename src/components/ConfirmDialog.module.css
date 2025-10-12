@@ -2,12 +2,12 @@
   border: none;
   border-radius: var(--size-2);
   padding: 0;
-  max-width: 400px;
+  max-width: var(--size-content-3);
   width: 90%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-4);
 
   &::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: color-mix(in srgb, var(--stone-12) 50%, transparent);
   }
 }
 
@@ -49,16 +49,16 @@
   border-color: var(--base-color);
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: color-mix(in srgb, var(--stone-12) 5%, transparent);
   }
 
   &:active {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: color-mix(in srgb, var(--stone-12) 10%, transparent);
   }
 }
 
 .ConfirmDialog__confirmButton {
-  color: #fff;
+  color: var(--color-on-contrast);
   background-color: var(--base-color);
   border-color: var(--base-color);
 

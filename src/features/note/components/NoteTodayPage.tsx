@@ -3,9 +3,9 @@ import { NoteActionsBar } from "./NoteActionsBar";
 import { NoteMeta } from "./NoteMeta";
 
 import { NoteProvider, useNoteContext } from "../contexts/NoteContext";
-import styles from "./Note.module.css";
 import { NoteMetaForm } from "./NoteMetaForm";
 import { NoteTitle } from "./NoteTitle";
+import styles from "./NoteTodayPage.module.css";
 
 const Contents = () => {
   const { displayComponentId } = useNoteContext();
@@ -16,7 +16,7 @@ const Contents = () => {
     <div>
       <NoteMeta />
       <NoteActionsBar />
-      <div className={styles.ExerciseList}>
+      <div className={styles.NoteTodayPage__exerciseList}>
         <ExerciseListItem />
         <ExerciseListItem />
       </div>

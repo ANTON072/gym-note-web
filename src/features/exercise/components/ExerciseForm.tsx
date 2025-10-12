@@ -92,7 +92,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
-        <div className={styles.formGrid}>
+        <div className={styles.Exercises__formGrid}>
           <InputField label="部位" name="body_part" required>
             <Select>
               <option value="">選択してください</option>
@@ -117,20 +117,13 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
           </InputField>
         </div>
         {isEdit ? (
-          <div className={styles.formActions}>
+          <div className={styles.Exercises__actions}>
             <Button to="/exercises" search={true} variant="outlined">
               キャンセル
             </Button>
             <MutateButton type="submit">更新</MutateButton>
             <div />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                padding: "var(--container-padding)",
-              }}
-            >
+            <div className={styles.Exercises__deleteAction}>
               <DeleteExerciseButton
                 exerciseId={exerciseId}
                 onDeleted={() => {
@@ -140,7 +133,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
             </div>
           </div>
         ) : (
-          <div className={styles.formActions}>
+          <div className={styles.Exercises__actions}>
             <Button to="/exercises" search={true} variant="outlined">
               キャンセル
             </Button>

@@ -1,4 +1,4 @@
-.toaster {
+.Toaster {
   --normal: var(--base-color);
   --error: var(--red-8);
   --border-size: 2px;
@@ -13,18 +13,18 @@
   transform: translateX(-50%) translateY(calc(-1 * var(--total-height, 0px)));
 }
 
-.toasterList {
+.Toaster__item {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 0.5em;
+  column-gap: var(--size-2);
   order: var(--order);
   width: 100%;
   padding: var(--size-2);
-  background: #fff;
+  background: var(--color-background);
   border-color: inherit;
   border-style: solid;
   border-width: var(--border-size);
@@ -35,11 +35,11 @@
   }
 }
 
-.toasterTransition {
+.Toaster__transition {
   transition: transform 400ms ease;
 }
 
-.closeButton {
+.Toaster__closeButton {
   display: grid;
   place-items: center;
   padding: 0;

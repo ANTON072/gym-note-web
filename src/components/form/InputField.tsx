@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { cloneElement, isValidElement, useId } from "react";
 import { type FieldError, type FieldValues, type Path, useFormContext } from "react-hook-form";
-import styles from "./form.module.css";
+import styles from "./InputField.module.css";
 
 interface InputProps {
   id?: string;
@@ -18,6 +18,7 @@ interface Props<T extends FieldValues = FieldValues> {
   helperText?: string;
   fullWidth?: boolean;
   required?: boolean;
+  className?: string;
   style?: React.CSSProperties;
 }
 
@@ -29,6 +30,7 @@ export const InputField = <T extends FieldValues = FieldValues>({
   helperText,
   fullWidth,
   required = false,
+  className,
   style,
 }: Props<T>) => {
   const fieldId = useId();
@@ -67,7 +69,7 @@ export const InputField = <T extends FieldValues = FieldValues>({
 
   return (
     <div
-      className={clsx(styles.InputField, fullWidth && styles.InputField__fullWidth)}
+      className={clsx(styles.InputField, fullWidth && styles.InputField__fullWidth, className)}
       style={style}
     >
       {label && (
