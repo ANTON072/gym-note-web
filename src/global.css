@@ -15,6 +15,8 @@
   --place-holder: var(--stone-4);
   --form-gap: var(--size-4);
   --link-text-color: var(--blue-8);
+  --border-size-1: 1px;
+  --border-size-2: 2px;
   --color-background: #fff;
   --color-background-muted: #f8f9fa;
   --color-on-contrast: #fff;
