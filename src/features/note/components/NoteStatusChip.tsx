@@ -1,7 +1,7 @@
 import { GoIssueDraft, GoIssueOpened, GoIssueReopened } from "react-icons/go";
 
 import { NOTE_STATUS, type NoteStatus } from "../constants/noteStatus";
-import styles from "./Note.module.css";
+import styles from "./NoteStatusChip.module.css";
 
 interface Props {
   status: NoteStatus;
@@ -24,7 +24,7 @@ export const NoteStatusChip = ({ status }: Props) => {
   };
 
   return (
-    <div className={`${styles.NoteStatusChip} ${styles[status]}`}>
+    <div className={`${styles.NoteStatusChip} ${styles[`NoteStatusChip--${status}`]}`}>
       {showIcon()}
       {statusLabel}
     </div>

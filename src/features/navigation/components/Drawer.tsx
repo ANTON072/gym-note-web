@@ -83,10 +83,10 @@ export const Drawer = () => {
     <>
       {/* biome-ignore lint/a11y/useKeyWithClickEvents:
       Backdrop is intended to be closed by mouse only; keyboard interaction is not required.*/}
-      <div ref={backdropRef} className={styles.backdrop} onClick={handleClose} />
-      <nav ref={drawerRef} className={styles.root}>
+      <div ref={backdropRef} className={styles.Drawer__backdrop} onClick={handleClose} />
+      <nav ref={drawerRef} className={styles.Drawer}>
         <div>
-          <ul>
+          <ul className={styles.Drawer__menu}>
             {menuList.map((item) => (
               <li key={item.name}>
                 <Link to={item.href} onClick={handleClose}>
@@ -97,10 +97,10 @@ export const Drawer = () => {
           </ul>
         </div>
         <div>
-          <hr className={styles.divider} />
-          <ul>
+          <hr className={styles.Drawer__divider} />
+          <ul className={styles.Drawer__menu}>
             <li>
-              <Link to="/mypage" className={styles.iconButton} onClick={handleClose}>
+              <Link to="/mypage" className={styles.Drawer__iconButton} onClick={handleClose}>
                 <GoPerson />
                 マイページ
               </Link>
@@ -110,7 +110,7 @@ export const Drawer = () => {
                 type="button"
                 onClick={handleLogout}
                 disabled={isMutating}
-                className={styles.iconButton}
+                className={styles.Drawer__iconButton}
               >
                 <GoSignOut />
                 ログアウト

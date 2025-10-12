@@ -15,6 +15,9 @@
   --place-holder: var(--stone-4);
   --form-gap: var(--size-4);
   --link-text-color: var(--blue-8);
+  --color-background: #fff;
+  --color-background-muted: #f8f9fa;
+  --color-on-contrast: #fff;
 }
 
 body {
@@ -41,26 +44,4 @@ svg,
 button,
 img {
   vertical-align: top;
-}
-
-/* Root Layout */
-.root-container {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100svh;
-}
-
-.root-main {
-  width: 100%;
-  max-width: var(--max-content-width);
-  padding: var(--container-padding);
-  margin: var(--size-4) auto 0 auto;
-}
-
-.root-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 1.2rem;
 }

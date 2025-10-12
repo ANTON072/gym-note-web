@@ -28,6 +28,12 @@
 - **hooks, lib, schema, action**: 各機能ごとに `hooks/`, `lib/`, `schema.ts`, `create*Action.ts` などを分離
 - **Firebase連携**: `src/configs/firebase.ts` で初期化、`features/auth/lib/auth.ts` で認証ロジック
 - **グローバルCSS**: `src/global.css` を参照
+- **CSSトークン**: open-props をベースに、背景やコントラストなどプロジェクト固有色は `--color-*` プレフィックス（例: `--color-background`, `--color-on-contrast`）で `global.css` に定義
+- **レイアウトスタイル**: ルートやページ専用のレイアウトは該当 TSX と同階層の CSS Module（例: `src/routes/__root.module.css`）で管理し、グローバルクラスは追加しない
+
+## レビュー時の着眼点
+- `global.css` に新たなレイアウト用クラスやドメイン固有スタイルが追加されていないかを確認し、違反があれば必ず指摘する。
+- 背景やコントラスト用のカラーは `--color-*` トークンを使用しているか、open-props の既存トークンと混在していないかを確認し、逸脱があれば指摘する。
 - **テストセットアップ**: `src/test/setup.ts` でテスト環境初期化
 - **定数管理**: `src/constants/` 配下でドメインごとに分離
 

@@ -1,6 +1,6 @@
 import { GoX } from "react-icons/go";
 import { useNoteContext } from "../contexts/NoteContext";
-import styles from "./Note.module.css";
+import styles from "./NoteFormTitle.module.css";
 
 interface Props {
   title: string;
@@ -11,8 +11,12 @@ export const NoteFormTitle = ({ title }: Props) => {
 
   return (
     <div className={styles.NoteFormTitle}>
-      <span>{title}</span>
-      <button type="button" onClick={() => setDisplayComponentId(null)}>
+      <span className={styles.NoteFormTitle__label}>{title}</span>
+      <button
+        type="button"
+        className={styles.NoteFormTitle__closeButton}
+        onClick={() => setDisplayComponentId(null)}
+      >
         <GoX size={20} />
       </button>
     </div>

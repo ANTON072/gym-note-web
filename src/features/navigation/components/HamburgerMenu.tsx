@@ -79,8 +79,13 @@ export const HamburgerMenu = ({ isOpen, ...props }: HamburgerMenuProps) => {
   }, [isOpen]);
 
   return (
-    <button type="button" aria-label="Open menu" className={`${styles.button} tap`} {...props}>
-      <svg viewBox="0 0 40 40" className={styles.icon}>
+    <button
+      type="button"
+      aria-label="Open menu"
+      className={`${styles.HamburgerMenu} tap`}
+      {...props}
+    >
+      <svg viewBox="0 0 40 40" className={styles.HamburgerMenu__icon}>
         <title>Open menu</title>
         <path ref={topLineRef} d="M8,12 L32,12 Z" />
         <path ref={middleLineRef} d="M8,20 L32,20 Z" />

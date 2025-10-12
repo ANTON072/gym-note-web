@@ -1,4 +1,4 @@
-.button {
+.HamburgerMenu {
   position: relative;
   width: 100%;
   height: 100%;
@@ -8,7 +8,7 @@
   border: none;
 }
 
-.icon {
+.HamburgerMenu__icon {
   --icon-size: var(--size-7);
 
   position: absolute;

@@ -1,0 +1,18 @@
+.NoteMetaForm {
+  display: grid;
+}
+
+.NoteMetaForm__fields {
+  display: grid;
+  gap: calc(var(--container-padding) * 2);
+}
+
+.NoteMetaForm__timeFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--container-padding);
+}
+
+.NoteMetaForm__submitButton {
+  margin-top: var(--size-4);
+}

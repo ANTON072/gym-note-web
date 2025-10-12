@@ -3,11 +3,11 @@
   border-radius: 50%;
 }
 
-.AvatarPlaceholder {
+.Avatar__placeholder {
   display: grid;
   place-items: center;
   font-weight: bold;
-  color: #fff;
+  color: var(--color-on-contrast);
   background-color: var(--key-color);
   border-radius: 50%;
 }

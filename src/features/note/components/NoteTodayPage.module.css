@@ -1,0 +1,5 @@
+.NoteTodayPage__exerciseList {
+  display: grid;
+  gap: var(--container-padding);
+  margin-block: var(--container-padding);
+}

@@ -1,48 +1,48 @@
-.profileCard {
-  padding: 32px 0;
+.MyPage {
+  padding-block: var(--size-8);
 }
 
-.avatarSection {
+.MyPage__avatarSection {
   display: flex;
   justify-content: center;
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: var(--size-8);
+  padding-bottom: var(--size-7);
+  border-bottom: 1px solid var(--stone-4);
 }
 
-.infoSection {
+.MyPage__infoSection {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--size-7);
 }
 
-.infoItem {
+.MyPage__infoItem {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--size-3);
 }
 
-.label {
-  font-size: 14px;
+.MyPage__label {
+  font-size: var(--font-size-0);
   font-weight: 600;
-  color: #6b7280;
+  color: var(--stone-9);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.value {
-  font-size: 16px;
-  color: #111827;
-  padding: 12px 16px;
-  background: #f9fafb;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+.MyPage__value {
+  font-size: var(--font-size-1);
+  color: var(--stone-12);
+  padding: var(--size-3) var(--size-4);
+  background: var(--color-background-muted);
+  border-radius: var(--radius-2);
+  border: 1px solid var(--stone-4);
 }
 
-.dangerZone {
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid #e5e7eb;
+.MyPage__dangerZone {
+  margin-top: var(--size-10);
+  padding-top: var(--size-8);
+  border-top: 1px solid var(--stone-4);
   display: flex;
   justify-content: flex-end;
 }

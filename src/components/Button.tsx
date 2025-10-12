@@ -49,6 +49,9 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
     ref,
   ) => {
     const isLoading = dataLoading === true || dataLoading === "true";
+    const variantClassName = variant ? styles[`Button__${variant}`] : undefined;
+    const sizeClassName = size ? styles[`Button__${size}`] : undefined;
+    const fullWidthClassName = fullWidth ? styles.Button__fullWidth : undefined;
     // toが指定されている場合はLinkタグを使用
     if (to) {
       return (
@@ -56,9 +59,9 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
           to={to}
           className={clsx(
             styles.Button,
-            variant && styles[variant],
-            size && styles[size],
-            fullWidth && styles.fullWidth,
+            variantClassName,
+            sizeClassName,
+            fullWidthClassName,
             className,
           )}
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -68,10 +71,10 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
             "to" | "children" | "className"
           >)}
         >
-          <span className={styles.content} aria-hidden={isLoading}>
-            {startIcon ? <span className={styles.startIcon}>{startIcon}</span> : null}
+          <span className={styles.Button__content} aria-hidden={isLoading}>
+            {startIcon ? <span className={styles.Button__startIcon}>{startIcon}</span> : null}
             {children}
-            {endIcon ? <span className={styles.endIcon}>{endIcon}</span> : null}
+            {endIcon ? <span className={styles.Button__endIcon}>{endIcon}</span> : null}
           </span>
         </Link>
       );
@@ -82,19 +85,19 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonCo
       <button
         className={clsx(
           styles.Button,
-          variant && styles[variant],
-          size && styles[size],
-          fullWidth && styles.fullWidth,
+          variantClassName,
+          sizeClassName,
+          fullWidthClassName,
           className,
         )}
         ref={ref as React.Ref<HTMLButtonElement>}
         data-loading={isLoading ? "true" : undefined}
         {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
-        <span className={styles.content} aria-hidden={isLoading}>
-          {startIcon ? <span className={styles.startIcon}>{startIcon}</span> : null}
+        <span className={styles.Button__content} aria-hidden={isLoading}>
+          {startIcon ? <span className={styles.Button__startIcon}>{startIcon}</span> : null}
           {children}
-          {endIcon ? <span className={styles.endIcon}>{endIcon}</span> : null}
+          {endIcon ? <span className={styles.Button__endIcon}>{endIcon}</span> : null}
         </span>
       </button>
     );

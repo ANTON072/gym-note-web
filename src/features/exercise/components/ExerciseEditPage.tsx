@@ -23,8 +23,8 @@ export const ExerciseEditPage = () => {
   return (
     <>
       <PageTitle title="種目の編集" />
-      <div className={styles.wrapper}>
-        <div className={styles.indexForm}>
+      <div className={styles.Exercises}>
+        <div className={styles.Exercises__filter}>
           <div />
           <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
             一覧に戻る

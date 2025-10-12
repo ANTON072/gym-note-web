@@ -16,12 +16,12 @@ export const GlobalHeader = () => {
   };
 
   return (
-    <header className={styles.root}>
+    <header className={styles.GlobalHeader}>
       <div>{user && <Avatar src={user.photoURL} name={user.displayName} size={40} />}</div>
-      <h1 className={styles.title}>
+      <h1 className={styles.GlobalHeader__title}>
         <Link to="/">{APP_NAME}</Link>
       </h1>
-      <div className={styles.hamburgerMenu}>
+      <div className={styles.GlobalHeader__menu}>
         {user && <HamburgerMenu isOpen={drawer.isOpen} onClick={handleClickHamburgerMenu} />}
       </div>
       <Drawer />

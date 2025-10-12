@@ -1,28 +1,40 @@
-.wrapper {
+.Exercises {
   display: grid;
   row-gap: var(--size-1);
   margin-top: var(--size-6);
 }
 
-.indexForm {
+.Exercises__filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.formGrid {
+.Exercises__filterInput {
+  position: relative;
+  top: calc(-1 * var(--form-font-size));
+}
+
+.Exercises__formGrid {
   display: grid;
   gap: var(--form-gap);
 }
 
-.formActions {
+.Exercises__actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--container-padding);
   margin-top: calc(var(--form-gap) * 1.5);
 }
 
-.successMessage {
+.Exercises__deleteAction {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--container-padding);
+}
+
+.Exercises__successMessage {
   padding: var(--size-2);
   background-color: var(--green-1);
   color: var(--green-8);
@@ -31,7 +43,7 @@
   font-size: var(--font-size-0);
 }
 
-.errorMessage {
+.Exercises__errorMessage {
   padding: var(--size-2);
   background-color: var(--red-1);
   color: var(--red-8);
@@ -40,17 +52,17 @@
   font-size: var(--font-size-0);
 }
 
-.exerciseLink {
+.Exercises__exerciseLink {
   all: unset;
   color: var(--link-text-color);
   cursor: pointer;
 }
 
-.exerciseLink:hover {
+.Exercises__exerciseLink:hover {
   color: var(--blue-10);
 }
 
-.listDeleteButton {
+.Exercises__listDeleteButton {
   display: grid;
   place-items: center;
 }

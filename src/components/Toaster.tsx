@@ -48,7 +48,7 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToasterIt
   return (
     <li
       ref={listRef}
-      className={clsx(styles.toasterList, styles.toasterTransition)}
+      className={clsx(styles.Toaster__item, styles.Toaster__transition)}
       data-type={type}
       style={
         {
@@ -58,7 +58,7 @@ const ToasterItem = ({ message, type, id, onHeightUpdate, yPosition }: ToasterIt
     >
       <button
         type="button"
-        className={styles.closeButton}
+        className={styles.Toaster__closeButton}
         aria-label="閉じる"
         onClick={handleRemove}
       >
@@ -97,7 +97,7 @@ export const Toaster = () => {
   return (
     <section>
       <ol
-        className={clsx(styles.toaster, styles.toasterTransition)}
+        className={clsx(styles.Toaster, styles.Toaster__transition)}
         style={
           {
             "--total-height": `${totalHeight}px`,

@@ -1,6 +1,6 @@
 import { GoPencil } from "react-icons/go";
 import { GoPlusCircle } from "react-icons/go";
-import styles from "./Note.module.css";
+import styles from "./ExerciseListItem.module.css";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -15,9 +15,9 @@ export const ExerciseListItem = () => {
       <div className={styles.ExerciseListItem__head}>
         <div className={styles.ExerciseListItem__name}>1. ベンチプレス</div>
         <button type="button" className={styles.ExerciseListItem__editButton}>
-          <div>
+          <span className={styles.ExerciseListItem__editButtonInner}>
             <GoPencil />
-          </div>
+          </span>
         </button>
       </div>
       <div className={styles.ExerciseListItem__body}>

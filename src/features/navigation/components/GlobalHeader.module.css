@@ -1,10 +1,10 @@
-.root {
+.GlobalHeader {
   display: grid;
   grid-template-columns: var(--header-height) 1fr var(--header-height);
   align-items: center;
   height: var(--header-height);
   padding: 0 var(--container-padding);
-  background: #fff;
+  background: var(--color-background);
   border-bottom: 1px solid var(--border-color);
 
   > h1 {
@@ -13,13 +13,13 @@
   }
 }
 
-.title {
+.GlobalHeader__title {
   font-size: var(--font-size-4);
   a {
     color: var(--base-color);
   }
 }
 
-.hamburgerMenu {
+.GlobalHeader__menu {
   height: 100%;
 }

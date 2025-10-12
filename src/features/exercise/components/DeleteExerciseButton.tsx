@@ -9,10 +9,9 @@ import styles from "./Exercises.module.css";
 interface Props {
   exerciseId: number;
   onDeleted?: () => void;
-  disabled?: boolean;
 }
 
-export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props) => {
+export const DeleteExerciseButton = ({ exerciseId, onDeleted }: Props) => {
   const query = useQueryClient();
   const toast = useToast();
   const { open, ConfirmDialog } = useConfirm();
@@ -49,7 +48,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted, disabled }: Props)
       <button
         type="button"
         onClick={handleClick}
-        className={styles.listDeleteButton}
+        className={styles.Exercises__listDeleteButton}
         disabled={isMutating}
       >
         <GoTrash />

@@ -1,4 +1,4 @@
-import styles from "./form.module.css";
+import styles from "./TextArea.module.css";
 
 interface Props {
   name?: string;

@@ -1,4 +1,4 @@
-.container {
+.NotFound {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,33 +6,33 @@
   padding: var(--size-4);
 }
 
-.content {
+.NotFound__content {
   text-align: center;
-  max-width: 500px;
+  max-width: var(--size-content-2);
 }
 
-.title {
+.NotFound__title {
   font-size: var(--font-size-fluid-3);
   font-weight: var(--font-weight-7);
   margin: 0 0 var(--size-4) 0;
   line-height: 1;
 }
 
-.message {
+.NotFound__message {
   font-size: var(--font-size-3);
   font-weight: var(--font-weight-6);
   color: var(--text-color);
   margin: 0 0 var(--size-2) 0;
 }
 
-.description {
+.NotFound__description {
   font-size: var(--font-size-1);
   color: var(--stone-9);
   margin: 0 0 var(--size-6) 0;
   line-height: 1.6;
 }
 
-.actions {
+.NotFound__actions {
   display: flex;
   justify-content: center;
   gap: var(--size-3);

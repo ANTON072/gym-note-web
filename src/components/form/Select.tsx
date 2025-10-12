@@ -1,5 +1,5 @@
 import { GoChevronDown } from "react-icons/go";
-import styles from "./form.module.css";
+import styles from "./Select.module.css";
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children: React.ReactNode;

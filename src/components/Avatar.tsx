@@ -18,7 +18,7 @@ export const Avatar = ({ size, src, name }: Props) => {
         />
       ) : (
         <div
-          className={styles.AvatarPlaceholder}
+          className={styles.Avatar__placeholder}
           style={{ width: size, height: size, fontSize: size / 2 }}
         >
           {name?.charAt(0)}
