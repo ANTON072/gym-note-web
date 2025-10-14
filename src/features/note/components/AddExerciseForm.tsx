@@ -11,6 +11,7 @@ export const AddExerciseForm = () => {
 
   return (
     <form
+      noValidate
       onSubmit={() => {
         setDisplayComponentId(null);
       }}
