@@ -7,6 +7,10 @@
   border-bottom: 2px solid var(--stone-12);
   color: var(--stone-12);
   letter-spacing: 0.05em;
+
+  &:has(.NoteFormTitle__closeButton:active) {
+    opacity: 0.5;
+  }
 }
 
 .NoteFormTitle__label {
@@ -16,15 +20,17 @@
 
 .NoteFormTitle__closeButton {
   position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
-  top: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-8);
-  height: var(--size-8);
-  transform: translateY(-50%);
-  background: transparent;
+  bottom: 0;
   border: none;
   cursor: pointer;
+
+  > span {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

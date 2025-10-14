@@ -17,7 +17,9 @@ export const NoteFormTitle = ({ title }: Props) => {
         className={styles.NoteFormTitle__closeButton}
         onClick={() => setDisplayComponentId(null)}
       >
-        <GoX size={20} />
+        <span>
+          <GoX size={20} />
+        </span>
       </button>
     </div>
   );
