@@ -1,5 +1,5 @@
+import { useRouter } from "@tanstack/react-router";
 import { GoX } from "react-icons/go";
-import { useNoteContext } from "../contexts/NoteContext";
 import styles from "./NoteFormTitle.module.css";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const NoteFormTitle = ({ title }: Props) => {
-  const { setDisplayComponentId } = useNoteContext();
+  const router = useRouter();
 
   return (
     <div className={styles.NoteFormTitle}>
@@ -15,7 +15,9 @@ export const NoteFormTitle = ({ title }: Props) => {
       <button
         type="button"
         className={styles.NoteFormTitle__closeButton}
-        onClick={() => setDisplayComponentId(null)}
+        onClick={() => {
+          router.history.back();
+        }}
       >
         <span>
           <GoX size={20} />

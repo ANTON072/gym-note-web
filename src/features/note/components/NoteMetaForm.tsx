@@ -1,21 +1,20 @@
 import { Button } from "@/components";
 import { InputField, TextField } from "@/components/form";
-import { useNoteContext } from "../contexts/NoteContext";
+import { useNavigate } from "@tanstack/react-router";
 import styles from "./NoteFormCommon.module.css";
 import { NoteFormTitle } from "./NoteFormTitle";
 
 export const NoteMetaForm = () => {
-  const { displayComponentId, setDisplayComponentId } = useNoteContext();
+  const navigate = useNavigate();
 
-  if (displayComponentId !== "edit_meta") return null;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: フォームデータの送信処理
+    navigate({ to: "/notes/today" });
+  };
 
   return (
-    <form
-      className={styles.NoteFormCommon}
-      onSubmit={() => {
-        setDisplayComponentId(null);
-      }}
-    >
+    <form className={styles.NoteFormCommon} onSubmit={handleSubmit}>
       <div className={styles.NoteFormCommon__fields}>
         <NoteFormTitle title="場所・日時" />
         <InputField label="日にち" name="date">

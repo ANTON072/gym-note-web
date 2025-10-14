@@ -14,8 +14,8 @@ interface Props {
 export const NoteTitle = ({ title, status }: Props) => {
   return (
     <div className={styles.NoteTitle}>
-      <PageTitle title={title} />
       <NoteStatusChip status={status} />
+      <PageTitle title={title} />
     </div>
   );
 };
