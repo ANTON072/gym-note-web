@@ -1,10 +1,8 @@
 import { Button, PageTitle, Table } from "@/components";
-import { InputField, Select } from "@/components/form";
-import Skeleton from "react-loading-skeleton";
-
-import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
+import { InputField, Select, renderBodyPartOptions } from "@/components/form";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import Skeleton from "react-loading-skeleton";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -42,14 +40,7 @@ export function ExerciseListPage() {
               }}
               value={filteredBodyPart ?? ""}
             >
-              <option value="">すべて</option>
-              {Array.isArray(BODY_PART_OPTIONS)
-                ? BODY_PART_OPTIONS.map(({ value, label }) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))
-                : null}
+              {renderBodyPartOptions({ includeAllOption: true })}
             </Select>
           </InputField>
 

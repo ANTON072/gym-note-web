@@ -1,8 +1,8 @@
 import { Button } from "@/components";
 import { InputField, TextField } from "@/components/form";
 import { useNoteContext } from "../contexts/NoteContext";
+import styles from "./NoteFormCommon.module.css";
 import { NoteFormTitle } from "./NoteFormTitle";
-import styles from "./NoteMetaForm.module.css";
 
 export const NoteMetaForm = () => {
   const { displayComponentId, setDisplayComponentId } = useNoteContext();
@@ -11,17 +11,17 @@ export const NoteMetaForm = () => {
 
   return (
     <form
-      className={styles.NoteMetaForm}
+      className={styles.NoteFormCommon}
       onSubmit={() => {
         setDisplayComponentId(null);
       }}
     >
-      <div className={styles.NoteMetaForm__fields}>
+      <div className={styles.NoteFormCommon__fields}>
         <NoteFormTitle title="場所・日時" />
         <InputField label="日にち" name="date">
           <TextField type="date" />
         </InputField>
-        <div className={styles.NoteMetaForm__timeFields}>
+        <div className={styles.NoteFormCommon__timeFields}>
           <InputField label="開始時刻" name="start_time">
             <TextField type="time" />
           </InputField>
@@ -32,7 +32,7 @@ export const NoteMetaForm = () => {
         <InputField label="場所" name="place">
           <TextField />
         </InputField>
-        <Button type="submit" fullWidth className={styles.NoteMetaForm__submitButton}>
+        <Button type="submit" fullWidth className={styles.NoteFormCommon__submitButton}>
           更新
         </Button>
       </div>

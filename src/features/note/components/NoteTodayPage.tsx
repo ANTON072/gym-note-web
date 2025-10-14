@@ -3,6 +3,7 @@ import { NoteActionsBar } from "./NoteActionsBar";
 import { NoteMeta } from "./NoteMeta";
 
 import { NoteProvider, useNoteContext } from "../contexts/NoteContext";
+import { AddExerciseForm } from "./AddExerciseForm";
 import { NoteMetaForm } from "./NoteMetaForm";
 import { NoteTitle } from "./NoteTitle";
 import styles from "./NoteTodayPage.module.css";
@@ -30,6 +31,7 @@ export const NoteTodayPage = () => {
       <NoteTitle title="本日のノート" status="active" />
       <Contents />
       <NoteMetaForm />
+      <AddExerciseForm />
     </NoteProvider>
   );
 };

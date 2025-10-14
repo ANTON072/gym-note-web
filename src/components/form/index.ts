@@ -1,3 +1,4 @@
+export * from "./BodyPartSelect";
 export * from "./InputField";
 export * from "./RadioButton";
 export * from "./RadioGroup";
