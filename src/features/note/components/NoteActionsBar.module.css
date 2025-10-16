@@ -8,6 +8,7 @@
 
 .NoteActionsBar__addButton {
   font-weight: var(--font-weight-7);
+  justify-self: start;
 }
 
 .NoteActionsBar__form {
