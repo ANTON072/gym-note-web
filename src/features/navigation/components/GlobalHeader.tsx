@@ -4,7 +4,6 @@ import { useAuth } from "@/features/auth";
 import { useRootStore } from "@/store/rootStore";
 import { Link } from "@tanstack/react-router";
 import { Drawer } from "./Drawer";
-import styles from "./GlobalHeader.module.css";
 import { HamburgerMenu } from "./HamburgerMenu";
 
 export const GlobalHeader = () => {
@@ -16,12 +15,12 @@ export const GlobalHeader = () => {
   };
 
   return (
-    <header className={styles.GlobalHeader}>
+    <header className="flex place-content-between items-center h-header px-container bg-background border-b border-border">
       <div>{user && <Avatar src={user.photoURL} name={user.displayName} size={40} />}</div>
-      <h1 className={styles.GlobalHeader__title}>
+      <h1 className="text-2xl font-bold">
         <Link to="/">{APP_NAME}</Link>
       </h1>
-      <div className={styles.GlobalHeader__menu}>
+      <div className="h-full">
         {user && <HamburgerMenu isOpen={drawer.isOpen} onClick={handleClickHamburgerMenu} />}
       </div>
       <Drawer />

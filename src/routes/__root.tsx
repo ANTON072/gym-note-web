@@ -6,8 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import styles from "./__root.module.css";
-
 import "react-loading-skeleton/dist/skeleton.css";
 
 const queryClient = new QueryClient({
@@ -20,16 +18,16 @@ const queryClient = new QueryClient({
 });
 
 const LoadingSpinner = () => (
-  <div className={styles.RootLayout__loading}>
+  <div className="flex items-center justify-center h-full text-2xl">
     <Loading />
   </div>
 );
 
 const Layout = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
-    <div className={styles.RootLayout}>
+    <div className="grid grid-rows-[auto_1fr_auto] h-svh">
       <GlobalHeader />
-      <main className={styles.RootLayout__main}>{children}</main>
+      <main className="w-full max-w-max-content-width p-content-gap mt-2 mx-auto">{children}</main>
       <GlobalFooter />
       <Toaster />
     </div>

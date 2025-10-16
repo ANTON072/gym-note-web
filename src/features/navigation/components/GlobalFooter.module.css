@@ -1,6 +1,0 @@
-.GlobalFooter {
-  display: grid;
-  place-items: center;
-  height: var(--size-8);
-  padding: var(--container-padding);
-}
