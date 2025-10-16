@@ -45,7 +45,7 @@ export const MyPage = () => {
           </FieldSet>
         </FieldGroup>
         <div className="py-10 flex justify-end">
-          <Button onClick={handleDeleteAccount} variant="ghost" className="text-destructive">
+          <Button onClick={handleDeleteAccount} variant="ghost">
             退会する
           </Button>
         </div>
