@@ -1,7 +1,9 @@
-import { Avatar, Button, PageTitle } from "@/components";
+import { PageTitle } from "@/components";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { FieldDescription, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAuthenticatedUser } from "@/features/auth";
 import { useConfirm } from "@/hooks/useConfirm";
-import styles from "./MyPage.module.css";
 
 export const MyPage = () => {
   const authUser = useAuthenticatedUser();
@@ -22,22 +24,28 @@ export const MyPage = () => {
   return (
     <>
       <PageTitle title="マイページ" />
-      <div className={styles.MyPage}>
-        <div className={styles.MyPage__avatarSection}>
-          <Avatar src={authUser.photoURL} name={authUser.displayName} size={80} />
+      <div>
+        <div className="grid place-items-center w-full h-30">
+          <Avatar className="size-20">
+            <AvatarImage
+              src={authUser.photoURL ?? undefined}
+              alt={authUser.displayName ?? undefined}
+            />
+            <AvatarFallback>{authUser.displayName}</AvatarFallback>
+          </Avatar>
         </div>
-        <div className={styles.MyPage__infoSection}>
-          <div className={styles.MyPage__infoItem}>
-            <span className={styles.MyPage__label}>ユーザー名</span>
-            <span className={styles.MyPage__value}>{authUser.displayName}</span>
-          </div>
-          <div className={styles.MyPage__infoItem}>
-            <span className={styles.MyPage__label}>メールアドレス</span>
-            <span className={styles.MyPage__value}>{authUser.email}</span>
-          </div>
-        </div>
-        <div className={styles.MyPage__dangerZone}>
-          <Button type="button" onClick={handleDeleteAccount} variant="danger">
+        <FieldGroup>
+          <FieldSet>
+            <FieldLegend>ユーザー名</FieldLegend>
+            <FieldDescription>{authUser.displayName}</FieldDescription>
+          </FieldSet>
+          <FieldSet>
+            <FieldLegend>メールアドレス</FieldLegend>
+            <FieldDescription>{authUser.email}</FieldDescription>
+          </FieldSet>
+        </FieldGroup>
+        <div className="py-10 flex justify-end">
+          <Button onClick={handleDeleteAccount} variant="ghost" className="text-destructive">
             退会する
           </Button>
         </div>
