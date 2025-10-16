@@ -7,7 +7,6 @@ import { GoPerson } from "react-icons/go";
 
 import { logout } from "@/features/auth/lib/auth";
 import { Link } from "@tanstack/react-router";
-import styles from "./Drawer.module.css";
 
 const menuList = [
   { name: "本日のノート", href: "/notes/today" },
@@ -83,13 +82,20 @@ export const Drawer = () => {
     <>
       {/* biome-ignore lint/a11y/useKeyWithClickEvents:
       Backdrop is intended to be closed by mouse only; keyboard interaction is not required.*/}
-      <div ref={backdropRef} className={styles.Drawer__backdrop} onClick={handleClose} />
-      <nav ref={drawerRef} className={styles.Drawer}>
+      <div
+        ref={backdropRef}
+        className="fixed top-header bottom-0 left-0 w-svw z-1 bg-foreground/60"
+        onClick={handleClose}
+      />
+      <nav
+        ref={drawerRef}
+        className="fixed top-header right-0 bottom-0 z-1 w-[80svw] p-4 bg-background grid grid-rows-[1fr_auto]"
+      >
         <div>
-          <ul className={styles.Drawer__menu}>
+          <ul className="grid gap-3">
             {menuList.map((item) => (
               <li key={item.name}>
-                <Link to={item.href} onClick={handleClose}>
+                <Link to={item.href} onClick={handleClose} className="text-link-foreground">
                   {item.name}
                 </Link>
               </li>
@@ -97,10 +103,14 @@ export const Drawer = () => {
           </ul>
         </div>
         <div>
-          <hr className={styles.Drawer__divider} />
-          <ul className={styles.Drawer__menu}>
+          <hr className="block w-full h-px my-5 bg-foreground" />
+          <ul className="grid gap-3 p-0 m-0 list-none">
             <li>
-              <Link to="/mypage" className={styles.Drawer__iconButton} onClick={handleClose}>
+              <Link
+                to="/mypage"
+                className="flex gap-1 items-center text-link-foreground"
+                onClick={handleClose}
+              >
                 <GoPerson />
                 マイページ
               </Link>
@@ -110,7 +120,7 @@ export const Drawer = () => {
                 type="button"
                 onClick={handleLogout}
                 disabled={isMutating}
-                className={styles.Drawer__iconButton}
+                className="flex gap-1 items-center text-link-foreground"
               >
                 <GoSignOut />
                 ログアウト

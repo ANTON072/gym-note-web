@@ -69,6 +69,7 @@
   --spacing-hamburger-icon: 2.25rem;
   --spacing-content-gap: 0.5rem;
   --spacing-max-content-width: 768px;
+  --color-active: var(--destructive);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -139,4 +140,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer components {
+  .text-link-foreground {
+    @apply text-foreground;
+  }
+  .text-link-foreground:active {
+    @apply text-destructive;
+  }
 }
