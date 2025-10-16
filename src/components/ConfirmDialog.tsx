@@ -1,5 +1,13 @@
-import { useEffect, useRef } from "react";
-import styles from "./ConfirmDialog.module.css";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Props {
   isOpen: boolean;
@@ -20,70 +28,18 @@ export const ConfirmDialog = ({
   onConfirm,
   onCancel,
 }: Props) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (isOpen) {
-      dialog.showModal();
-    } else {
-      dialog.close();
-    }
-  }, [isOpen]);
-
-  const handleConfirm = () => {
-    onConfirm();
-    dialogRef.current?.close();
-  };
-
-  const handleCancel = () => {
-    onCancel();
-    dialogRef.current?.close();
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-    if (e.target === dialogRef.current) {
-      handleCancel();
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
-    if (e.key === "Escape") {
-      handleCancel();
-    }
-  };
-
-  if (!isOpen) return null;
-
   return (
-    <dialog
-      ref={dialogRef}
-      className={styles.ConfirmDialog}
-      onClick={handleBackdropClick}
-      onKeyDown={handleKeyDown}
-    >
-      <div className={styles.ConfirmDialog__content}>
-        {title && <h2 className={styles.ConfirmDialog__title}>{title}</h2>}
-        <p className={styles.ConfirmDialog__message}>{message}</p>
-        <div className={styles.ConfirmDialog__buttons}>
-          <button
-            type="button"
-            onClick={handleCancel}
-            className={styles.ConfirmDialog__cancelButton}
-          >
-            {cancelLabel}
-          </button>
-          <button
-            type="button"
-            onClick={handleConfirm}
-            className={styles.ConfirmDialog__confirmButton}
-          >
-            {confirmLabel}
-          </button>
-        </div>
-      </div>
-    </dialog>
+    <AlertDialog open={isOpen}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          {title && <AlertDialogTitle>{title}</AlertDialogTitle>}
+          {message && <AlertDialogDescription>{message}</AlertDialogDescription>}
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={() => onCancel()}>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogAction onClick={() => onConfirm()}>{confirmLabel}</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

@@ -12,7 +12,8 @@ export const MyPage = () => {
   const handleDeleteAccount = () => {
     open(
       {
-        message: "本当に退会しますか？",
+        title: "退会確認",
+        message: "退会するとデータは復元できません。",
         confirmLabel: "退会する",
       },
       () => {
