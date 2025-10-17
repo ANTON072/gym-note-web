@@ -1,30 +1,9 @@
-@import url("open-props/style");
-
 @import "tw-animate-css";
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --max-content-width: 768px;
-  --base-color: var(--stone-12);
-  --key-color: var(--red-9);
-  --text-color: var(--base-color);
-  --border-color: var(--base-color);
-  --container-padding: var(--size-2);
-  --header-height: var(--size-8);
-  --button-height: var(--size-8);
-  --form-font-size: var(--font-size-1);
-  --form-padding-horizontal: var(--size-2);
-  --place-holder: var(--stone-4);
-  --form-gap: var(--size-4);
-  --link-text-color: var(--blue-8);
-  --border-size-1: 1px;
-  --border-size-2: 2px;
-  --color-background: #fff;
-  --color-background-muted: #f8f9fa;
-  --color-on-contrast: #fff;
-
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
