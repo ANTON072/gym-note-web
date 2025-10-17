@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircleIcon } from "lucide-react";
+import { PencilIcon, PlusCircleIcon } from "lucide-react";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -11,7 +11,10 @@ export const ExerciseListItem = () => {
   ];
 
   return (
-    <Card className="!border-stone-300 gap-1 pb-2">
+    <Card className="!border-stone-300 gap-1 pb-2 relative">
+      <Button size="icon-sm" variant="ghost" className="absolute top-2 right-2">
+        <PencilIcon className="size-3.5 text-gray-500" />
+      </Button>
       <CardHeader className="px-3">
         <CardTitle className="text-lg font-bold">1. ベンチプレス</CardTitle>
       </CardHeader>

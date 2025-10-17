@@ -9,7 +9,7 @@ export const NoteMeta = () => {
           to="/notes/today/meta"
           className="absolute inset-0 border-0 bg-transparent cursor-pointer"
         >
-          <Pencil className="absolute right-2 top-2 size-3.5 text-gray-500" />
+          <Pencil className="absolute right-4 top-3 size-3.5 text-gray-500" />
         </Link>
         <div>2025年10月6日(月)</div>
         <div>開始: 12:00</div>
