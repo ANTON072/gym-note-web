@@ -1,9 +1,8 @@
 import { useRootStore } from "@/store/rootStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { LogOut, User } from "lucide-react";
 import { useRef, useState } from "react";
-import { GoSignOut } from "react-icons/go";
-import { GoPerson } from "react-icons/go";
 import { toast } from "sonner";
 
 import { logout } from "@/features/auth/lib/auth";
@@ -111,7 +110,7 @@ export const Drawer = () => {
                 className="flex gap-1 items-center text-link-foreground"
                 onClick={handleClose}
               >
-                <GoPerson />
+                <User size={20} />
                 マイページ
               </Link>
             </li>
@@ -122,7 +121,7 @@ export const Drawer = () => {
                 disabled={isMutating}
                 className="flex gap-1 items-center text-link-foreground"
               >
-                <GoSignOut />
+                <LogOut size={20} />
                 ログアウト
               </button>
             </li>
