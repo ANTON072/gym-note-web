@@ -1,8 +1,16 @@
-import { PageTitle, Table } from "@/components";
+import { PageTitle } from "@/components";
 import { BodyPartSelect } from "@/components/form";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useGetExercises } from "../hooks/useExerciseApi";
@@ -58,36 +66,45 @@ export function ExerciseListPage() {
           </div>
         )}
         {isFetched && (
-          <Table
-            data={filteredExercises}
-            columns={[
-              {
-                key: "name",
-                header: "種目名",
-                render: (exercise) => (
-                  <Link
-                    to="/exercises/$exerciseId"
-                    params={{ exerciseId: exercise.id.toString() }}
-                    search={true}
-                  >
-                    {exercise.name}
-                  </Link>
-                ),
-                width: "55%",
-              },
-              {
-                key: "body_part",
-                header: "部位",
-                render: (exercise) => exercise.body_part,
-              },
-              {
-                key: "edit",
-                header: "",
-                render: (exercise) => <DeleteExerciseButton exerciseId={exercise.id} />,
-              },
-            ]}
-            keyExtractor={(exercise) => exercise.id}
-          />
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[55%]">種目名</TableHead>
+                  <TableHead>部位</TableHead>
+                  <TableHead className="w-12" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredExercises.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-muted-foreground">
+                      データがありません
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredExercises.map((exercise) => (
+                    <TableRow key={exercise.id}>
+                      <TableCell className="font-medium">
+                        <Link
+                          to="/exercises/$exerciseId"
+                          params={{ exerciseId: exercise.id.toString() }}
+                          search={true}
+                          className="hover:underline"
+                        >
+                          {exercise.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{exercise.body_part}</TableCell>
+                      <TableCell>
+                        <DeleteExerciseButton exerciseId={exercise.id} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
         )}
       </div>
     </>
