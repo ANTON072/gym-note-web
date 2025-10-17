@@ -1,10 +1,9 @@
-import { useToast } from "@/hooks";
 import { useConfirm } from "@/hooks/useConfirm";
 import { useIsMutating, useQueryClient } from "@tanstack/react-query";
-import { GoTrash } from "react-icons/go";
+import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useDeleteExercise } from "../hooks/useExerciseApi";
-import styles from "./Exercises.module.css";
 
 interface Props {
   exerciseId: number;
@@ -13,21 +12,17 @@ interface Props {
 
 export const DeleteExerciseButton = ({ exerciseId, onDeleted }: Props) => {
   const query = useQueryClient();
-  const toast = useToast();
   const { open, ConfirmDialog } = useConfirm();
   const isMutating = useIsMutating() > 0;
 
   const deleteMutation = useDeleteExercise({
     onSuccess: () => {
       query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
-      toast.add({ message: "種目を削除しました" });
+      toast.success("種目を削除しました");
       onDeleted?.();
     },
     onError: (error: Error) => {
-      toast.add({
-        message: `種目の削除に失敗しました: ${error.message}`,
-        type: "error",
-      });
+      toast.error(`種目の削除に失敗しました: ${error.message}`);
     },
   });
 
@@ -48,10 +43,10 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted }: Props) => {
       <button
         type="button"
         onClick={handleClick}
-        className={styles.Exercises__listDeleteButton}
+        className="grid place-items-center"
         disabled={isMutating}
       >
-        <GoTrash />
+        <Trash2 className="h-4 w-4" />
       </button>
       <ConfirmDialog />
     </>

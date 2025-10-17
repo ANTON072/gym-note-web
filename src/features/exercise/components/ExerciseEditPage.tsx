@@ -1,13 +1,10 @@
-import { Button, PageTitle } from "@/components";
-import Skeleton from "react-loading-skeleton";
-
-import { useParams } from "@tanstack/react-router";
-import { GoChevronLeft } from "react-icons/go";
-
+import { PageTitle } from "@/components";
 import { NotFound } from "@/components/NotFound";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useParams } from "@tanstack/react-router";
 import { useGetExercise } from "../hooks/useExerciseApi";
 import { ExerciseForm } from "./ExerciseForm";
-import styles from "./Exercises.module.css";
+import { ExercisePageLayout } from "./ExercisePageLayout";
 
 export const ExerciseEditPage = () => {
   const { exerciseId } = useParams({ from: "/exercises/$exerciseId" });
@@ -23,19 +20,17 @@ export const ExerciseEditPage = () => {
   return (
     <>
       <PageTitle title="種目の編集" />
-      <div className={styles.Exercises}>
-        <div className={styles.Exercises__filter}>
-          <div />
-          <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
-            一覧に戻る
-          </Button>
-        </div>
+      <ExercisePageLayout>
         {isPending ? (
-          <Skeleton count={10} height={40} style={{ marginBottom: 10 }} />
+          <div className="space-y-2.5">
+            {Array.from({ length: 5 }, (_, i) => `skeleton-${i}`).map((id) => (
+              <Skeleton key={id} className="h-10 w-full" />
+            ))}
+          </div>
         ) : (
           <ExerciseForm defaultValues={exercise} exerciseId={exerciseIdNumber} />
         )}
-      </div>
+      </ExercisePageLayout>
     </>
   );
 };

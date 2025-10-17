@@ -1,18 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { GoPencil } from "react-icons/go";
-import styles from "./NoteMeta.module.css";
+import { Pencil } from "lucide-react";
 
 export const NoteMeta = () => {
   return (
     <>
-      <div className={styles.NoteMeta}>
-        <Link to="/notes/today/meta" className={styles.NoteMeta__toggle}>
-          <GoPencil className={styles.NoteMeta__icon} />
+      <div className="relative grid grid-cols-[auto_auto_auto] gap-content-gap p-content-gap mb-3 bg-blue-100 rounded-sm text-sm border-blue-200 border">
+        <Link
+          to="/notes/today/meta"
+          className="absolute inset-0 border-0 bg-transparent cursor-pointer"
+        >
+          <Pencil className="absolute right-4 top-3 size-3.5 text-gray-500" />
         </Link>
         <div>2025年10月6日(月)</div>
         <div>開始: 12:00</div>
         <div />
-        <div className={styles.NoteMeta__place}>場所: クラブオーサム西国分寺</div>
+        <div className="col-span-3">場所: クラブオーサム西国分寺</div>
       </div>
     </>
   );

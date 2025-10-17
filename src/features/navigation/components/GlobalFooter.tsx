@@ -1,9 +1,8 @@
 import { APP_NAME } from "@/constants/app";
-import styles from "./GlobalFooter.module.css";
 
 export const GlobalFooter = () => {
   return (
-    <footer className={styles.GlobalFooter}>
+    <footer className="grid place-items-center p-content-gap">
       <small>© 2025 {APP_NAME}</small>
     </footer>
   );

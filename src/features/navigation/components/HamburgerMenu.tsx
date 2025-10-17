@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
-import styles from "./HamburgerMenu.module.css";
 
 interface HamburgerMenuProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;
@@ -82,10 +81,13 @@ export const HamburgerMenu = ({ isOpen, ...props }: HamburgerMenuProps) => {
     <button
       type="button"
       aria-label="Open menu"
-      className={`${styles.HamburgerMenu} tap`}
+      className="relative inline-flex items-center justify-center w-full h-full p-0 bg-transparent border-none tap"
       {...props}
     >
-      <svg viewBox="0 0 40 40" className={styles.HamburgerMenu__icon}>
+      <svg
+        viewBox="0 0 40 40"
+        className="w-hamburger-icon h-hamburger-icon cursor-pointer fill-none stroke-[color:var(--foreground)] stroke-[3px]"
+      >
         <title>Open menu</title>
         <path ref={topLineRef} d="M8,12 L32,12 Z" />
         <path ref={middleLineRef} d="M8,20 L32,20 Z" />

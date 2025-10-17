@@ -1,27 +1,18 @@
-import { Button, PageTitle } from "@/components";
-
-import { GoChevronLeft } from "react-icons/go";
-
+import { PageTitle } from "@/components";
 import { ExerciseForm } from "./ExerciseForm";
-import styles from "./Exercises.module.css";
+import { ExercisePageLayout } from "./ExercisePageLayout";
 
 export const ExerciseNewPage = () => {
   return (
     <>
       <PageTitle title="種目の新規作成" />
-      <div className={styles.Exercises}>
-        <div className={styles.Exercises__filter}>
-          <div />
-          <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
-            一覧に戻る
-          </Button>
-        </div>
+      <ExercisePageLayout>
         <ExerciseForm
           defaultValues={{
             laterality: "bilateral" as const,
           }}
         />
-      </div>
+      </ExercisePageLayout>
     </>
   );
 };

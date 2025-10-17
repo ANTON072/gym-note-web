@@ -1,14 +1,10 @@
-import { Loading } from "@/components";
-import { Toaster } from "@/components/Toaster";
+import { Toaster } from "@/components/ui/sonner";
+import { Spinner } from "@/components/ui/spinner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-
-import styles from "./__root.module.css";
-
-import "react-loading-skeleton/dist/skeleton.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,19 +16,19 @@ const queryClient = new QueryClient({
 });
 
 const LoadingSpinner = () => (
-  <div className={styles.RootLayout__loading}>
-    <Loading />
+  <div className="flex items-center justify-center h-full">
+    <Spinner className="size-10 text-gray-300" />
   </div>
 );
 
 const Layout = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
-    <div className={styles.RootLayout}>
+    <div className="grid grid-rows-[auto_1fr_auto] h-svh">
       <GlobalHeader />
-      <main className={styles.RootLayout__main}>{children}</main>
+      <main className="w-full max-w-max-content-width px-content-gap mt-4 mx-auto">{children}</main>
       <GlobalFooter />
-      <Toaster />
     </div>
+    <Toaster />
   </QueryClientProvider>
 );
 
