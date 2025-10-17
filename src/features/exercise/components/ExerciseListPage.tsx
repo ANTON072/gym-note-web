@@ -21,6 +21,9 @@ export function ExerciseListPage() {
     if (!filteredBodyPart) {
       return true;
     }
+    if (filteredBodyPart === "unset") {
+      return !exercise.body_part || exercise.body_part === "";
+    }
     return exercise.body_part === filteredBodyPart;
   });
 
@@ -40,6 +43,7 @@ export function ExerciseListPage() {
               }}
               value={filteredBodyPart ?? ""}
               showAllOption
+              showUnsetOption
             />
           </Field>
           <Button asChild>

@@ -21,6 +21,10 @@ interface BodyPartSelectProps {
   showAllOption?: boolean;
   // すべてのオプションのラベル
   allOptionLabel?: string;
+  // 未設定の選択肢を含めるかどうか
+  showUnsetOption?: boolean;
+  // 未設定のオプションのラベル
+  unsetOptionLabel?: string;
   // プレースホルダーテキスト
   placeholder?: string;
   // aria-invalid属性
@@ -40,6 +44,8 @@ export function BodyPartSelect({
   disabled = false,
   showAllOption = false,
   allOptionLabel = "すべて",
+  showUnsetOption = false,
+  unsetOptionLabel = "未設定",
   placeholder = "選択してください",
   "aria-invalid": ariaInvalid,
   id,
@@ -50,8 +56,14 @@ export function BodyPartSelect({
   const selectValue = value || "all";
 
   const handleValueChange = (newValue: string) => {
-    // "all"を空文字列に戻す
-    onValueChange?.(newValue === "all" ? "" : newValue);
+    // "all"と"unset"を適切な値に変換
+    if (newValue === "all") {
+      onValueChange?.("");
+    } else if (newValue === "unset") {
+      onValueChange?.("unset");
+    } else {
+      onValueChange?.(newValue);
+    }
   };
 
   return (
@@ -63,6 +75,12 @@ export function BodyPartSelect({
         {showAllOption && (
           <>
             <SelectItem value="all">{allOptionLabel}</SelectItem>
+            <SelectSeparator />
+          </>
+        )}
+        {showUnsetOption && (
+          <>
+            <SelectItem value="unset">{unsetOptionLabel}</SelectItem>
             <SelectSeparator />
           </>
         )}
