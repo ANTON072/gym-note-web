@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Pencil } from "lucide-react";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -90,8 +91,9 @@ export function ExerciseListPage() {
                           to="/exercises/$exerciseId"
                           params={{ exerciseId: exercise.id.toString() }}
                           search={true}
-                          className="hover:underline"
+                          className="inline-flex items-center gap-2 text-primary"
                         >
+                          <Pencil className="h-4 w-4 shrink-0" />
                           {exercise.name}
                         </Link>
                       </TableCell>
