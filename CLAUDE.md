@@ -44,7 +44,7 @@ npm install
 - **フロントエンド**: React 19 + TypeScript 5.6
 - **ビルドツール**: Vite 5.4
 - **ルーティング**: TanStack Router
-- **スタイリング**: CSS Modules
+- **スタイリング**: Tailwind CSS v4 + shadcn/ui
 - **テスト**: Vitest + Testing Library
 - **コード品質**: Biome（フォーマッター・リンター）
 
@@ -59,6 +59,13 @@ npm install
 1. **日本語対応**: ドキュメントとコミュニケーションは日本語で行う
 2. **コード品質**: 保存時に自動フォーマットが実行される
 3. **型安全性**: TypeScript の strict モードを維持する
-4. **スタイリング**: CSS Modules を使用（Component.module.css）
+4. **スタイリング**: Tailwind CSS v4 のユーティリティクラスを使用。shadcn/ui コンポーネント（`src/components/ui/`）を活用
 5. **ルーティング**: routes/[page]/route.tsx でページを定義
 6. **テスト**: Vitest を使用、Testing Library でコンポーネントテスト
+
+### スタイリング詳細
+
+- **UIコンポーネント**: 新規作成時は shadcn/ui の既存コンポーネントを優先的に使用
+- **カスタムスタイル**: Tailwind のユーティリティクラスで記述
+- **条件付きスタイル**: `cn()` ユーティリティ（`src/lib/utils.ts`）を使用
+- **CSS Modules**: 原則として使用しない（レガシーコードにのみ残存）
