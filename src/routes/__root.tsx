@@ -1,5 +1,5 @@
-import { Loading } from "@/components";
 import { Toaster } from "@/components/ui/sonner";
+import { Spinner } from "@/components/ui/spinner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,8 +18,8 @@ const queryClient = new QueryClient({
 });
 
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center h-full text-2xl">
-    <Loading />
+  <div className="flex items-center justify-center h-full">
+    <Spinner className="size-10 text-gray-300" />
   </div>
 );
 
