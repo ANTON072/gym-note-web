@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
 import { toast } from "sonner";
 import { signInWithGoogle } from "../lib/auth";
@@ -48,7 +49,7 @@ export const GoogleLoginButton = () => {
       onClick={handleGoogleLogin}
       disabled={isLoading}
     >
-      <GoogleIcon />
+      {isLoading ? <Spinner /> : <GoogleIcon />}
       Sign in with Google
     </Button>
   );
