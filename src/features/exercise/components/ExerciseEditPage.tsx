@@ -3,8 +3,8 @@ import { NotFound } from "@/components/NotFound";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "@tanstack/react-router";
 import { useGetExercise } from "../hooks/useExerciseApi";
-import { BackToListButton } from "./BackToListButton";
 import { ExerciseForm } from "./ExerciseForm";
+import { ExercisePageLayout } from "./ExercisePageLayout";
 
 export const ExerciseEditPage = () => {
   const { exerciseId } = useParams({ from: "/exercises/$exerciseId" });
@@ -20,11 +20,7 @@ export const ExerciseEditPage = () => {
   return (
     <>
       <PageTitle title="種目の編集" />
-      <div className="mt-6 grid gap-4">
-        <div className="flex items-center justify-between">
-          <div />
-          <BackToListButton />
-        </div>
+      <ExercisePageLayout>
         {isPending ? (
           <div className="space-y-2.5">
             {Array.from({ length: 5 }, (_, i) => `skeleton-${i}`).map((id) => (
@@ -34,7 +30,7 @@ export const ExerciseEditPage = () => {
         ) : (
           <ExerciseForm defaultValues={exercise} exerciseId={exerciseIdNumber} />
         )}
-      </div>
+      </ExercisePageLayout>
     </>
   );
 };
