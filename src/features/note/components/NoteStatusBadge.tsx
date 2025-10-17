@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { NOTE_STATUS, type NoteStatus } from "../constants/noteStatus";
 
 const STATUS_CLASS_NAME: Record<NoteStatus, string> = {
-  active: "bg-blue-500 text-white",
-  completed: "bg-green-500 text-white",
-  archived: "bg-gray-500 text-white",
+  active: "bg-blue-500",
+  completed: "bg-green-500",
+  archived: "bg-gray-500",
 };
 
 interface Props {

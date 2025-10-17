@@ -12,7 +12,7 @@ interface Props {
 
 export const NoteTitle = ({ title, status }: Props) => {
   return (
-    <div className="grid mb-2 justify-items-start gap-1">
+    <div className="grid mb-4 justify-items-start gap-1">
       <NoteStatusBadge status={status} />
       <PageTitle title={title} />
     </div>
