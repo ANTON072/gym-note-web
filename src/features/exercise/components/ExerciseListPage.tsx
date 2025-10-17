@@ -1,12 +1,13 @@
-import { Button, PageTitle, Table } from "@/components";
-import { InputField, Select, renderBodyPartOptions } from "@/components/form";
+import { PageTitle, Table } from "@/components";
+import { BodyPartSelect } from "@/components/form";
+import { Button } from "@/components/ui/button";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import Skeleton from "react-loading-skeleton";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
-import styles from "./Exercises.module.css";
 
 export function ExerciseListPage() {
   const { data, isLoading, isFetched } = useGetExercises();
@@ -26,25 +27,24 @@ export function ExerciseListPage() {
   return (
     <>
       <PageTitle title="種目一覧" />
-      <div className={styles.Exercises}>
-        <div className={styles.Exercises__filter}>
-          <InputField label="種目名で絞り込み" className={styles.Exercises__filterInput}>
-            <Select
-              name="body_part"
+      <div className="mt-6 grid gap-1">
+        <div className="flex items-end justify-between mb-3">
+          <Field className="w-40">
+            <FieldLabel>部位でフィルタ</FieldLabel>
+            <BodyPartSelect
               disabled={isMutating}
-              onChange={(e) => {
-                const target = e.target.value;
+              onValueChange={(value) => {
                 navigate({
-                  search: { bodyPart: target || undefined },
+                  search: { bodyPart: value || undefined },
                 });
               }}
               value={filteredBodyPart ?? ""}
-            >
-              {renderBodyPartOptions({ includeAllOption: true })}
-            </Select>
-          </InputField>
-
-          <Button to="/exercises/new">新規登録</Button>
+              showAllOption
+            />
+          </Field>
+          <Button asChild>
+            <Link to="/exercises/new">新規登録</Link>
+          </Button>
         </div>
         {isLoading && !isFetched && <Skeleton count={5} height={40} style={{ marginBottom: 10 }} />}
         {isFetched && (
