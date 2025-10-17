@@ -1,12 +1,9 @@
 import { PageTitle } from "@/components";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-
-import { Link, useParams } from "@tanstack/react-router";
-import { ChevronLeft } from "lucide-react";
-
 import { NotFound } from "@/components/NotFound";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useParams } from "@tanstack/react-router";
 import { useGetExercise } from "../hooks/useExerciseApi";
+import { BackToListButton } from "./BackToListButton";
 import { ExerciseForm } from "./ExerciseForm";
 
 export const ExerciseEditPage = () => {
@@ -26,12 +23,7 @@ export const ExerciseEditPage = () => {
       <div className="mt-6 grid gap-4">
         <div className="flex items-center justify-between">
           <div />
-          <Button variant="outline" asChild>
-            <Link to="/exercises" search={true}>
-              <ChevronLeft />
-              一覧に戻る
-            </Link>
-          </Button>
+          <BackToListButton />
         </div>
         {isPending ? (
           <div className="space-y-2.5">

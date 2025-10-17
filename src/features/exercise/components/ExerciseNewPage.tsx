@@ -1,20 +1,15 @@
-import { Button, PageTitle } from "@/components";
-
-import { GoChevronLeft } from "react-icons/go";
-
+import { PageTitle } from "@/components";
+import { BackToListButton } from "./BackToListButton";
 import { ExerciseForm } from "./ExerciseForm";
-import styles from "./Exercises.module.css";
 
 export const ExerciseNewPage = () => {
   return (
     <>
       <PageTitle title="種目の新規作成" />
-      <div className={styles.Exercises}>
-        <div className={styles.Exercises__filter}>
+      <div className="mt-6 grid gap-4">
+        <div className="flex items-center justify-between">
           <div />
-          <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
-            一覧に戻る
-          </Button>
+          <BackToListButton />
         </div>
         <ExerciseForm
           defaultValues={{
