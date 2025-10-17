@@ -4,5 +4,7 @@ interface Props {
 }
 
 export const PageTitle = ({ title }: Props) => {
-  return <h2 className="text-2xl font-bold">{title}</h2>;
+  return (
+    <h2 className="scroll-m-header text-4xl font-extrabold tracking-tight text-balance">{title}</h2>
+  );
 };
