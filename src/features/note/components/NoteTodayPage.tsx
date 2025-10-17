@@ -5,7 +5,6 @@ import { NoteMeta } from "./NoteMeta";
 import { NoteProvider, useNoteContext } from "../contexts/NoteContext";
 import { AddExerciseForm } from "./AddExerciseForm";
 import { NoteTitle } from "./NoteTitle";
-import styles from "./NoteTodayPage.module.css";
 
 const Contents = () => {
   const { displayComponentId } = useNoteContext();
@@ -16,7 +15,7 @@ const Contents = () => {
     <div>
       <NoteMeta />
       <NoteActionsBar />
-      <div className={styles.NoteTodayPage__exerciseList}>
+      <div className="grid gap-content-gap my-content-gap">
         <ExerciseListItem />
         <ExerciseListItem />
       </div>
