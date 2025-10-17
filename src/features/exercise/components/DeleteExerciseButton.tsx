@@ -4,7 +4,6 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useDeleteExercise } from "../hooks/useExerciseApi";
-import styles from "./Exercises.module.css";
 
 interface Props {
   exerciseId: number;
@@ -44,7 +43,7 @@ export const DeleteExerciseButton = ({ exerciseId, onDeleted }: Props) => {
       <button
         type="button"
         onClick={handleClick}
-        className={styles.Exercises__listDeleteButton}
+        className="grid place-items-center"
         disabled={isMutating}
       >
         <Trash2 className="h-4 w-4" />

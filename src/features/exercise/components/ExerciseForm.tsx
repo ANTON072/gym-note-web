@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import styles from "./Exercises.module.css";
 
-import { Button, MutateButton } from "@/components";
+import { MutateButton } from "@/components";
+import { Button } from "@/components/ui/button";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useCreateExercise, useUpdateExercise } from "../hooks/useExerciseApi";
@@ -77,17 +77,19 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
-        <div className={styles.Exercises__formGrid}>
+        <div className="grid gap-4">
           <ExerciseFormFields />
         </div>
         {isEdit ? (
-          <div className={styles.Exercises__actions}>
-            <Button to="/exercises" search={true} variant="outlined">
-              キャンセル
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <Button variant="outline" asChild>
+              <Link to="/exercises" search={true}>
+                キャンセル
+              </Link>
             </Button>
             <MutateButton type="submit">更新</MutateButton>
             <div />
-            <div className={styles.Exercises__deleteAction}>
+            <div className="flex items-center justify-end p-4">
               <DeleteExerciseButton
                 exerciseId={exerciseId}
                 onDeleted={() => {
@@ -97,9 +99,11 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
             </div>
           </div>
         ) : (
-          <div className={styles.Exercises__actions}>
-            <Button to="/exercises" search={true} variant="outlined">
-              キャンセル
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <Button variant="outline" asChild>
+              <Link to="/exercises" search={true}>
+                キャンセル
+              </Link>
             </Button>
             <MutateButton type="submit">登録</MutateButton>
           </div>
