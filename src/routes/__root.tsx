@@ -1,5 +1,5 @@
 import { Loading } from "@/components";
-import { Toaster } from "@/components/Toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -29,8 +29,8 @@ const Layout = ({ children }: { children: ReactNode }) => (
       <GlobalHeader />
       <main className="w-full max-w-max-content-width p-content-gap mt-2 mx-auto">{children}</main>
       <GlobalFooter />
-      <Toaster />
     </div>
+    <Toaster />
   </QueryClientProvider>
 );
 

@@ -1,7 +1,7 @@
-import { useToast } from "@/hooks";
 import { useConfirm } from "@/hooks/useConfirm";
 import { useIsMutating, useQueryClient } from "@tanstack/react-query";
 import { GoTrash } from "react-icons/go";
+import { toast } from "sonner";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useDeleteExercise } from "../hooks/useExerciseApi";
 import styles from "./Exercises.module.css";
@@ -13,21 +13,18 @@ interface Props {
 
 export const DeleteExerciseButton = ({ exerciseId, onDeleted }: Props) => {
   const query = useQueryClient();
-  const toast = useToast();
   const { open, ConfirmDialog } = useConfirm();
   const isMutating = useIsMutating() > 0;
 
   const deleteMutation = useDeleteExercise({
     onSuccess: () => {
       query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
-      toast.add({ message: "種目を削除しました" });
+      // toast.add({ message: "種目を削除しました" });
+      toast.success("種目を削除しました");
       onDeleted?.();
     },
     onError: (error: Error) => {
-      toast.add({
-        message: `種目の削除に失敗しました: ${error.message}`,
-        type: "error",
-      });
+      toast.error(`種目の削除に失敗しました: ${error.message}`);
     },
   });
 
