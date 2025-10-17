@@ -23,12 +23,7 @@ export const NoteFormCard = ({ title, children, onClose }: NoteFormCardProps) =>
 
   return (
     <Card className="relative">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-3 right-3"
-        onClick={handleClose}
-      >
+      <Button variant="ghost" size="icon" className="absolute top-3 right-3" onClick={handleClose}>
         <XIcon className="text-gray-500" />
       </Button>
       <CardHeader className="px-3">

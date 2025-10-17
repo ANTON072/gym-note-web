@@ -1,4 +1,4 @@
-import { BodyPartSelect } from "@/components/form";
+import { BodyPartSelect } from "@/components";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

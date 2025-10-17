@@ -1,5 +1,5 @@
 import { PageTitle } from "@/components";
-import { BodyPartSelect } from "@/components/form";
+import { BodyPartSelect } from "@/components";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
