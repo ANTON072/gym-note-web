@@ -22,6 +22,7 @@ import { Route as ExercisesExerciseIdRouteImport } from './routes/exercises.$exe
 import { Route as NotesTodayIndexRouteImport } from './routes/notes.today.index'
 import { Route as NotesTodayFormRouteImport } from './routes/notes.today._form'
 import { Route as NotesTodayFormMetaRouteImport } from './routes/notes.today._form.meta'
+import { Route as NotesTodayFormAddExerciseRouteImport } from './routes/notes.today._form.add-exercise'
 
 const NotesTodayRouteImport = createFileRoute('/notes/today')()
 
@@ -84,6 +85,12 @@ const NotesTodayFormMetaRoute = NotesTodayFormMetaRouteImport.update({
   path: '/meta',
   getParentRoute: () => NotesTodayFormRoute,
 } as any)
+const NotesTodayFormAddExerciseRoute =
+  NotesTodayFormAddExerciseRouteImport.update({
+    id: '/add-exercise',
+    path: '/add-exercise',
+    getParentRoute: () => NotesTodayFormRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/exercises/': typeof ExercisesIndexRoute
   '/notes/today': typeof NotesTodayFormRouteWithChildren
   '/notes/today/': typeof NotesTodayIndexRoute
+  '/notes/today/add-exercise': typeof NotesTodayFormAddExerciseRoute
   '/notes/today/meta': typeof NotesTodayFormMetaRoute
 }
 export interface FileRoutesByTo {
@@ -107,6 +115,7 @@ export interface FileRoutesByTo {
   '/notes/$noteId': typeof NotesNoteIdRoute
   '/exercises': typeof ExercisesIndexRoute
   '/notes/today': typeof NotesTodayIndexRoute
+  '/notes/today/add-exercise': typeof NotesTodayFormAddExerciseRoute
   '/notes/today/meta': typeof NotesTodayFormMetaRoute
 }
 export interface FileRoutesById {
@@ -122,6 +131,7 @@ export interface FileRoutesById {
   '/notes/today': typeof NotesTodayRouteWithChildren
   '/notes/today/_form': typeof NotesTodayFormRouteWithChildren
   '/notes/today/': typeof NotesTodayIndexRoute
+  '/notes/today/_form/add-exercise': typeof NotesTodayFormAddExerciseRoute
   '/notes/today/_form/meta': typeof NotesTodayFormMetaRoute
 }
 export interface FileRouteTypes {
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/exercises/'
     | '/notes/today'
     | '/notes/today/'
+    | '/notes/today/add-exercise'
     | '/notes/today/meta'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/notes/$noteId'
     | '/exercises'
     | '/notes/today'
+    | '/notes/today/add-exercise'
     | '/notes/today/meta'
   id:
     | '__root__'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
     | '/notes/today'
     | '/notes/today/_form'
     | '/notes/today/'
+    | '/notes/today/_form/add-exercise'
     | '/notes/today/_form/meta'
   fileRoutesById: FileRoutesById
 }
@@ -258,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesTodayFormMetaRouteImport
       parentRoute: typeof NotesTodayFormRoute
     }
+    '/notes/today/_form/add-exercise': {
+      id: '/notes/today/_form/add-exercise'
+      path: '/add-exercise'
+      fullPath: '/notes/today/add-exercise'
+      preLoaderRoute: typeof NotesTodayFormAddExerciseRouteImport
+      parentRoute: typeof NotesTodayFormRoute
+    }
   }
 }
 
@@ -278,10 +298,12 @@ const ExercisesRouteRouteWithChildren = ExercisesRouteRoute._addFileChildren(
 )
 
 interface NotesTodayFormRouteChildren {
+  NotesTodayFormAddExerciseRoute: typeof NotesTodayFormAddExerciseRoute
   NotesTodayFormMetaRoute: typeof NotesTodayFormMetaRoute
 }
 
 const NotesTodayFormRouteChildren: NotesTodayFormRouteChildren = {
+  NotesTodayFormAddExerciseRoute: NotesTodayFormAddExerciseRoute,
   NotesTodayFormMetaRoute: NotesTodayFormMetaRoute,
 }
 

@@ -1,19 +1,14 @@
 import { Button } from "@/components";
 import { ExerciseFormFields } from "@/features/exercise";
-import { useNoteContext } from "../contexts/NoteContext";
 import styles from "./NoteFormCommon.module.css";
 import { NoteFormTitle } from "./NoteFormTitle";
 
 export const AddExerciseForm = () => {
-  const { displayComponentId, setDisplayComponentId } = useNoteContext();
-
-  if (displayComponentId !== "add_exercise") return null;
-
   return (
     <form
       noValidate
       onSubmit={() => {
-        setDisplayComponentId(null);
+        console.log("フォーム送信処理");
       }}
       className={styles.NoteFormCommon}
     >
