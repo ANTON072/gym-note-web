@@ -6,8 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import "react-loading-skeleton/dist/skeleton.css";
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

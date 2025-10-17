@@ -1,5 +1,5 @@
 import { Button, PageTitle } from "@/components";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { useParams } from "@tanstack/react-router";
 import { GoChevronLeft } from "react-icons/go";
@@ -31,7 +31,11 @@ export const ExerciseEditPage = () => {
           </Button>
         </div>
         {isPending ? (
-          <Skeleton count={10} height={40} style={{ marginBottom: 10 }} />
+          <div className="space-y-2.5">
+            {Array.from({ length: 5 }, (_, i) => `skeleton-${i}`).map((id) => (
+              <Skeleton key={id} className="h-10 w-full" />
+            ))}
+          </div>
         ) : (
           <ExerciseForm defaultValues={exercise} exerciseId={exerciseIdNumber} />
         )}
