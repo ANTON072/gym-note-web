@@ -1,5 +1,4 @@
-import { PageTitle } from "@/components";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, PageTitle } from "@/components";
 import { Button } from "@/components/ui/button";
 import { FieldDescription, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAuthenticatedUser } from "@/features/auth";
@@ -27,13 +26,7 @@ export const MyPage = () => {
       <PageTitle title="マイページ" />
       <div>
         <div className="grid place-items-center w-full h-30">
-          <Avatar className="size-20">
-            <AvatarImage
-              src={authUser.photoURL ?? undefined}
-              alt={authUser.displayName ?? undefined}
-            />
-            <AvatarFallback>{authUser.displayName}</AvatarFallback>
-          </Avatar>
+          <Avatar className="size-20" user={authUser} />
         </div>
         <FieldGroup>
           <FieldSet>

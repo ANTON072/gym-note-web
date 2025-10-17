@@ -1,29 +1,21 @@
-import styles from "./Avatar.module.css";
+import {
+  Avatar as ShadcnAvatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import type { User } from "firebase/auth";
 
 interface Props {
-  size: number;
-  src?: string | null;
-  name?: string | null;
+  user: User;
+  className?: string;
 }
 
-export const Avatar = ({ size, src, name }: Props) => {
+export const Avatar = ({ user, className }: Props) => {
   return (
-    <>
-      {src ? (
-        <img
-          className={styles.Avatar}
-          src={src}
-          alt={name ?? "Avatar"}
-          style={{ width: size, height: size }}
-        />
-      ) : (
-        <div
-          className={styles.Avatar__placeholder}
-          style={{ width: size, height: size, fontSize: size / 2 }}
-        >
-          {name?.charAt(0)}
-        </div>
-      )}
-    </>
+    <ShadcnAvatar className={cn(className)}>
+      <AvatarImage src={user.photoURL ?? undefined} alt={user.displayName ?? undefined} />
+      <AvatarFallback>{user.displayName}</AvatarFallback>
+    </ShadcnAvatar>
   );
 };
