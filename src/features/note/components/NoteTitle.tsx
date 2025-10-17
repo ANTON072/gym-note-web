@@ -1,20 +1,19 @@
 import { PageTitle } from "@/components";
 import type { ComponentProps } from "react";
-import { NoteStatusChip } from "./NoteStatusChip";
-import styles from "./NoteTitle.module.css";
+import { NoteStatusBadge } from "./NoteStatusBadge";
 
 type NoteTitleProps = ComponentProps<typeof PageTitle>;
-type NoteStatusChipProps = ComponentProps<typeof NoteStatusChip>;
+type NoteStatusBadgeProps = ComponentProps<typeof NoteStatusBadge>;
 
 interface Props {
   title: NoteTitleProps["title"];
-  status: NoteStatusChipProps["status"];
+  status: NoteStatusBadgeProps["status"];
 }
 
 export const NoteTitle = ({ title, status }: Props) => {
   return (
-    <div className={styles.NoteTitle}>
-      <NoteStatusChip status={status} />
+    <div className="grid mb-2 justify-items-start gap-1">
+      <NoteStatusBadge status={status} />
       <PageTitle title={title} />
     </div>
   );
