@@ -67,12 +67,12 @@ export function ExerciseListPage() {
           </div>
         )}
         {isFetched && (
-          <div className="rounded-md border">
+          <div className="rounded-md border overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[55%]">種目名</TableHead>
-                  <TableHead>部位</TableHead>
+                  <TableHead className="w-[55%] min-w-[200px]">種目名</TableHead>
+                  <TableHead className="min-w-[100px]">部位</TableHead>
                   <TableHead className="w-12" />
                 </TableRow>
               </TableHeader>
@@ -94,7 +94,7 @@ export function ExerciseListPage() {
                           className="inline-flex items-center gap-2 text-primary"
                         >
                           <Pencil className="h-4 w-4 shrink-0" />
-                          {exercise.name}
+                          <span className="truncate">{exercise.name}</span>
                         </Link>
                       </TableCell>
                       <TableCell>{exercise.body_part}</TableCell>
