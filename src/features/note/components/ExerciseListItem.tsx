@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GoPencil, GoPlusCircle } from "react-icons/go";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PlusCircleIcon } from "lucide-react";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -22,9 +22,7 @@ export const ExerciseListItem = () => {
               key={set.id}
               className="grid grid-cols-[minmax(3rem,auto)_1fr] py-2 gap-2 border-b border-stone-200 last:border-b-0"
             >
-              <div className="text-stone-700 font-semibold dark:text-stone-400">
-                {index + 1}セット
-              </div>
+              <div className="text-stone-500">{index + 1}セット</div>
               <div className="flex items-center gap-2">
                 <div>{set.weight}kg</div>
                 <div>×</div>
@@ -32,10 +30,10 @@ export const ExerciseListItem = () => {
               </div>
             </div>
           ))}
-          <div className="flex justify-end items-center">
-            <Button variant="ghost" className="gap-2 font-bold">
+          <div className="flex justify-end items-center pt-3">
+            <Button variant="secondary" size="sm">
               セットの追加
-              <GoPlusCircle />
+              <PlusCircleIcon />
             </Button>
           </div>
         </div>

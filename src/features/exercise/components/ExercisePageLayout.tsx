@@ -12,7 +12,7 @@ interface ExercisePageLayoutProps {
  */
 export const ExercisePageLayout = ({ children }: ExercisePageLayoutProps) => {
   return (
-    <div className="mt-6 grid gap-4">
+    <div className="mt-4 grid gap-4">
       <div className="flex items-center justify-between">
         <div />
         <BackToListButton />

@@ -25,7 +25,7 @@ const Layout = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     <div className="grid grid-rows-[auto_1fr_auto] h-svh">
       <GlobalHeader />
-      <main className="w-full max-w-max-content-width p-content-gap mt-2 mx-auto">{children}</main>
+      <main className="w-full max-w-max-content-width px-content-gap mt-4 mx-auto">{children}</main>
       <GlobalFooter />
     </div>
     <Toaster />

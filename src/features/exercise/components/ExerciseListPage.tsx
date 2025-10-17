@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/table";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { Pencil } from "lucide-react";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -39,7 +38,7 @@ export function ExerciseListPage() {
   return (
     <>
       <PageTitle title="種目一覧" />
-      <div className="mt-6 grid gap-1">
+      <div className="mt-4 grid gap-1">
         <div className="flex items-end justify-between mb-3">
           <Field className="w-40">
             <FieldLabel>部位でフィルタ</FieldLabel>
@@ -93,7 +92,6 @@ export function ExerciseListPage() {
                           search={true}
                           className="inline-flex items-center gap-2 text-primary"
                         >
-                          <Pencil className="h-4 w-4 shrink-0" />
                           <span className="truncate">{exercise.name}</span>
                         </Link>
                       </TableCell>

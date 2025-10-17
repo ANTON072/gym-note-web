@@ -15,7 +15,7 @@ const Contents = () => {
     <div>
       <NoteMeta />
       <NoteActionsBar />
-      <div className="grid gap-content-gap my-content-gap">
+      <div className="grid gap-3 my-content-gap">
         <ExerciseListItem />
         <ExerciseListItem />
       </div>

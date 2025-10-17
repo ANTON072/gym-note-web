@@ -7,7 +7,7 @@ import { ChevronLeft } from "lucide-react";
  */
 export const BackToListButton = () => {
   return (
-    <Button variant="outline" asChild>
+    <Button variant="outline" asChild size="sm">
       <Link to="/exercises" search={true}>
         <ChevronLeft />
         一覧に戻る
