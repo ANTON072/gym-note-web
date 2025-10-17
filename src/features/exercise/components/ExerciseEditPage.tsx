@@ -1,13 +1,13 @@
-import { Button, PageTitle } from "@/components";
+import { PageTitle } from "@/components";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useParams } from "@tanstack/react-router";
-import { GoChevronLeft } from "react-icons/go";
+import { Link, useParams } from "@tanstack/react-router";
+import { ChevronLeft } from "lucide-react";
 
 import { NotFound } from "@/components/NotFound";
 import { useGetExercise } from "../hooks/useExerciseApi";
 import { ExerciseForm } from "./ExerciseForm";
-import styles from "./Exercises.module.css";
 
 export const ExerciseEditPage = () => {
   const { exerciseId } = useParams({ from: "/exercises/$exerciseId" });
@@ -23,11 +23,14 @@ export const ExerciseEditPage = () => {
   return (
     <>
       <PageTitle title="種目の編集" />
-      <div className={styles.Exercises}>
-        <div className={styles.Exercises__filter}>
+      <div className="mt-6 grid gap-4">
+        <div className="flex items-center justify-between">
           <div />
-          <Button to="/exercises" search={true} startIcon={<GoChevronLeft />}>
-            一覧に戻る
+          <Button variant="outline" asChild>
+            <Link to="/exercises" search={true}>
+              <ChevronLeft />
+              一覧に戻る
+            </Link>
           </Button>
         </div>
         {isPending ? (
