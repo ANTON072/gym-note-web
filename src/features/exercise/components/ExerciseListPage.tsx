@@ -2,9 +2,9 @@ import { PageTitle, Table } from "@/components";
 import { BodyPartSelect } from "@/components/form";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
-import Skeleton from "react-loading-skeleton";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
 import { DeleteExerciseButton } from "./DeleteExerciseButton";
@@ -46,7 +46,13 @@ export function ExerciseListPage() {
             <Link to="/exercises/new">新規登録</Link>
           </Button>
         </div>
-        {isLoading && !isFetched && <Skeleton count={5} height={40} style={{ marginBottom: 10 }} />}
+        {isLoading && !isFetched && (
+          <div className="space-y-2">
+            {Array.from({ length: 5 }, (_, i) => `skeleton-${i}`).map((id) => (
+              <Skeleton key={id} className="h-10 w-full" />
+            ))}
+          </div>
+        )}
         {isFetched && (
           <Table
             data={filteredExercises}
