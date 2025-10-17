@@ -1,24 +1,22 @@
 import { APP_NAME } from "@/constants/app";
 import { useState } from "react";
+import { toast } from "sonner";
 import { signInWithGoogle } from "../lib/auth";
 import { GoogleLoginButton } from "./GoogleLoginButton";
-
-import { useRootStore } from "@/store/rootStore";
 import styles from "./LoginForm.module.css";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useRootStore((state) => state.toast);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
 
     try {
       await signInWithGoogle();
-      toast.add({ message: "ログインに成功しました" });
+      toast.success("ログインに成功しました");
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "ログインに失敗しました";
-      toast.add({ message: errorMessage, type: "error" });
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }

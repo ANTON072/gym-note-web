@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useRef, useState } from "react";
 import { GoSignOut } from "react-icons/go";
 import { GoPerson } from "react-icons/go";
+import { toast } from "sonner";
 
 import { logout } from "@/features/auth/lib/auth";
 import { Link } from "@tanstack/react-router";
@@ -18,7 +19,6 @@ export const Drawer = () => {
   const drawerRef = useRef<HTMLElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const [isMutating, setIsMutating] = useState(false);
-  const toast = useRootStore((state) => state.toast);
 
   const drawerStore = useRootStore((state) => state.drawer);
 
@@ -64,11 +64,11 @@ export const Drawer = () => {
     try {
       setIsMutating(true);
       await logout();
-      toast.add({ message: "ログアウトしました" });
+      toast.success("ログアウトしました");
       drawerStore.closeDrawer();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "ログアウトに失敗しました";
-      toast.add({ message: errorMessage, type: "error" });
+      toast.error(errorMessage);
     } finally {
       setIsMutating(false);
     }
