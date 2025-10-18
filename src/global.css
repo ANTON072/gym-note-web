@@ -46,7 +46,7 @@
     "Courier New", monospace;
   --spacing-header: 3.5rem;
   --spacing-hamburger-icon: 2.25rem;
-  --spacing-content-gap: 0.5rem;
+  --spacing-content-gap: 1rem;
   --spacing-max-content-width: 768px;
   --color-active: var(--destructive);
 
