@@ -1,17 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 
+const formatDate = (date: Date): string => {
+  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const weekday = weekdays[date.getDay()];
+  return `${year}年${month}月${day}日（${weekday}）`;
+};
+
 interface WorkoutStartScreenProps {
-  today: string;
   isCreating: boolean;
   onStartWorkout: () => void;
 }
 
-export const WorkoutStartScreen = ({
-  today,
-  isCreating,
-  onStartWorkout,
-}: WorkoutStartScreenProps) => {
+export const WorkoutStartScreen = ({ isCreating, onStartWorkout }: WorkoutStartScreenProps) => {
+  const today = formatDate(new Date());
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8">
       <div className="text-center">

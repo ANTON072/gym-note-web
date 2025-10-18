@@ -10,22 +10,11 @@ import { WorkoutStartScreen } from "./WorkoutStartScreen";
 
 import { NoteTitle } from "./NoteTitle";
 
-const formatDate = (date: Date): string => {
-  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const weekday = weekdays[date.getDay()];
-  return `${year}年${month}月${day}日（${weekday}）`;
-};
-
 export const NoteTodayPage = () => {
   // TODO: 本番ではAPIから本日のノートの存在を確認
   const [hasNote, setHasNote] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
-  const today = formatDate(new Date());
 
   const handleStartWorkout = async () => {
     try {
@@ -59,13 +48,7 @@ export const NoteTodayPage = () => {
 
   // ノートが存在しない場合は開始ボタンを表示
   if (!hasNote) {
-    return (
-      <WorkoutStartScreen
-        today={today}
-        isCreating={isCreating}
-        onStartWorkout={handleStartWorkout}
-      />
-    );
+    return <WorkoutStartScreen isCreating={isCreating} onStartWorkout={handleStartWorkout} />;
   }
 
   // ノートが存在する場合は既存の表示
