@@ -1,20 +1,11 @@
 import { useState } from "react";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { DeleteConfirmDialog } from "@/components/DeleteConfirmDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { MoreHorizontalIcon, PencilIcon, PlusCircleIcon, Trash2Icon, XIcon } from "lucide-react";
+import { PlusCircleIcon, XIcon } from "lucide-react";
 import { SetFormDialog } from "./SetFormDialog";
+import { SetItem } from "./SetItem";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -27,7 +18,6 @@ export const ExerciseListItem = () => {
   const [editingSetId, setEditingSetId] = useState<number | null>(null);
   const [deletingSetId, setDeletingSetId] = useState<number | null>(null);
   const [isDeletingExercise, setIsDeletingExercise] = useState(false);
-  const [openMenuSetId, setOpenMenuSetId] = useState<number | null>(null);
 
   const handleAddSet = (data: { weight: number; reps: number }) => {
     console.log("セットを追加:", data);
@@ -71,58 +61,14 @@ export const ExerciseListItem = () => {
           {sets.map((set, index) => {
             const editingSet = editingSetId === set.id ? set : null;
             return (
-              <div
-                key={set.id}
-                className="grid grid-cols-[minmax(3rem,auto)_1fr_auto] py-2 gap-2 border-b border-stone-200 last:border-b-0 items-center"
-              >
-                <div className="text-stone-500">{index + 1}セット</div>
-                <div className="flex items-center gap-2">
-                  <div>{set.weight}kg</div>
-                  <div>×</div>
-                  <div>{set.reps}回</div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  aria-label="メニューを開く"
-                  onClick={() => setOpenMenuSetId(set.id)}
-                >
-                  <MoreHorizontalIcon className="size-4 text-gray-500" />
-                </Button>
-                <Drawer
-                  open={openMenuSetId === set.id}
-                  onOpenChange={(open) => !open && setOpenMenuSetId(null)}
-                >
-                  <DrawerContent>
-                    <DrawerHeader>
-                      <DrawerTitle>セットの編集・削除</DrawerTitle>
-                    </DrawerHeader>
-                    <div className="p-4 space-y-2">
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start"
-                        onClick={() => {
-                          setEditingSetId(set.id);
-                          setOpenMenuSetId(null);
-                        }}
-                      >
-                        <PencilIcon className="size-4 mr-2" />
-                        編集
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start text-destructive hover:text-destructive"
-                        onClick={() => {
-                          setDeletingSetId(set.id);
-                          setOpenMenuSetId(null);
-                        }}
-                      >
-                        <Trash2Icon className="size-4 mr-2" />
-                        削除
-                      </Button>
-                    </div>
-                  </DrawerContent>
-                </Drawer>
+              <div key={set.id} className="border-b border-stone-200 last:border-b-0">
+                <SetItem
+                  index={index + 1}
+                  weight={set.weight}
+                  reps={set.reps}
+                  onEdit={() => setEditingSetId(set.id)}
+                  onDelete={() => setDeletingSetId(set.id)}
+                />
                 {editingSet && (
                   <SetFormDialog
                     title="セットを編集"
@@ -149,50 +95,20 @@ export const ExerciseListItem = () => {
           </div>
         </div>
       </CardContent>
-      <AlertDialog
+      <DeleteConfirmDialog
         open={deletingSetId !== null}
         onOpenChange={(open) => !open && setDeletingSetId(null)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>セットを削除しますか？</AlertDialogTitle>
-            <AlertDialogDescription>
-              この操作は取り消せません。本当にこのセットを削除しますか？
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>キャンセル</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => deletingSetId && handleDeleteSet(deletingSetId)}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              削除
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-      <AlertDialog
+        onConfirm={() => deletingSetId && handleDeleteSet(deletingSetId)}
+        title="セットを削除しますか？"
+        description="この操作は取り消せません。本当にこのセットを削除しますか？"
+      />
+      <DeleteConfirmDialog
         open={isDeletingExercise}
         onOpenChange={(open) => !open && setIsDeletingExercise(false)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>種目を削除しますか？</AlertDialogTitle>
-            <AlertDialogDescription>
-              この操作は取り消せません。本当にこの種目とすべてのセットを削除しますか？
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>キャンセル</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDeleteExercise}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              削除
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+        onConfirm={handleDeleteExercise}
+        title="種目を削除しますか？"
+        description="この操作は取り消せません。本当にこの種目とすべてのセットを削除しますか？"
+      />
     </Card>
   );
 };
