@@ -46,11 +46,7 @@ export const ExerciseFormDialog = ({
           <div className="grid gap-4">
             <ExerciseFormFields hideMemo />
             <div className="grid grid-cols-2 gap-4 mt-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setOpen(false)}
-              >
+              <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                 キャンセル
               </Button>
               <Button type="submit">追加</Button>
