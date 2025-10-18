@@ -26,15 +26,18 @@ const formSchema = z.object({
   weight: z
     .string()
     .min(1, "重量を入力してください")
-    .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+    .refine((val) => !Number.isNaN(Number(val)) && Number(val) > 0, {
       message: "正の数値を入力してください",
     }),
   reps: z
     .string()
     .min(1, "回数を入力してください")
-    .refine((val) => !isNaN(Number(val)) && Number(val) > 0 && Number.isInteger(Number(val)), {
-      message: "正の整数を入力してください",
-    }),
+    .refine(
+      (val) => !Number.isNaN(Number(val)) && Number(val) > 0 && Number.isInteger(Number(val)),
+      {
+        message: "正の整数を入力してください",
+      },
+    ),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -87,12 +90,7 @@ export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
                       重量 (kg)<span className="text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.5"
-                        placeholder="例: 12.5"
-                        {...field}
-                      />
+                      <Input type="number" step="0.5" placeholder="例: 12.5" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -107,12 +105,7 @@ export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
                       回数<span className="text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="1"
-                        placeholder="例: 10"
-                        {...field}
-                      />
+                      <Input type="number" step="1" placeholder="例: 10" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
