@@ -9,7 +9,7 @@ import { logout } from "@/features/auth/lib/auth";
 import { Link } from "@tanstack/react-router";
 
 const menuList = [
-  { name: "本日のノート", href: "/notes/today" },
+  { name: "本日のノート", href: "/" },
   { name: "ノート", href: "/notes" },
   { name: "種目", href: "/exercises" },
 ];

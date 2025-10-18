@@ -21,7 +21,7 @@ export const AddExerciseForm = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate({ to: "/notes/today" })}
+              onClick={() => navigate({ to: "/" })}
             >
               キャンセル
             </Button>
