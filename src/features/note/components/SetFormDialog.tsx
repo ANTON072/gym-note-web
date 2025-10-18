@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PlusCircleIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 const formSchema = z.object({
   weight: z
@@ -43,18 +43,35 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface AddSetDialogProps {
+interface SetFormDialogProps {
+  trigger?: ReactNode;
+  title?: string;
+  submitLabel?: string;
+  initialValues?: { weight: number; reps: number };
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   onSubmit: (data: { weight: number; reps: number }) => void;
 }
 
-export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
-  const [open, setOpen] = useState(false);
+export const SetFormDialog = ({
+  trigger,
+  title = "セットを追加",
+  submitLabel = "追加",
+  initialValues,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+  onSubmit,
+}: SetFormDialogProps) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = controlledOnOpenChange ?? setInternalOpen;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      weight: "",
-      reps: "",
+      weight: initialValues?.weight.toString() ?? "",
+      reps: initialValues?.reps.toString() ?? "",
     },
   });
 
@@ -69,15 +86,10 @@ export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="secondary" size="sm">
-          セットの追加
-          <PlusCircleIcon />
-        </Button>
-      </DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>セットを追加</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -126,7 +138,7 @@ export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
                 >
                   キャンセル
                 </Button>
-                <Button type="submit">追加</Button>
+                <Button type="submit">{submitLabel}</Button>
               </div>
             </div>
           </form>
