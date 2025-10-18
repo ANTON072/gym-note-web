@@ -17,7 +17,7 @@ export const NoteFormCard = ({ title, children, onClose }: NoteFormCardProps) =>
     if (onClose) {
       onClose();
     } else {
-      navigate({ to: "/notes/today" });
+      navigate({ to: "/" });
     }
   };
 

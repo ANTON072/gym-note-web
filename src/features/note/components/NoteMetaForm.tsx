@@ -47,7 +47,7 @@ export const NoteMetaForm = () => {
   const onSubmit = (values: FormValues) => {
     console.log(values);
     // TODO: フォームデータの送信処理
-    navigate({ to: "/notes/today" });
+    navigate({ to: "/" });
   };
 
   return (

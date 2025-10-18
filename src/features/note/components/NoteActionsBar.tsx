@@ -7,7 +7,7 @@ export const NoteActionsBar = () => {
     <>
       <div className="grid grid-cols-[1fr_auto_auto] items-center gap-[var(--size-2)] mb-[var(--container-padding)]">
         <Button asChild variant="secondary" className="justify-self-start" size="sm">
-          <Link to="/notes/today/add-exercise">
+          <Link to="/today/add-exercise">
             <PlusCircle />
             種目を追加
           </Link>

@@ -15,7 +15,7 @@ export const GlobalHeader = () => {
   };
 
   return (
-    <header className="flex place-content-between items-center h-header px-container bg-background border-b border-border">
+    <header className="flex place-content-between items-center h-header px-content-gap bg-background border-b border-border">
       <div>{user && <Avatar className="size-10" user={user} />}</div>
       <h1 className="text-2xl font-bold">
         <Link to="/">{APP_NAME}</Link>
