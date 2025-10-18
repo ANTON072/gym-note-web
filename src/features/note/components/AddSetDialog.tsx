@@ -14,6 +14,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -92,6 +93,9 @@ export const AddSetDialog = ({ onSubmit }: AddSetDialogProps) => {
                     <FormControl>
                       <Input type="number" step="0.5" placeholder="例: 12.5" {...field} />
                     </FormControl>
+                    <FormDescription>
+                      ダンベル種目の場合は片手の重量を入力してください
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
