@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
-import { History, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 
 export const NoteActionsBar = () => {
   return (
@@ -12,10 +12,11 @@ export const NoteActionsBar = () => {
             種目を追加
           </Link>
         </Button>
-        <Button variant="ghost" size="sm">
+        {/* MEMO: MVPでは実装しない */}
+        {/* <Button variant="ghost" size="sm">
           <History />
           前回のノート
-        </Button>
+        </Button> */}
       </div>
     </>
   );
