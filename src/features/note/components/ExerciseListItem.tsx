@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PencilIcon, PlusCircleIcon } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontalIcon, PlusCircleIcon, Trash2Icon } from "lucide-react";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -12,9 +18,24 @@ export const ExerciseListItem = () => {
 
   return (
     <Card className="!border-stone-300 gap-1 pb-2 relative">
-      <Button size="icon-sm" variant="ghost" className="absolute top-2 right-2">
-        <PencilIcon className="size-3.5 text-gray-500" />
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            size="icon-sm"
+            variant="ghost"
+            className="absolute top-2 right-2"
+            aria-label="More Options"
+          >
+            <MoreHorizontalIcon className="size-3.5 text-gray-500" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem className="text-destructive focus:text-destructive">
+            <Trash2Icon className="size-4 mr-2" />
+            削除
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <CardHeader className="px-3">
         <CardTitle className="text-lg font-bold">1. ベンチプレス</CardTitle>
       </CardHeader>
