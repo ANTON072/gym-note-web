@@ -12,12 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { MoreHorizontalIcon, PencilIcon, PlusCircleIcon, Trash2Icon, XIcon } from "lucide-react";
 import { SetFormDialog } from "./SetFormDialog";
 
@@ -32,6 +27,7 @@ export const ExerciseListItem = () => {
   const [editingSetId, setEditingSetId] = useState<number | null>(null);
   const [deletingSetId, setDeletingSetId] = useState<number | null>(null);
   const [isDeletingExercise, setIsDeletingExercise] = useState(false);
+  const [openMenuSetId, setOpenMenuSetId] = useState<number | null>(null);
 
   const handleAddSet = (data: { weight: number; reps: number }) => {
     console.log("セットを追加:", data);
@@ -85,26 +81,48 @@ export const ExerciseListItem = () => {
                   <div>×</div>
                   <div>{set.reps}回</div>
                 </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon-sm" aria-label="メニューを開く">
-                      <MoreHorizontalIcon className="size-4 text-gray-500" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onSelect={() => setEditingSetId(set.id)}>
-                      <PencilIcon className="size-4 mr-2" />
-                      編集
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="text-destructive focus:text-destructive"
-                      onSelect={() => setDeletingSetId(set.id)}
-                    >
-                      <Trash2Icon className="size-4 mr-2" />
-                      削除
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label="メニューを開く"
+                  onClick={() => setOpenMenuSetId(set.id)}
+                >
+                  <MoreHorizontalIcon className="size-4 text-gray-500" />
+                </Button>
+                <Drawer
+                  open={openMenuSetId === set.id}
+                  onOpenChange={(open) => !open && setOpenMenuSetId(null)}
+                >
+                  <DrawerContent>
+                    <DrawerHeader>
+                      <DrawerTitle>セットの編集・削除</DrawerTitle>
+                    </DrawerHeader>
+                    <div className="p-4 space-y-2">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        onClick={() => {
+                          setEditingSetId(set.id);
+                          setOpenMenuSetId(null);
+                        }}
+                      >
+                        <PencilIcon className="size-4 mr-2" />
+                        編集
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-destructive hover:text-destructive"
+                        onClick={() => {
+                          setDeletingSetId(set.id);
+                          setOpenMenuSetId(null);
+                        }}
+                      >
+                        <Trash2Icon className="size-4 mr-2" />
+                        削除
+                      </Button>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
                 {editingSet && (
                   <SetFormDialog
                     title="セットを編集"
