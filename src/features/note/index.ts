@@ -1,4 +1,5 @@
 export * from "./components/NoteTodayPage";
+export * from "./components/NotesListPage";
 export * from "./components/NoteMetaForm";
 export * from "./components/NoteTitle";
 export * from "./components/AddExerciseForm";
