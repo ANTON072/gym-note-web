@@ -18,11 +18,7 @@ export const AddExerciseForm = () => {
         <div className="grid gap-4">
           <ExerciseFormFields hideMemo />
           <div className="grid grid-cols-2 gap-4 mt-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => navigate({ to: "/" })}
-            >
+            <Button type="button" variant="outline" onClick={() => navigate({ to: "/" })}>
               キャンセル
             </Button>
             <Button type="submit">追加</Button>
