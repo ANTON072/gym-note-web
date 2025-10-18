@@ -18,7 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontalIcon, PencilIcon, PlusCircleIcon, Trash2Icon } from "lucide-react";
+import { MoreHorizontalIcon, PencilIcon, PlusCircleIcon, Trash2Icon, XIcon } from "lucide-react";
 import { SetFormDialog } from "./SetFormDialog";
 
 export const ExerciseListItem = () => {
@@ -31,6 +31,7 @@ export const ExerciseListItem = () => {
 
   const [editingSetId, setEditingSetId] = useState<number | null>(null);
   const [deletingSetId, setDeletingSetId] = useState<number | null>(null);
+  const [isDeletingExercise, setIsDeletingExercise] = useState(false);
 
   const handleAddSet = (data: { weight: number; reps: number }) => {
     console.log("セットを追加:", data);
@@ -49,26 +50,23 @@ export const ExerciseListItem = () => {
     setDeletingSetId(null);
   };
 
+  const handleDeleteExercise = () => {
+    console.log("種目を削除");
+    // TODO: 種目削除処理を実装
+    setIsDeletingExercise(false);
+  };
+
   return (
     <Card className="!border-stone-300 gap-1 pb-2 relative">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            size="icon-sm"
-            variant="ghost"
-            className="absolute top-2 right-2"
-            aria-label="More Options"
-          >
-            <MoreHorizontalIcon className="size-3.5 text-gray-500" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem className="text-destructive focus:text-destructive">
-            <Trash2Icon className="size-4 mr-2" />
-            削除
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Button
+        size="icon-sm"
+        variant="ghost"
+        className="absolute top-2 right-2"
+        aria-label="種目を削除"
+        onClick={() => setIsDeletingExercise(true)}
+      >
+        <XIcon className="size-3.5 text-gray-500" />
+      </Button>
       <CardHeader className="px-3">
         <CardTitle className="text-lg font-bold">1. ベンチプレス</CardTitle>
       </CardHeader>
@@ -148,6 +146,28 @@ export const ExerciseListItem = () => {
             <AlertDialogCancel>キャンセル</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deletingSetId && handleDeleteSet(deletingSetId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              削除
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <AlertDialog
+        open={isDeletingExercise}
+        onOpenChange={(open) => !open && setIsDeletingExercise(false)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>種目を削除しますか？</AlertDialogTitle>
+            <AlertDialogDescription>
+              この操作は取り消せません。本当にこの種目とすべてのセットを削除しますか？
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>キャンセル</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteExercise}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               削除
