@@ -6,7 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontalIcon, PlusCircleIcon, Trash2Icon } from "lucide-react";
+import { MoreHorizontalIcon, Trash2Icon } from "lucide-react";
+import { AddSetDialog } from "./AddSetDialog";
 
 export const ExerciseListItem = () => {
   // 仮のデータ（後でpropsから受け取るように変更）
@@ -15,6 +16,11 @@ export const ExerciseListItem = () => {
     { id: 2, weight: 100, reps: 8 },
     { id: 3, weight: 90, reps: 10 },
   ];
+
+  const handleAddSet = (data: { weight: number; reps: number }) => {
+    console.log("セットを追加:", data);
+    // TODO: セット追加処理を実装
+  };
 
   return (
     <Card className="!border-stone-300 gap-1 pb-2 relative">
@@ -55,10 +61,7 @@ export const ExerciseListItem = () => {
             </div>
           ))}
           <div className="flex justify-end items-center pt-3">
-            <Button variant="secondary" size="sm">
-              セットの追加
-              <PlusCircleIcon />
-            </Button>
+            <AddSetDialog onSubmit={handleAddSet} />
           </div>
         </div>
       </CardContent>
