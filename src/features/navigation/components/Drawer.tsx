@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 
 const menuList = [
   { name: "本日のノート", href: "/" },
-  { name: "ノート", href: "/notes" },
+  { name: "過去のノート", href: "/notes" },
   { name: "種目", href: "/exercises" },
 ];
 
