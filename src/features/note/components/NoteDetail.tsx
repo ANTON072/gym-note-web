@@ -5,17 +5,18 @@ import { NoteMeta } from "./NoteMeta";
 import { NoteTitle } from "./NoteTitle";
 
 type NoteDetailProps = {
+  noteId: string;
   title: string;
   status: NoteStatus;
   // TODO: exercises配列を受け取るようにする
 };
 
-export const NoteDetail = ({ title, status }: NoteDetailProps) => {
+export const NoteDetail = ({ noteId, title, status }: NoteDetailProps) => {
   return (
     <>
       <NoteTitle title={title} status={status} />
-      <NoteMeta />
-      <NoteActionsBar />
+      <NoteMeta noteId={noteId} />
+      <NoteActionsBar noteId={noteId} />
       <div className="grid gap-3 my-content-gap">
         {/* TODO: exercisesをmapで表示 */}
         <ExerciseListItem />

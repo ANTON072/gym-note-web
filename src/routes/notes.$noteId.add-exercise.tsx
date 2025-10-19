@@ -1,6 +1,6 @@
 import { AddExerciseForm } from "@/features/note";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/today/add-exercise")({
+export const Route = createFileRoute("/notes/$noteId/add-exercise")({
   component: AddExerciseForm,
 });

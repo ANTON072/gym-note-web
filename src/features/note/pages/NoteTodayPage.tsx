@@ -11,6 +11,9 @@ export const NoteTodayPage = () => {
   // const [isCreating, setIsCreating] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
+  // TODO: 本番ではAPIから本日のノートIDを取得
+  const todayNoteId = "1";
+
   // const handleStartWorkout = async () => {
   //   try {
   //     setIsCreating(true);
@@ -50,7 +53,7 @@ export const NoteTodayPage = () => {
   // ノートが存在する場合は既存の表示
   return (
     <>
-      <NoteDetail title="本日のノート" status="active" />
+      <NoteDetail noteId={todayNoteId} title="本日のノート" status="active" />
       <Button
         onClick={handleCompleteClick}
         className="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg"
