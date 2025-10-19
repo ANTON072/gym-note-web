@@ -1,13 +1,13 @@
 import { PageTitle } from "@/components";
 import type { ComponentProps } from "react";
+import type { NoteStatus } from "../constants/noteStatus";
 import { NoteStatusBadge } from "./NoteStatusBadge";
 
 type NoteTitleProps = ComponentProps<typeof PageTitle>;
-type NoteStatusBadgeProps = ComponentProps<typeof NoteStatusBadge>;
 
 interface Props {
   title: NoteTitleProps["title"];
-  status: NoteStatusBadgeProps["status"];
+  status: NoteStatus;
 }
 
 export const NoteTitle = ({ title, status }: Props) => {

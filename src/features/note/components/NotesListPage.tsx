@@ -1,7 +1,6 @@
 import { PageTitle } from "@/components";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { SimplePagination } from "./SimplePagination";
 
 const formatDate = (date: Date): string => {
@@ -47,24 +46,15 @@ export const NotesListPage = () => {
     });
   };
 
-  const handleNoteClick = (noteId: number) => {
-    // TODO: 個別ノートページへの遷移
-    console.log("ノートID:", noteId);
-  };
-
   return (
     <>
       <PageTitle title="ノート一覧" />
       <div className="space-y-3 mb-8 mt-4">
         {notes.map((note) => (
           <Card key={note.id} className="p-4 hover:bg-accent transition-colors cursor-pointer">
-            <Button
-              variant="ghost"
-              className="w-full justify-start p-0 h-auto font-normal hover:bg-transparent"
-              onClick={() => handleNoteClick(note.id)}
-            >
-              <p className="text-base">{note.title}</p>
-            </Button>
+            <Link to="/notes/$noteId" params={{ noteId: String(note.id) }}>
+              {note.title}
+            </Link>
           </Card>
         ))}
       </div>
