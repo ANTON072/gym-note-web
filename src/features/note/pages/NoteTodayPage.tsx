@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import { NoteDetail } from "./NoteDetail";
+import { NoteDetail } from "../components/NoteDetail";
 
 export const NoteTodayPage = () => {
   // TODO: 本番ではAPIから本日のノートの存在を確認

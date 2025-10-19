@@ -1,7 +1,7 @@
 import { PageTitle } from "@/components";
 import { Card } from "@/components/ui/card";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { SimplePagination } from "./SimplePagination";
+import { SimplePagination } from "../components/SimplePagination";
 
 const formatDate = (date: Date): string => {
   const weekdays = ["日", "月", "火", "水", "木", "金", "土"];

@@ -1,4 +1,4 @@
-import { NoteEditPage } from "@/features/note/components/NoteEditPage";
+import { NoteEditPage } from "@/features/note/pages/NoteEditPage";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/notes/$noteId")({
