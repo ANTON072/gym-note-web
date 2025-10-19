@@ -21,6 +21,7 @@ import { Route as ExercisesExerciseIdRouteImport } from './routes/exercises.$exe
 import { Route as NotesNoteIdIndexRouteImport } from './routes/notes.$noteId.index'
 import { Route as NotesNoteIdMetaRouteImport } from './routes/notes.$noteId.meta'
 import { Route as NotesNoteIdExerciseNewRouteImport } from './routes/notes.$noteId.exercise.new'
+import { Route as NotesNoteIdExerciseExerciseIdRouteImport } from './routes/notes.$noteId.exercise.$exerciseId'
 
 const MypageRoute = MypageRouteImport.update({
   id: '/mypage',
@@ -82,6 +83,12 @@ const NotesNoteIdExerciseNewRoute = NotesNoteIdExerciseNewRouteImport.update({
   path: '/exercise/new',
   getParentRoute: () => NotesNoteIdRoute,
 } as any)
+const NotesNoteIdExerciseExerciseIdRoute =
+  NotesNoteIdExerciseExerciseIdRouteImport.update({
+    id: '/exercise/$exerciseId',
+    path: '/exercise/$exerciseId',
+    getParentRoute: () => NotesNoteIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/notes/': typeof NotesIndexRoute
   '/notes/$noteId/meta': typeof NotesNoteIdMetaRoute
   '/notes/$noteId/': typeof NotesNoteIdIndexRoute
+  '/notes/$noteId/exercise/$exerciseId': typeof NotesNoteIdExerciseExerciseIdRoute
   '/notes/$noteId/exercise/new': typeof NotesNoteIdExerciseNewRoute
 }
 export interface FileRoutesByTo {
@@ -106,6 +114,7 @@ export interface FileRoutesByTo {
   '/notes': typeof NotesIndexRoute
   '/notes/$noteId/meta': typeof NotesNoteIdMetaRoute
   '/notes/$noteId': typeof NotesNoteIdIndexRoute
+  '/notes/$noteId/exercise/$exerciseId': typeof NotesNoteIdExerciseExerciseIdRoute
   '/notes/$noteId/exercise/new': typeof NotesNoteIdExerciseNewRoute
 }
 export interface FileRoutesById {
@@ -121,6 +130,7 @@ export interface FileRoutesById {
   '/notes/': typeof NotesIndexRoute
   '/notes/$noteId/meta': typeof NotesNoteIdMetaRoute
   '/notes/$noteId/': typeof NotesNoteIdIndexRoute
+  '/notes/$noteId/exercise/$exerciseId': typeof NotesNoteIdExerciseExerciseIdRoute
   '/notes/$noteId/exercise/new': typeof NotesNoteIdExerciseNewRoute
 }
 export interface FileRouteTypes {
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/notes/'
     | '/notes/$noteId/meta'
     | '/notes/$noteId/'
+    | '/notes/$noteId/exercise/$exerciseId'
     | '/notes/$noteId/exercise/new'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/notes'
     | '/notes/$noteId/meta'
     | '/notes/$noteId'
+    | '/notes/$noteId/exercise/$exerciseId'
     | '/notes/$noteId/exercise/new'
   id:
     | '__root__'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
     | '/notes/'
     | '/notes/$noteId/meta'
     | '/notes/$noteId/'
+    | '/notes/$noteId/exercise/$exerciseId'
     | '/notes/$noteId/exercise/new'
   fileRoutesById: FileRoutesById
 }
@@ -258,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesNoteIdExerciseNewRouteImport
       parentRoute: typeof NotesNoteIdRoute
     }
+    '/notes/$noteId/exercise/$exerciseId': {
+      id: '/notes/$noteId/exercise/$exerciseId'
+      path: '/exercise/$exerciseId'
+      fullPath: '/notes/$noteId/exercise/$exerciseId'
+      preLoaderRoute: typeof NotesNoteIdExerciseExerciseIdRouteImport
+      parentRoute: typeof NotesNoteIdRoute
+    }
   }
 }
 
@@ -280,12 +300,14 @@ const ExercisesRouteRouteWithChildren = ExercisesRouteRoute._addFileChildren(
 interface NotesNoteIdRouteChildren {
   NotesNoteIdMetaRoute: typeof NotesNoteIdMetaRoute
   NotesNoteIdIndexRoute: typeof NotesNoteIdIndexRoute
+  NotesNoteIdExerciseExerciseIdRoute: typeof NotesNoteIdExerciseExerciseIdRoute
   NotesNoteIdExerciseNewRoute: typeof NotesNoteIdExerciseNewRoute
 }
 
 const NotesNoteIdRouteChildren: NotesNoteIdRouteChildren = {
   NotesNoteIdMetaRoute: NotesNoteIdMetaRoute,
   NotesNoteIdIndexRoute: NotesNoteIdIndexRoute,
+  NotesNoteIdExerciseExerciseIdRoute: NotesNoteIdExerciseExerciseIdRoute,
   NotesNoteIdExerciseNewRoute: NotesNoteIdExerciseNewRoute,
 }
 
