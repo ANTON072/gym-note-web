@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import { DeleteConfirmDialog } from "@/components/DeleteConfirmDialog";
+import { ActionMenuDrawer, type ActionMenuItem } from "@/components/ui/action-menu-drawer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircleIcon, XIcon } from "lucide-react";
+import { MoreVerticalIcon, PencilIcon, PlusCircleIcon, Trash2Icon } from "lucide-react";
 import { SetFormDialog } from "./SetFormDialog";
 import { SetItem } from "./SetItem";
 
@@ -14,10 +15,28 @@ export const ExerciseListItem = () => {
     { id: 2, weight: 100, reps: 8 },
     { id: 3, weight: 90, reps: 10 },
   ];
+  // TODO: propsから受け取るように変更
+  const noteId = "1";
+  const exerciseId = "1";
 
   const [editingSetId, setEditingSetId] = useState<number | null>(null);
   const [deletingSetId, setDeletingSetId] = useState<number | null>(null);
   const [isDeletingExercise, setIsDeletingExercise] = useState(false);
+
+  const exerciseActions: ActionMenuItem[] = [
+    {
+      label: "編集",
+      icon: <PencilIcon className="size-4 mr-2" />,
+      to: "/notes/$noteId/exercise/$exerciseId",
+      params: { noteId, exerciseId },
+    },
+    {
+      label: "削除",
+      icon: <Trash2Icon className="size-4 mr-2" />,
+      onClick: () => setIsDeletingExercise(true),
+      variant: "destructive",
+    },
+  ];
 
   const handleAddSet = (data: { weight: number; reps: number }) => {
     console.log("セットを追加:", data);
@@ -44,15 +63,20 @@ export const ExerciseListItem = () => {
 
   return (
     <Card className="!border-stone-300 gap-1 pb-2 relative">
-      <Button
-        size="icon-sm"
-        variant="ghost"
-        className="absolute top-2 right-2"
-        aria-label="種目を削除"
-        onClick={() => setIsDeletingExercise(true)}
-      >
-        <XIcon className="size-3.5 text-gray-500" />
-      </Button>
+      <ActionMenuDrawer
+        title="種目の編集・削除"
+        trigger={
+          <Button
+            size="icon-sm"
+            variant="ghost"
+            className="absolute top-2 right-2"
+            aria-label="メニューを開く"
+          >
+            <MoreVerticalIcon className="size-3.5 text-gray-500" />
+          </Button>
+        }
+        actions={exerciseActions}
+      />
       <CardHeader className="px-3">
         <CardTitle className="text-lg font-bold">1. ベンチプレス</CardTitle>
       </CardHeader>
