@@ -24,25 +24,23 @@ export const MyPage = () => {
   return (
     <>
       <PageTitle title="マイページ" />
-      <div>
-        <div className="grid place-items-center w-full h-30">
-          <Avatar className="size-20" user={authUser} />
-        </div>
-        <FieldGroup>
-          <FieldSet>
-            <FieldLegend>ユーザー名</FieldLegend>
-            <FieldDescription>{authUser.displayName}</FieldDescription>
-          </FieldSet>
-          <FieldSet>
-            <FieldLegend>メールアドレス</FieldLegend>
-            <FieldDescription>{authUser.email}</FieldDescription>
-          </FieldSet>
-        </FieldGroup>
-        <div className="py-10 flex justify-end">
-          <Button onClick={handleDeleteAccount} variant="ghost">
-            退会する
-          </Button>
-        </div>
+      <div className="grid place-items-center w-full h-30">
+        <Avatar className="size-20" user={authUser} />
+      </div>
+      <FieldGroup>
+        <FieldSet>
+          <FieldLegend>ユーザー名</FieldLegend>
+          <FieldDescription>{authUser.displayName}</FieldDescription>
+        </FieldSet>
+        <FieldSet>
+          <FieldLegend>メールアドレス</FieldLegend>
+          <FieldDescription>{authUser.email}</FieldDescription>
+        </FieldSet>
+      </FieldGroup>
+      <div className="py-10 flex justify-end">
+        <Button onClick={handleDeleteAccount} variant="ghost">
+          退会する
+        </Button>
       </div>
       <ConfirmDialog />
     </>
