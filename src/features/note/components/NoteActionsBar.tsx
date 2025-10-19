@@ -11,7 +11,7 @@ export const NoteActionsBar = ({ noteId }: NoteActionsBarProps) => {
     <>
       <div className="grid grid-cols-[1fr_auto_auto] items-center gap-[var(--size-2)] mb-[var(--container-padding)]">
         <Button asChild variant="secondary" className="justify-self-start" size="sm">
-          <Link to="/notes/$noteId/add-exercise" params={{ noteId }}>
+          <Link to="/notes/$noteId/exercise/new" params={{ noteId }}>
             <PlusCircle />
             種目を追加
           </Link>
