@@ -1,24 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNavigate } from "@tanstack/react-router";
 import { XIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface NoteFormCardProps {
   title: string;
   children: ReactNode;
-  onClose?: () => void;
 }
 
-export const NoteFormCard = ({ title, children, onClose }: NoteFormCardProps) => {
-  const navigate = useNavigate();
-
+export const NoteFormCard = ({ title, children }: NoteFormCardProps) => {
   const handleClose = () => {
-    if (onClose) {
-      onClose();
-    } else {
-      navigate({ to: "/" });
-    }
+    window.history.back();
   };
 
   return (
