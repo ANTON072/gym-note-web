@@ -1,6 +1,6 @@
 import { PageTitle } from "@/components";
-import { ExerciseForm } from "./ExerciseForm";
-import { ExercisePageLayout } from "./ExercisePageLayout";
+import { ExerciseForm } from "../components/ExerciseForm";
+import { ExercisePageLayout } from "../components/ExercisePageLayout";
 
 export const ExerciseNewPage = () => {
   return (
