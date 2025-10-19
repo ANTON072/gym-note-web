@@ -1,12 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { Pencil } from "lucide-react";
 
-export const NoteMeta = () => {
+type NoteMetaProps = {
+  noteId: string;
+};
+
+export const NoteMeta = ({ noteId }: NoteMetaProps) => {
   return (
     <>
       <div className="relative grid grid-cols-[auto_auto_auto] gap-content-gap p-content-gap mb-3 bg-blue-100 rounded-sm text-sm border-blue-200 border">
         <Link
-          to="/today/meta"
+          to="/notes/$noteId/meta"
+          params={{ noteId }}
           className="absolute right-4 top-3 border-0 bg-transparent cursor-pointer"
         >
           <Pencil className="size-3.5 text-gray-500" />

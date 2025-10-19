@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/table";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { DeleteExerciseButton } from "../components/DeleteExerciseButton";
 import { useGetExercises } from "../hooks/useExerciseApi";
 import type { Exercise } from "../schema";
-import { DeleteExerciseButton } from "./DeleteExerciseButton";
 
 export function ExerciseListPage() {
   const { data, isLoading, isFetched } = useGetExercises();

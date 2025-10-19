@@ -3,7 +3,7 @@ import { ExerciseFormFields } from "@/features/exercise";
 import { useNavigate } from "@tanstack/react-router";
 import { NoteFormCard } from "./NoteFormCard";
 
-export const AddExerciseForm = () => {
+export const ExerciseForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {

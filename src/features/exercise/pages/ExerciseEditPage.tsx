@@ -2,9 +2,9 @@ import { PageTitle } from "@/components";
 import { NotFound } from "@/components/NotFound";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "@tanstack/react-router";
+import { ExerciseForm } from "../components/ExerciseForm";
+import { ExercisePageLayout } from "../components/ExercisePageLayout";
 import { useGetExercise } from "../hooks/useExerciseApi";
-import { ExerciseForm } from "./ExerciseForm";
-import { ExercisePageLayout } from "./ExercisePageLayout";
 
 export const ExerciseEditPage = () => {
   const { exerciseId } = useParams({ from: "/exercises/$exerciseId" });
