@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { QUERY_KEY_EXERCISES } from "../constants/queryKeys";
 import { useCreateExercise, useUpdateExercise } from "../hooks/useExerciseApi";
@@ -30,10 +31,12 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
     navigate({ to: "/exercises", search: isEdit ? true : undefined });
   };
 
-  const form = useForm<ExerciseFormData>({
+  const formMethods = useForm<ExerciseFormData>({
     resolver: zodResolver(exerciseFormSchema),
     defaultValues,
   });
+
+  const { reset } = formMethods;
 
   const handleMutationSuccess = (message: string) => {
     query.invalidateQueries({ queryKey: [QUERY_KEY_EXERCISES] });
@@ -48,7 +51,7 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   const handleFormMutationError = (error: Error, action: string) => {
     handleFormError({
       error,
-      setError: form.setError,
+      setError: formMethods.setError,
       onValidationError: () => {
         toast.error("入力内容を確認してください");
       },
@@ -67,16 +70,23 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
   });
 
   const onSubmit = (values: ExerciseFormData) => {
+    // 編集の実行
     if (isEdit && exerciseId) {
       updateMutation.mutate({ id: exerciseId, data: values });
       return;
     }
+    // 作成の実行
     createMutation.mutate(values);
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: functions are static
+  useEffect(() => {
+    reset(defaultValues);
+  }, [reset]);
+
   return (
-    <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
+    <FormProvider {...formMethods}>
+      <form onSubmit={formMethods.handleSubmit(onSubmit)} noValidate>
         <div className="grid gap-4">
           <ExerciseFormFields />
         </div>

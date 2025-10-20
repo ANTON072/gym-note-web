@@ -1,3 +1,4 @@
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
 import {
   Select,
   SelectContent,
@@ -7,51 +8,67 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
+import { useId } from "react";
+import type { FieldError as RHFFieldError } from "react-hook-form";
 
 interface BodyPartSelectProps {
-  // 選択された値
-  value?: string;
-  // 値が変更されたときのコールバック
-  onValueChange?: (value: string) => void;
-  // name属性（フォーム送信時に使用）
-  name?: string;
-  // 無効化フラグ
-  disabled?: boolean;
-  // すべての選択肢を含めるかどうか
-  showAllOption?: boolean;
-  // すべてのオプションのラベル
-  allOptionLabel?: string;
-  // 未設定の選択肢を含めるかどうか
-  showUnsetOption?: boolean;
-  // 未設定のオプションのラベル
-  unsetOptionLabel?: string;
-  // プレースホルダーテキスト
-  placeholder?: string;
-  // aria-invalid属性
-  "aria-invalid"?: boolean;
-  // id属性
   id?: string;
-  // サイズ
-  size?: "sm" | "default";
-  // カスタムクラス名
-  className?: string;
+  name?: string;
+  label: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  disabled?: boolean;
+  required?: boolean;
+  helperText?: string;
+  showAllOption?: boolean;
+  allOptionLabel?: string;
+  showUnsetOption?: boolean;
+  unsetOptionLabel?: string;
+  placeholder?: string;
+  error?: RHFFieldError;
+  "aria-invalid"?: boolean;
 }
 
-export function BodyPartSelect({
+/**
+ * 部位選択フィールドのUIコンポーネント
+ * React Hook Formに依存せず、直接値とコールバックを渡して使用できます
+ *
+ * @param id - フィールドのID（指定しない場合は自動生成）
+ * @param name - フィールドのname属性
+ * @param label - フィールドのラベルテキスト
+ * @param value - 選択された値
+ * @param onValueChange - 値が変更されたときのコールバック
+ * @param disabled - 無効化フラグ
+ * @param required - 入力必須かどうか
+ * @param helperText - フィールドの補足説明テキスト
+ * @param showAllOption - 「すべて」オプションを表示するかどうか
+ * @param allOptionLabel - 「すべて」オプションのラベル
+ * @param showUnsetOption - 「未設定」オプションを表示するかどうか
+ * @param unsetOptionLabel - 「未設定」オプションのラベル
+ * @param placeholder - プレースホルダーテキスト
+ * @param error - エラーオブジェクト
+ * @param aria-invalid - aria-invalid属性
+ */
+export const BodyPartSelect = ({
+  id: providedId,
+  name,
+  label,
   value,
   onValueChange,
-  name,
   disabled = false,
+  required,
+  helperText,
   showAllOption = false,
   allOptionLabel = "すべて",
   showUnsetOption = false,
   unsetOptionLabel = "未設定",
   placeholder = "選択してください",
+  error,
   "aria-invalid": ariaInvalid,
-  id,
-  size = "default",
-  className,
-}: BodyPartSelectProps) {
+}: BodyPartSelectProps) => {
+  const generatedId = useId();
+  const id = providedId || generatedId;
+
   // 空文字列を"all"に変換し、undefinedの場合も"all"にする
   const selectValue = value || "all";
 
@@ -67,54 +84,37 @@ export function BodyPartSelect({
   };
 
   return (
-    <Select name={name} value={selectValue} onValueChange={handleValueChange} disabled={disabled}>
-      <SelectTrigger aria-invalid={ariaInvalid} id={id} size={size} className={className}>
-        <SelectValue placeholder={showAllOption ? allOptionLabel : placeholder} />
-      </SelectTrigger>
-      <SelectContent position="popper">
-        {showAllOption && (
-          <>
-            <SelectItem value="all">{allOptionLabel}</SelectItem>
-            <SelectSeparator />
-          </>
-        )}
-        {showUnsetOption && (
-          <>
-            <SelectItem value="unset">{unsetOptionLabel}</SelectItem>
-            <SelectSeparator />
-          </>
-        )}
-        {BODY_PART_OPTIONS.map(({ value, label }) => (
-          <SelectItem key={value} value={value}>
-            {label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
-
-/**
- * @deprecated renderBodyPartOptions は非推奨です。代わりに BodyPartSelect コンポーネントを使用してください。
- */
-export const renderBodyPartOptions = ({
-  includeAllOption = false,
-  allOptionLabel = "すべて",
-  placeholder = "選択してください",
-}: {
-  includeAllOption?: boolean;
-  allOptionLabel?: string;
-  placeholder?: string;
-} = {}) => {
-  return (
-    <>
-      {includeAllOption && <option value="">{allOptionLabel}</option>}
-      {!includeAllOption && <option value="">{placeholder}</option>}
-      {BODY_PART_OPTIONS.map(({ value, label }) => (
-        <option key={value} value={value}>
-          {label}
-        </option>
-      ))}
-    </>
+    <Field>
+      <FieldLabel htmlFor={id}>
+        {label}
+        {required && <span className="text-destructive">*</span>}
+      </FieldLabel>
+      <Select name={name} value={selectValue} onValueChange={handleValueChange} disabled={disabled}>
+        <SelectTrigger id={id} aria-invalid={ariaInvalid}>
+          <SelectValue placeholder={showAllOption ? allOptionLabel : placeholder} />
+        </SelectTrigger>
+        <SelectContent position="popper">
+          {showAllOption && (
+            <>
+              <SelectItem value="all">{allOptionLabel}</SelectItem>
+              <SelectSeparator />
+            </>
+          )}
+          {showUnsetOption && (
+            <>
+              <SelectItem value="unset">{unsetOptionLabel}</SelectItem>
+              <SelectSeparator />
+            </>
+          )}
+          {BODY_PART_OPTIONS.map(({ value, label }) => (
+            <SelectItem key={value} value={value}>
+              {label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {helperText && <FieldDescription>{helperText}</FieldDescription>}
+      {error && <FieldError errors={[error]} />}
+    </Field>
   );
 };
