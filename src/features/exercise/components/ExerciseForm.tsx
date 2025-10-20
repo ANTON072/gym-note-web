@@ -33,7 +33,13 @@ export const ExerciseForm = ({ exerciseId, defaultValues }: Props) => {
 
   const formMethods = useForm<ExerciseFormData>({
     resolver: zodResolver(exerciseFormSchema),
-    defaultValues,
+    defaultValues: {
+      name: "",
+      laterality: "bilateral",
+      body_part: "",
+      memo: "",
+      ...defaultValues,
+    },
   });
 
   const { reset } = formMethods;

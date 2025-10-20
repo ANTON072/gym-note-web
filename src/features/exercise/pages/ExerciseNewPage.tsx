@@ -9,7 +9,9 @@ export const ExerciseNewPage = () => {
       <ExercisePageLayout>
         <ExerciseForm
           defaultValues={{
-            laterality: "bilateral" as const,
+            name: "",
+            body_part: "unset",
+            laterality: "bilateral",
           }}
         />
       </ExercisePageLayout>
