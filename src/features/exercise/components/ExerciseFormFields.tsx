@@ -1,6 +1,5 @@
-import { BodyPartSelect } from "@/components";
+import { FormBodyPartSelect, FormTextField } from "@/components/hook-form";
 import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,22 +16,8 @@ interface ExerciseFormFieldsProps {
 export const ExerciseFormFields = ({ hideMemo = false }: ExerciseFormFieldsProps) => {
   return (
     <>
-      <Field>
-        <FieldLabel htmlFor="name">
-          種目名<span className="text-destructive">*</span>
-        </FieldLabel>
-        <Input id="name" name="name" placeholder="ベンチプレス" required />
-      </Field>
-
-      <Field>
-        <FieldLabel htmlFor="body_part">部位</FieldLabel>
-        <BodyPartSelect
-          showUnsetOption
-          id="body_part"
-          name="body_part"
-          placeholder="選択してください"
-        />
-      </Field>
+      <FormTextField name="name" label="種目名" placeholder="種目名を入力してください" required />
+      <FormBodyPartSelect name="body_part" label="部位" showUnsetOption />
 
       <Field>
         <FieldLabel htmlFor="laterality">動作パターン</FieldLabel>
