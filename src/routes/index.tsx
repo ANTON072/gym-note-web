@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const response = await fetch("http://localhost:3001/v1/notes/today", {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/v1/notes/today`, {
       method: "POST",
     });
     if (!response.ok) {
