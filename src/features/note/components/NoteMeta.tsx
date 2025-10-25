@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Pencil } from "lucide-react";
 
 type NoteMetaProps = {
-  noteId: string;
+  noteId: number;
 };
 
 export const NoteMeta = ({ noteId }: NoteMetaProps) => {
@@ -11,7 +11,7 @@ export const NoteMeta = ({ noteId }: NoteMetaProps) => {
       <div className="relative grid grid-cols-[auto_auto_auto] gap-content-gap p-content-gap mb-3 bg-blue-100 rounded-sm text-sm border-blue-200 border">
         <Link
           to="/notes/$noteId/meta"
-          params={{ noteId }}
+          params={{ noteId: String(noteId) }}
           className="absolute right-4 top-3 border-0 bg-transparent cursor-pointer"
         >
           <Pencil className="size-3.5 text-gray-500" />

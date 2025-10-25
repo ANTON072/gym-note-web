@@ -10,7 +10,7 @@ export const NoteTodayPage = () => {
   const loaderData = useLoaderData({ from: "/" });
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  const todayNoteId = String(loaderData.id);
+  const todayNoteId = loaderData.id;
 
   const handleCompleteClick = () => {
     setIsConfirmOpen(true);

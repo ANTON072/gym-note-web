@@ -5,7 +5,7 @@ import { NoteMeta } from "./NoteMeta";
 import { NoteTitle } from "./NoteTitle";
 
 type NoteDetailProps = {
-  noteId: string;
+  noteId: number;
   title: string;
   status: NoteStatus;
   // TODO: exercises配列を受け取るようにする

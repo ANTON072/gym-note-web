@@ -28,6 +28,7 @@ app.post("/v1/notes/today", (_req, res) => {
   // モックなので常にid: 1を返す
   res.status(200).json({
     id: 1,
+    exercises: [],
     created_at: new Date().toISOString(),
   });
 });
