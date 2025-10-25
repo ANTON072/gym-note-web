@@ -92,7 +92,12 @@ app.listen(PORT, () => {
   console.log(`Mock server running on http://localhost:${PORT}`);
   console.log();
   console.log("Endpoints:");
-  console.log(`  POST http://localhost:${PORT}/v1/notes/today`);
-  console.log(`  GET  http://localhost:${PORT}/v1/exercises`);
-  console.log(`  GET  http://localhost:${PORT}/v1/notes`);
+  console.log(`  POST   http://localhost:${PORT}/v1/notes/today`);
+  console.log(`  GET    http://localhost:${PORT}/v1/exercises`);
+  console.log(`  GET    http://localhost:${PORT}/v1/exercises/:id`);
+  console.log(`  POST   http://localhost:${PORT}/v1/exercises`);
+  console.log(`  GET    http://localhost:${PORT}/v1/notes`);
+  console.log(`  GET    http://localhost:${PORT}/v1/notes/:id`);
+  console.log(`  PUT    http://localhost:${PORT}/v1/notes/:id`);
+  console.log(`  DELETE http://localhost:${PORT}/v1/notes/:id`);
 });
