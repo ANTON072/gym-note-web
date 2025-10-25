@@ -1,4 +1,5 @@
 import { initializeAuthListener } from "@/features/auth/lib/authInitializer";
+import { queryClient } from "@/lib/queryClient";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 
@@ -11,7 +12,12 @@ import "./global.css";
 initializeAuthListener();
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+});
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {

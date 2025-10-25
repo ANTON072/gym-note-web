@@ -1,22 +1,19 @@
 import fs from "node:fs";
 import express from "express";
+import cors from "cors";
 
 const app = express();
-app.use(express.json());
 
 // CORS設定
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
-  // プリフライトリクエストへの対応
-  if (req.method === "OPTIONS") {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
+app.use(express.json());
 
 // db.jsonを読み込み
 const dbPath = "./mock/db.json";
@@ -42,7 +39,7 @@ app.get("/v1/exercises", (_req, res) => {
 // GET /v1/exercises/:id
 app.get("/v1/exercises/:id", (req, res) => {
   const db = readDb();
-  const exercise = db.exercises.find((e) => e.id === req.params.id);
+  const exercise = db.exercises.find((e) => e.id === Number(req.params.id));
   if (exercise) {
     res.json(exercise);
   } else {
@@ -71,7 +68,7 @@ app.get("/v1/notes", (_req, res) => {
 // GET /v1/notes/:id
 app.get("/v1/notes/:id", (req, res) => {
   const db = readDb();
-  const note = db.notes.find((n) => n.id === req.params.id);
+  const note = db.notes.find((n) => n.id === Number(req.params.id));
   if (note) {
     res.json(note);
   } else {
@@ -82,7 +79,7 @@ app.get("/v1/notes/:id", (req, res) => {
 // PUT /v1/notes/:id
 app.put("/v1/notes/:id", (req, res) => {
   const db = readDb();
-  const index = db.notes.findIndex((n) => n.id === req.params.id);
+  const index = db.notes.findIndex((n) => n.id === Number(req.params.id));
   if (index !== -1) {
     db.notes[index] = { ...db.notes[index], ...req.body };
     writeDb(db);
@@ -95,7 +92,7 @@ app.put("/v1/notes/:id", (req, res) => {
 // DELETE /v1/notes/:id
 app.delete("/v1/notes/:id", (req, res) => {
   const db = readDb();
-  const index = db.notes.findIndex((n) => n.id === req.params.id);
+  const index = db.notes.findIndex((n) => n.id === Number(req.params.id));
   if (index !== -1) {
     db.notes.splice(index, 1);
     writeDb(db);

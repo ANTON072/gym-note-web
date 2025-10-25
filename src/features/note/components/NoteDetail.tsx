@@ -17,7 +17,7 @@ export const NoteDetail = ({ noteId, title, status }: NoteDetailProps) => {
       <NoteTitle title={title} status={status} />
       <NoteMeta noteId={noteId} />
       <NoteActionsBar noteId={noteId} />
-      <div className="grid gap-3 my-content-gap">
+      <div className="grid gap-3 my-3">
         {/* TODO: exercisesをmapで表示 */}
         <ExerciseListItem />
         <ExerciseListItem />

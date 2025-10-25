@@ -2,18 +2,14 @@ import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Toaster } from "@/components/shadcn/sonner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { queryClient } from "@/lib/queryClient";
+import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: 1000 * 60 * 60 * 24, // 24時間
-      refetchOnWindowFocus: false, // window.focus時に再取得しない
-    },
-  },
-});
+export interface RouterContext {
+  queryClient: QueryClient;
+}
 
 const Layout = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
@@ -38,4 +34,4 @@ const RootLayout = () => {
   return <Layout>{content}</Layout>;
 };
 
-export const Route = createRootRoute({ component: RootLayout });
+export const Route = createRootRouteWithContext<RouterContext>()({ component: RootLayout });
