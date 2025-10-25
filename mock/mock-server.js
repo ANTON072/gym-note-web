@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import express from "express";
 import cors from "cors";
+import express from "express";
 
 const app = express();
 
@@ -26,7 +26,9 @@ app.post("/v1/notes/today", (_req, res) => {
   res.status(200).json({
     id: 1,
     exercises: [],
+    status: "active",
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   });
 });
 

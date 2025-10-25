@@ -5,19 +5,12 @@ import { Button } from "@/components/shadcn/button";
 import { useLoaderData } from "@tanstack/react-router";
 import { CheckCircle } from "lucide-react";
 import { NoteDetail } from "../components/NoteDetail";
-import { useGetNote } from "../hooks/useNoteApi";
 
 export const NoteTodayPage = () => {
   const loaderData = useLoaderData({ from: "/" });
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const todayNoteId = loaderData.id;
-
-  const { data: note } = useGetNote(todayNoteId, {
-    enabled: !!todayNoteId,
-  });
-
-  console.log("Today's Note:", note);
 
   const handleCompleteClick = () => {
     setIsConfirmOpen(true);

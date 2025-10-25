@@ -17,9 +17,11 @@ export const noteFormSchema = z.object({
   place: z.string().optional(),
   memo: z.string().max(1000, "メモは1000文字以内で入力してください").optional(),
   exercises: z.array(noteExerciseSchema),
+  status: z.string(),
 });
 
 export const noteResponseSchema = noteFormSchema.extend({
   id: z.number(),
   created_at: z.string(),
+  updated_at: z.string(),
 });

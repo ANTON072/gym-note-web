@@ -1,4 +1,4 @@
-import type { NoteStatus } from "../constants/noteStatus";
+import type { NoteStatus } from "../types";
 import { ExerciseListItem } from "./ExerciseListItem";
 import { NoteActionsBar } from "./NoteActionsBar";
 import { NoteMeta } from "./NoteMeta";
@@ -14,7 +14,7 @@ type NoteDetailProps = {
 export const NoteDetail = ({ noteId, title, status }: NoteDetailProps) => {
   return (
     <>
-      <NoteTitle title={title} status={status} />
+      <NoteTitle title={title} status={"active"} />
       <NoteMeta noteId={noteId} />
       <NoteActionsBar noteId={noteId} />
       <div className="grid gap-3 my-3">
