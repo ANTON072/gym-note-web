@@ -1,5 +1,5 @@
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { Toaster } from "@/components/shadcn/sonner";
-import { Spinner } from "@/components/shadcn/spinner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,12 +14,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center h-full">
-    <Spinner className="size-10 text-gray-300" />
-  </div>
-);
 
 const Layout = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>

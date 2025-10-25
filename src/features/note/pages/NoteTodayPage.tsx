@@ -2,29 +2,15 @@ import { useState } from "react";
 
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { Button } from "@/components/shadcn/button";
+import { useLoaderData } from "@tanstack/react-router";
 import { CheckCircle } from "lucide-react";
 import { NoteDetail } from "../components/NoteDetail";
 
 export const NoteTodayPage = () => {
-  // TODO: 本番ではAPIから本日のノートの存在を確認
-  const [hasNote, setHasNote] = useState(false);
+  const loaderData = useLoaderData({ from: "/" });
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  // TODO: 本番ではAPIから本日のノートIDを取得
-  const todayNoteId = "1";
-
-  const handleStartWorkout = async () => {
-    try {
-      // TODO: 本番ではAPIにPOSTリクエストを送信してノートを作成
-      console.log("本日のノートを作成中...");
-      await new Promise((resolve) => setTimeout(resolve, 100)); // 仮のAPI呼び出し
-      console.log("本日のノートを作成しました");
-      setHasNote(true);
-    } catch (error) {
-      console.error("ノートの作成に失敗しました", error);
-      // TODO: エラーハンドリング（toast通知など）
-    }
-  };
+  const todayNoteId = String(loaderData.id);
 
   const handleCompleteClick = () => {
     setIsConfirmOpen(true);
@@ -40,13 +26,6 @@ export const NoteTodayPage = () => {
     setIsConfirmOpen(false);
   };
 
-  // ノートが存在しない場合は開始ボタンを表示
-  // TODO: 本番ではhasNoteの値に応じて表示を切り替え
-  // if (!hasNote) {
-  //   return <WorkoutStartScreen isCreating={isCreating} onStartWorkout={handleStartWorkout} />;
-  // }
-
-  // ノートが存在する場合は既存の表示
   return (
     <>
       <NoteDetail noteId={todayNoteId} title="本日のノート" status="active" />
