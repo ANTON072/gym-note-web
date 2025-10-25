@@ -1,6 +1,6 @@
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/shadcn/field";
+import { Label } from "@/components/shadcn/label";
+import { RadioGroup, RadioGroupItem } from "@/components/shadcn/radio-group";
 import { useId } from "react";
 import { Controller } from "react-hook-form";
 

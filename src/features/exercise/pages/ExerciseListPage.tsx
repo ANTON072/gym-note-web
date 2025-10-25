@@ -1,8 +1,8 @@
 import { PageTitle } from "@/components";
 import { BodyPartSelect } from "@/components";
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/shadcn/button";
+import { Field, FieldLabel } from "@/components/shadcn/field";
+import { Skeleton } from "@/components/shadcn/skeleton";
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/shadcn/table";
 import { useIsMutating } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { DeleteExerciseButton } from "../components/DeleteExerciseButton";

@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import { DeleteConfirmDialog } from "@/components/DeleteConfirmDialog";
-import { ActionMenuDrawer, type ActionMenuItem } from "@/components/ui/action-menu-drawer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ActionMenuDrawer, type ActionMenuItem } from "@/components/shadcn/action-menu-drawer";
+import { Button } from "@/components/shadcn/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/card";
 import { MoreVerticalIcon, PencilIcon, PlusCircleIcon, Trash2Icon } from "lucide-react";
 import { SetFormDialog } from "./SetFormDialog";
 import { SetItem } from "./SetItem";

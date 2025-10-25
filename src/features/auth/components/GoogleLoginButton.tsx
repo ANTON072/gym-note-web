@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/components/shadcn/button";
+import { Spinner } from "@/components/shadcn/spinner";
 import { useState } from "react";
 import { toast } from "sonner";
 import { signInWithGoogle } from "../lib/auth";

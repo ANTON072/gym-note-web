@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { ExerciseFormFields } from "@/features/exercise";
 import { useNavigate } from "@tanstack/react-router";
 import { NoteFormCard } from "./NoteFormCard";

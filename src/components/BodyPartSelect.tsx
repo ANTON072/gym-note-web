@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/shadcn/field";
 import {
   Select,
   SelectContent,
@@ -6,7 +6,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/shadcn/select";
 import { BODY_PART_OPTIONS } from "@/constants/bodyParts";
 import { useId } from "react";
 import type { FieldError as RHFFieldError } from "react-hook-form";

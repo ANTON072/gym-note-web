@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/shadcn/field";
+import { Textarea } from "@/components/shadcn/textarea";
 import { useId } from "react";
 import { Controller } from "react-hook-form";
 

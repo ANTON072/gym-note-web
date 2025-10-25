@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { MutateButton } from "@/components";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { handleFormError } from "@/lib/formError";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";

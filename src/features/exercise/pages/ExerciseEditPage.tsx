@@ -1,6 +1,6 @@
 import { PageTitle } from "@/components";
 import { NotFound } from "@/components/NotFound";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/shadcn/skeleton";
 import { useParams } from "@tanstack/react-router";
 import { ExerciseForm } from "../components/ExerciseForm";
 import { ExercisePageLayout } from "../components/ExercisePageLayout";

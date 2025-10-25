@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { Play } from "lucide-react";
 
 const formatDate = (date: Date): string => {

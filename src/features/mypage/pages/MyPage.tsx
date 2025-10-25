@@ -1,6 +1,6 @@
 import { Avatar, PageTitle } from "@/components";
-import { Button } from "@/components/ui/button";
-import { FieldDescription, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Button } from "@/components/shadcn/button";
+import { FieldDescription, FieldGroup, FieldLegend, FieldSet } from "@/components/shadcn/field";
 import { useAuthenticatedUser } from "@/features/auth";
 import { useConfirm } from "@/hooks/useConfirm";
 

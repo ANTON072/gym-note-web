@@ -3,10 +3,10 @@ import { ja } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
 import type { ControllerRenderProps } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { FormControl } from "@/components/ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/shadcn/button";
+import { Calendar } from "@/components/shadcn/calendar";
+import { FormControl } from "@/components/shadcn/form";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/shadcn/popover";
 import { cn } from "@/lib/utils";
 
 interface DatePickerProps {

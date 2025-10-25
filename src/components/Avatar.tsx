@@ -1,4 +1,4 @@
-import { AvatarFallback, AvatarImage, Avatar as ShadcnAvatar } from "@/components/ui/avatar";
+import { AvatarFallback, AvatarImage, Avatar as ShadcnAvatar } from "@/components/shadcn/avatar";
 import { cn } from "@/lib/utils";
 import type { User } from "firebase/auth";
 

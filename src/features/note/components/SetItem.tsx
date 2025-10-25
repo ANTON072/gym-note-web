@@ -1,5 +1,5 @@
-import { ActionMenuDrawer, type ActionMenuItem } from "@/components/ui/action-menu-drawer";
-import { Button } from "@/components/ui/button";
+import { ActionMenuDrawer, type ActionMenuItem } from "@/components/shadcn/action-menu-drawer";
+import { Button } from "@/components/shadcn/button";
 import { MoreHorizontalIcon, PencilIcon, Trash2Icon } from "lucide-react";
 
 interface SetItemProps {

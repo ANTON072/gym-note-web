@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { Link } from "@tanstack/react-router";
 import { Home, SearchX } from "lucide-react";
 

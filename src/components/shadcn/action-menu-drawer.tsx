@@ -2,14 +2,14 @@ import { type ReactNode, useState } from "react";
 
 import { Link } from "@tanstack/react-router";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@/components/shadcn/drawer";
 
 export interface ActionMenuItem {
   label: string;

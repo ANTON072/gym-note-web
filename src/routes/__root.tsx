@@ -1,5 +1,5 @@
-import { Toaster } from "@/components/ui/sonner";
-import { Spinner } from "@/components/ui/spinner";
+import { Toaster } from "@/components/shadcn/sonner";
+import { Spinner } from "@/components/shadcn/spinner";
 import { LoginForm, useAuth } from "@/features/auth";
 import { GlobalFooter, GlobalHeader } from "@/features/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

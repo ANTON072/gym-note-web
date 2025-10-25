@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { ConfirmDialog } from "@/components/ConfirmDialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shadcn/button";
 import { CheckCircle } from "lucide-react";
 import { NoteDetail } from "../components/NoteDetail";
 

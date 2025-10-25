@@ -41,10 +41,7 @@
         },
         {
           "id": 3,
-          "set_list": [
-            { "weight": 10, "reps": 12 },
-            { "weight": 12, "reps": 10 }
-          ]
+          "set_list": [{ "weight": 10, "reps": 12 }, { "weight": 12, "reps": 10 }]
         }
       ]
     },

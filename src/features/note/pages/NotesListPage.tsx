@@ -1,5 +1,5 @@
 import { PageTitle } from "@/components";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/shadcn/card";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { SimplePagination } from "../components/SimplePagination";
 
