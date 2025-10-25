@@ -4,6 +4,20 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
+// CORS設定
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+
+  // プリフライトリクエストへの対応
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 // db.jsonを読み込み
 const dbPath = "./mock/db.json";
 const readDb = () => JSON.parse(fs.readFileSync(dbPath, "utf-8"));
@@ -12,7 +26,10 @@ const writeDb = (data) => fs.writeFileSync(dbPath, JSON.stringify(data, null, 2)
 // カスタムエンドポイント: POST /v1/notes/today
 app.post("/v1/notes/today", (_req, res) => {
   // モックなので常にid: 1を返す
-  res.status(200).json({ id: 1 });
+  res.status(200).json({
+    id: 1,
+    created_at: new Date().toISOString(),
+  });
 });
 
 // GET /v1/exercises

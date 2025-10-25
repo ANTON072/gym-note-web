@@ -12,12 +12,14 @@ export const noteExerciseSchema = z.object({
 });
 
 export const noteFormSchema = z.object({
-  created_at: z
-    .string()
-    .refine((date) => !Number.isNaN(Date.parse(date)), { message: "有効な日付を入力してください" }),
   started_time: z.string().optional(),
   ended_time: z.string().optional(),
   place: z.string().optional(),
   memo: z.string().max(1000, "メモは1000文字以内で入力してください").optional(),
   exercises: z.array(noteExerciseSchema),
+});
+
+export const noteResponseSchema = noteFormSchema.extend({
+  id: z.number(),
+  created_at: z.string(),
 });
