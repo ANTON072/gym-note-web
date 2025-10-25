@@ -7,28 +7,24 @@ import { NoteDetail } from "../components/NoteDetail";
 
 export const NoteTodayPage = () => {
   // TODO: 本番ではAPIから本日のノートの存在を確認
-  // const [hasNote, setHasNote] = useState(false);
-  // const [isCreating, setIsCreating] = useState(false);
+  const [hasNote, setHasNote] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   // TODO: 本番ではAPIから本日のノートIDを取得
   const todayNoteId = "1";
 
-  // const handleStartWorkout = async () => {
-  //   try {
-  //     setIsCreating(true);
-  //     // TODO: 本番ではAPIにPOSTリクエストを送信してノートを作成
-  //     console.log("本日のノートを作成中...");
-  //     await new Promise((resolve) => setTimeout(resolve, 1000)); // 仮のAPI呼び出し
-  //     console.log("本日のノートを作成しました");
-  //     setHasNote(true);
-  //   } catch (error) {
-  //     console.error("ノートの作成に失敗しました", error);
-  //     // TODO: エラーハンドリング（toast通知など）
-  //   } finally {
-  //     setIsCreating(false);
-  //   }
-  // };
+  const handleStartWorkout = async () => {
+    try {
+      // TODO: 本番ではAPIにPOSTリクエストを送信してノートを作成
+      console.log("本日のノートを作成中...");
+      await new Promise((resolve) => setTimeout(resolve, 100)); // 仮のAPI呼び出し
+      console.log("本日のノートを作成しました");
+      setHasNote(true);
+    } catch (error) {
+      console.error("ノートの作成に失敗しました", error);
+      // TODO: エラーハンドリング（toast通知など）
+    }
+  };
 
   const handleCompleteClick = () => {
     setIsConfirmOpen(true);
